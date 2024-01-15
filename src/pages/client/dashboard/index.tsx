@@ -3197,7 +3197,7 @@ const dialerCodes = {
       >
         choose file
       </button>
-      <span>{f_name}</span>
+      <span className="d-block pt-1">{f_name}</span>
 
  
                        

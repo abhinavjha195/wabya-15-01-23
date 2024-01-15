@@ -416,7 +416,7 @@ setErrorMessage("");
 
                        
                     
-<span className="percent btn">
+<span className={` ${showpercent ? 'percent btn' : ''}`}>
   {showpercent ? `${percent}%` : null}
 </span>
                    
