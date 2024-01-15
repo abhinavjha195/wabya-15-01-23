@@ -941,6 +941,7 @@ return (
                         <span>0 h</span>
                         <span>£0 0 0</span>
                       </div>
+                    
                     </td>
                     <td>
                       <div className="box">

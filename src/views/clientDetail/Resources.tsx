@@ -1,7 +1,7 @@
 // ** MUI Imports
 // import { Typography } from '@mui/material'
 // import Link from 'next/link'
-import { ReactNode, useState, useEffect,useCallback } from 'react'
+import { ReactNode, useState, useEffect,useCallback,useRef } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -22,13 +22,14 @@ import { event } from 'jquery';
 const Resources = () => {
 
   const [file, setFile] = useState(null);
+  const [f_name, setf_name] = useState('');
   const [showpercent, setshowpercent] = useState(false);
   const [showfile, setshowfile] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [allFiles, setAllFiles] = useState([]);
-   // get all meeting data
+   // get all meeting data 
 
-   
+   const fileInputRef = useRef(null);
    
 const getFiles = async () => {
   const meetRef = collection(database, "resources");
@@ -103,6 +104,8 @@ useEffect(() => {
   }, [allFiles]);
   function handleFileChange(event) {
     console.log('test');
+    console.log(event.target.files[0].name);
+    setf_name(event.target.files[0].name);
     setFile(event.target.files[0]);
 //handleSubmit();
   }
@@ -267,6 +270,18 @@ const year = today.getFullYear();
             }
         
         }, [fileUrl])
+
+
+
+
+
+
+        const handleButtonClick = () => {
+          // Trigger click on the hidden file input
+          if (fileInputRef.current) {
+            fileInputRef.current.click();
+          }
+        };
  
   return (
     <>
@@ -316,10 +331,25 @@ const year = today.getFullYear();
     <i className="fa fa-cloud-upload"></i> choose File
     <input id="file-upload" type="file" onChange={handleFileChange}/>
 </label> */}
-<input  type="file" onChange={handleFileChange} className='btn btn-primary' style={{width:'100%'}}/>
+{/* <input  type="file" onChange={handleFileChange} className='btn btn-primary' style={{width:'100%'}}/> */}
 
 
-
+<input
+        type="file"
+        id="getFile"
+        onChange={handleFileChange}
+        className="btn btn-primary"
+        style={{ display: 'none' }} // Hide the file input
+        ref={fileInputRef}
+      />
+      <button
+        
+        onClick={handleButtonClick}
+        className='btn'
+      >
+        choose file
+      </button>
+<span>{f_name}</span>
 
                        
                     </div>
@@ -496,7 +526,7 @@ const year = today.getFullYear();
               </form>
             </div>
             {allFiles.length > 0 ? (
-            <div className="file-list">
+            <div className={` ${allFiles.length > 3 ? 'file-list' : 'file-list-noscroll'}`}>
               <div className="file-list-scroll">
              
              { allFiles.map((myfile, index) => {

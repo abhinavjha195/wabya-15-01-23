@@ -3432,6 +3432,41 @@ var myArr2=data.meetingTime.split(':');
 var myArr=new Date(data.meetingDate).toLocaleDateString().split('/');
 
 
+// Extract hours and minutes from meeting time
+const meetingTimeArr = data.meetingTime.split(':');
+const meetingHours = parseInt(meetingTimeArr[0]);
+const meetingMinutes = parseInt(meetingTimeArr[1]);
+
+
+
+const currentDate = new Date();
+const currentTime = currentDate.getTime(); // Get time in milliseconds
+
+
+
+// Extract hours and minutes from meeting start time
+const meetingStartTimeArr = data.meetingTime.split(':');
+const meetingStartHours = parseInt(meetingStartTimeArr[0]);
+const meetingStartMinutes = parseInt(meetingStartTimeArr[1]);
+
+
+
+const meetingEndTimeArr = data.meetingEndTime.split(':');
+const meetingEndHours = parseInt(meetingEndTimeArr[0]);
+const meetingEndMinutes = parseInt(meetingEndTimeArr[1]);
+
+// Set the meeting start and end times
+const meetingStartTime = new Date(data.meetingDate);
+meetingStartTime.setHours(meetingStartHours, meetingStartMinutes, 0, 0);
+
+const meetingEndTime = new Date(data.meetingDate);
+meetingEndTime.setHours(meetingEndHours, meetingEndMinutes, 0, 0);
+
+const isMeetingToday = new Date(data.meetingDate).toLocaleDateString() === currentDate.toLocaleDateString();
+const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentTime <= meetingEndTime.getTime();
+
+
+
 
             if (new Date(data.meetingDate).toLocaleDateString() == new Date().toLocaleDateString() )
             
@@ -3453,10 +3488,30 @@ var myArr=new Date(data.meetingDate).toLocaleDateString().split('/');
                                 target="_blank"
                                
                               > */}
-                                <a className="btn btn-coach" href={`/client/joinvideo/${data.meetingName}`}>join video</a>
+
+
+
+{isMeetingTimeRange ? (
+                    <a className="btn btn-coach" href={`/client/joinvideo/${data.meetingName}`}>
+                        join video
+                    </a>
+                ) : (
+                  <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>
+                  join video
+              </a>
+
+            
+              
+                )}            
+                             
                               {/* </Link> */}
                                
                             </td>
+
+                           {/* { meetingStartTime.getTime()}
+              -{meetingEndTime.getTime()}
+              -
+              {currentTime} */}
                             <td className="td-two">
                               <button
                                 className="btn btn-schedule"
@@ -3504,7 +3559,7 @@ var myArr=new Date(data.meetingDate).toLocaleDateString().split('/');
                                 target="_blank"
                                
                               > */}
-                                <a className="btn btn-coach"  href={`/client/joinvideo/${data.meetingName}`}>join video</a>
+                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
                               {/* </Link> */}
                               {/* <Link
                                 passHref
