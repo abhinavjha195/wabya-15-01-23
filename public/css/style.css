@@ -1443,7 +1443,7 @@ span.pass-eye {
 .client-password .form-password .btn-save:hover{color: #f7f0e4; background-color: #0f2540; -webkit-transition: all .3s; -moz-transition: all .3s; -o-transition: all .3s; transition: all .3s;}
 .client-password .form-password .btn.btn-choose{background: #b95427 !important;}
 .client-password .form-password .file-form-group span{padding: 0 15px;}
-.client-password .form-password .persant.btn{background: #ef7655; padding: 8.5px !important; margin: 0 15px 0 0;}
+.client-password .form-password .percent.btn{background: #ef7655; padding: 9px 10px 8px !important; margin: 0 15px 0 0;}
 .client-password .form-password label {
   font-size: 16px;
   font-weight: 600;
