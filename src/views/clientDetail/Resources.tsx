@@ -26,6 +26,7 @@ const Resources = () => {
   const [showpercent, setshowpercent] = useState(false);
   const [showfile, setshowfile] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [allFiles, setAllFiles] = useState([]);
    // get all meeting data 
 
@@ -104,9 +105,25 @@ useEffect(() => {
   }, [allFiles]);
   function handleFileChange(event) {
     console.log('test');
-    console.log(event.target.files[0].name);
+    console.log(event.target.files[0]);
+    setSuccessMessage('');
+    setErrorMessage('');
+    setf_name('');
+
+    if(event.target.files[0].type == 'application/pdf'){
+
+      if(event.target.files[0].size <= 2 * 1024 * 1024){
     setf_name(event.target.files[0].name);
     setFile(event.target.files[0]);
+    }
+    else{
+      setErrorMessage('file size must be below 2mb');
+    }
+  }
+
+    else{
+      setErrorMessage('please add only pdf and doc file');
+    }
 //handleSubmit();
   }
 
@@ -238,6 +255,9 @@ useEffect(() => {
 const date = today.getDate();
 const month = today.getMonth() + 1; // add 1 because months are zero-indexed
 const year = today.getFullYear();
+
+setSuccessMessage("");
+setErrorMessage("");
         addDoc(resourceRef, {
             resourceURL: fileUrl,
             parentId : sessionStorage.getItem("coachId"),
@@ -249,7 +269,8 @@ const year = today.getFullYear();
             .then(() => {
              // toast.success('File Uploaded')
               //router.push('/client/login')
-              setErrorMessage("File Uploaded");
+              setSuccessMessage("File Uploaded");
+              //setErrorMessage("File Uploaded");
               getFiles();
               var element = document.getElementById("myres");
   element.scrollIntoView({ behavior: 'smooth' });
@@ -323,9 +344,9 @@ const year = today.getFullYear();
                 <div className='inner-info'>
                 
                 <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()} className='form-password'>
-                  <div className="row">
+                  {/* <div className="row">
                     
-                    <div className="col-sm-6">
+                    <div className="col-sm-6"> */}
                     
                     {/* <label  className="custom-file-upload">
     <i className="fa fa-cloud-upload"></i> choose File
@@ -334,7 +355,7 @@ const year = today.getFullYear();
 {/* <input  type="file" onChange={handleFileChange} className='btn btn-primary' style={{width:'100%'}}/> */}
 
 
-<input
+{/* <input
         type="file"
         id="getFile"
         onChange={handleFileChange}
@@ -360,17 +381,62 @@ const year = today.getFullYear();
     percent  : null}
     { showpercent ?
     "%"  : null}
-                      <input type="submit" value="save" className='btn btn-save' onClick={handleSubmit} />
+                      <input type="submit" value="save" className='btn btn-save' onClick={handleSubmit}  disabled={!f_name} />
                     </div>
 
                     
+                  </div> */}
+
+
+
+                  <div className='row'>
+
+               
+                    
+                    <div className="col-sm-12">
+                    
+                    <div className="file-form-group">
+
+<input
+        type="file"
+        id="getFile"
+        onChange={handleFileChange}
+        className="btn btn-primary"
+        style={{ display: 'none' }} // Hide the file input
+        ref={fileInputRef}
+      />
+      <button
+        
+        onClick={handleButtonClick}
+        className='btn btn-choose'
+      >
+        choose file
+      </button>
+<span>{f_name}</span>
+
+                       
+                    
+
+                    { showpercent ?
+    percent  : null}
+    { showpercent ?
+    "%"  : null}
+                      <input type="submit" value="save" className='btn btn-save' onClick={handleSubmit}  disabled={!f_name} />
+                    </div>
                   </div>
+
+
+
+
+
                  
                   <div className="row">
                   <div className="col-sm-12">
-                      {errorMessage && <Alert message={errorMessage} className='mt-4' type="success"/> }
+                      {successMessage && <Alert message={successMessage} className='mt-4' type="success"/> }
+                   
+                      {errorMessage && <Alert message={errorMessage} className='mt-4' type="error"/> }
                     </div>
-
+</div>
                   </div>
                 </form>
                 </div>

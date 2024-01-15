@@ -39,6 +39,7 @@ const Dashboard = () => {
   const router = useRouter();
   const form = useRef();
   const formMobile = useRef();
+  const fileInputRef = useRef(null);
   const form2 = useRef();
   const databaseRef = collection(database, "client_user");
   const coachRef = collection(database, "coaches_user");
@@ -2771,7 +2772,12 @@ const dialerCodes = {
 
 
 
-
+    const handleButtonClick = () => {
+      // Trigger click on the hidden file input
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+    };
 
 
 
@@ -3157,11 +3163,18 @@ const dialerCodes = {
                     <div className="col-sm-8 left-area">
                     
                    
-<input  type="file" onChange={handleFileChange} className='form-control' />
+<input  type="file" onChange={handleFileChange} className='form-control' style={{ display: 'none' }} // Hide the file input
+        ref={fileInputRef} />
+ <button
+        
+        onClick={handleButtonClick}
+        className='form-control'
+      >
+        choose file
+      </button>
 
 
-
-
+ 
                        
                     </div>
                   
