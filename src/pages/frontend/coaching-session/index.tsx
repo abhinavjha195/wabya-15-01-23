@@ -1089,14 +1089,14 @@ if(client_emailId != ""){
                 <div className="col-sm-12 date-time">
                   <h3>select your date & time</h3>
 
-                  {sortedCoaches && sortedCoaches.map((coach) => (
+                  {/* {sortedCoaches && sortedCoaches.map((coach) => (
         <div key={coach.coach_idd}>
           <h1>Coach: {coach.coach_name}  - {coach.coach_gender} </h1>
           <p>Number of Clients: {coachClientCounts[coach.coach_idd]}</p>
         </div>
       ))}
 
-assign coach - {coachId}
+assign coach - {coachId} */}
       
                 <div className="time-btn"><button className="btn" id="myButton" onClick={scheduleNewSes}>select an available time</button></div>
                 </div>
