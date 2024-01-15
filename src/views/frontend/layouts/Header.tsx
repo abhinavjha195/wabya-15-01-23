@@ -21,7 +21,7 @@ const Header = () => {
 let lastUrl='';
     if(localStorage.getItem("p_url") && !localStorage.getItem("front_reload")){
      lastUrl = localStorage.getItem("p_url");
-	 localStorage.setItem("front_reload",'yes');
+	// localStorage.setItem("front_reload",'yes');
   }else{
     setshowpage(true);
   }
