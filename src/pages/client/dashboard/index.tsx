@@ -298,6 +298,8 @@ const Dashboard = () => {
   const [showpercent, setshowpercent] = useState(false);
   const [showfile, setshowfile] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [f_name, setf_name] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const [detailSaved, setdetailSaved] = useState(false);
   const [savedMsg, setsavedMsg] = useState("");
 
@@ -2351,8 +2353,27 @@ console.log('on load array',timeslots);
 
 function handleFileChange(event) {
   //console.log('test');
+  console.log('test');
+  console.log(event.target.files[0]);
+  setSuccessMessage('');
+  setErrorMessage('');
+  setf_name('');
+
+  if(event.target.files[0].type == 'application/pdf'){
+
+    if(event.target.files[0].size <= 2 * 1024 * 1024){
+  setf_name(event.target.files[0].name);
   setFile(event.target.files[0]);
-handleSubmit();
+  }
+  else{
+    setErrorMessage('file size must be below 2mb');
+  }
+}
+
+  else{
+    setErrorMessage('please add only pdf and doc file');
+  }
+//handleSubmit();
 }
 
 function handleFileChange2(event) {
@@ -2501,7 +2522,10 @@ function profile2(){
 const date = today.getDate();
 const month = today.getMonth() + 1; // add 1 because months are zero-indexed
 const year = today.getFullYear();
+setSuccessMessage("");
+setErrorMessage("");
       addDoc(resourceRef, {
+
           resourceURL: fileUrl,
           parentId : sessionStorage.getItem("userId"),
           fileName : fileName,
@@ -2512,7 +2536,8 @@ const year = today.getFullYear();
           .then(() => {
            // toast.success('File Uploaded')
             //router.push('/client/login')
-            setErrorMessage("File Uploaded");
+            setSuccessMessage("File Uploaded");
+            //setErrorMessage("File Uploaded");
             getFiles();
 
             console.log('after');
@@ -3172,7 +3197,7 @@ const dialerCodes = {
       >
         choose file
       </button>
-
+      <span>{f_name}</span>
 
  
                        
@@ -3181,7 +3206,7 @@ const dialerCodes = {
 
                     <div className="col-sm-4 right-area">
 
-                      <input type="submit" value="save" className='btn btn-save btn-success' onClick={handleSubmit} />
+                      <input type="submit" value="save" className='btn btn-save btn-success' onClick={handleSubmit} disabled={!f_name} />
                       <div className="percent">
 <>
                     
@@ -3203,7 +3228,9 @@ percent  : null}
                  
                   <div className="row">
                   <div className="col-sm-12">
-                      {errorMessage && <Alert message={errorMessage} className='mt-4' type="success"/> }
+                  {successMessage && <Alert message={successMessage} className='mt-4' type="success"/> }
+                   
+                   {errorMessage && <Alert message={errorMessage} className='mt-4' type="error"/> }
                     </div>
 
                   </div>
