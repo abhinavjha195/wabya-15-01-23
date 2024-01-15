@@ -640,7 +640,9 @@ return (
       )).length * 30) / 60).toFixed(1)}`} <span>hours</span>
                 </p>
                 <p>
-                £ <span>000.00</span>
+                £ <span>{`${(((filteredMeetingSessions2(dateString, dateString).filter(
+    meet => meet.client_plan === 'novice'
+  )).length * 30) / 60 * 20).toFixed(2)}`}</span>
                 </p>
             </div>
 :null }
@@ -657,7 +659,10 @@ return (
       )).length * 30) / 60).toFixed(1)}`} <span>hours</span>
                 </p>
                 <p>
-                £ <span>000.00</span>
+                £ <span>`${(((filteredMeetingSessions2(dateString, dateString).filter(
+    meet => meet.client_plan === 'experienced'
+  )).length * 30) / 60 * 200).toFixed(2)}`
+ </span>
                 </p>
             </div>
             : null }

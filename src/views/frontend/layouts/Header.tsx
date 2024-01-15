@@ -19,8 +19,9 @@ const Header = () => {
   useEffect(() => {
     // Check if the last URL was '/coch/login'
 let lastUrl='';
-    if(localStorage.getItem("p_url")){
+    if(localStorage.getItem("p_url") && !localStorage.getItem("front_reload")){
      lastUrl = localStorage.getItem("p_url");
+	 localStorage.setItem("front_reload",'yes');
   }else{
     setshowpage(true);
   }
@@ -29,9 +30,14 @@ let lastUrl='';
       // Reload the current page
       console.log('yes');
      // localStorage.removeItem("p_url");
+	 if(!localStorage.getItem("front_reload")){
+		localStorage.setItem("front_reload",'yes');
+       router.reload();
 
-	 
-     // router.reload();
+	
+	 }else{
+		localStorage.removeItem("p_url");
+	 }
     }
   }, [router.path]); // Empty dependency array means this effect runs once after the initial render
 
