@@ -416,11 +416,10 @@ setErrorMessage("");
 
                        
                     
-
-                    { showpercent ?
-    percent  : null}
-    { showpercent ?
-    "%"  : null}
+<span className="percent btn">
+  {showpercent ? `${percent}%` : null}
+</span>
+                   
                       <input type="submit" value="save" className='btn btn-save' onClick={handleSubmit}  disabled={!f_name} />
                     </div>
                   </div>
@@ -430,13 +429,13 @@ setErrorMessage("");
 
 
                  
-                  <div className="row">
+                 
                   <div className="col-sm-12">
                       {successMessage && <Alert message={successMessage} className='mt-4' type="success"/> }
                    
                       {errorMessage && <Alert message={errorMessage} className='mt-4' type="error"/> }
                     </div>
-</div>
+
                   </div>
                 </form>
                 </div>
