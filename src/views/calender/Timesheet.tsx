@@ -637,12 +637,12 @@ return (
                 <p>
                     {`${ (((filteredMeetingSessions2(dateString,dateString).filter(
         meet => meet.client_plan === 'novice'
-      )).length * 30) / 60).toFixed(1)}`} <span>hours</span>
+      )).length * 0.45))}`} <span>hours</span>
                 </p>
                 <p>
                 £ <span>{`${(((filteredMeetingSessions2(dateString, dateString).filter(
     meet => meet.client_plan === 'novice'
-  )).length * 30) / 60 * 20).toFixed(2)}`}</span>
+  )).length) * 20)}`}</span>
                 </p>
             </div>
 :null }
@@ -656,12 +656,12 @@ return (
                 <p>
                 {`${ (((filteredMeetingSessions2(dateString,dateString).filter(
         meet => meet.client_plan === 'experienced'
-      )).length * 30) / 60).toFixed(1)}`} <span>hours</span>
+      )).length * 0.45))}`} <span>hours</span>
                 </p>
                 <p>
                 £ <span>`${(((filteredMeetingSessions2(dateString, dateString).filter(
     meet => meet.client_plan === 'experienced'
-  )).length * 30) / 60 * 200).toFixed(2)}`
+  )).length)  * 50).toFixed(2)}`
  </span>
                 </p>
             </div>
