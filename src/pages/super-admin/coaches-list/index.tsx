@@ -138,14 +138,14 @@ const CoachesList = ()  => {
                         <td>
 
                         {data.isApproved === 1
-    ? <><p>approved</p>
+    ? <>approved
     </>
     : data.isApproved === 0
-      ? <><p>declined</p>
+      ? <>declined
       </>
       : <div>
-          <button className='btn btn-darkgreen' onClick={() => updateApproved(1, data.coach_id)}>approve</button>
-          <button className='btn btn-chestnutred'onClick={() => updateApproved(0, data.coach_id)}>decline</button>
+          <button className='btn btn-desktop btn-darkgreen' onClick={() => updateApproved(1, data.coach_id)}>approve</button>
+          <button className='btn btn-desktop btn-chestnutred'onClick={() => updateApproved(0, data.coach_id)}>decline</button>
         </div>
   }
                         </td>
