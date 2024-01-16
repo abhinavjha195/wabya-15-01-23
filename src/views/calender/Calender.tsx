@@ -3909,6 +3909,7 @@ footer={[]}
     <div className="">
       <div className="row">
         <div className="col-12">
+        <div className="schedule-cross"><i aria-hidden="true" className="fa fa-arrow-left"></i></div>
           <h3 className="mrb-20">schedule a session</h3>
           <div className="form-group mrb-30">
             <h4 className="mrb-5">select the date</h4>
