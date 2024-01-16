@@ -41,6 +41,7 @@ const ApplyWabyaBasic = () => {
 
   const [coachGender, setcoachGender] = useState('female');
 
+  const [coachCertificate, setcoachCertificate] = useState('no');
 
   const [nameErr, setnameErr] = useState('');
   const [surnameErr, setsurnameErr] = useState('');
@@ -111,6 +112,11 @@ const ApplyWabyaBasic = () => {
 const handleGender = (event) => {
 
   setcoachGender(event.target.value);
+}
+
+const handleCertificate = (event) => {
+
+  setcoachCertificate(event.target.value);
 }
 
 
@@ -230,6 +236,7 @@ err=err+1;
         coach_phone : Number(mobile),
         coach_timezone : selectedCountryTimezone,
         coach_gender : coachGender,
+        coach_certificate : coachCertificate,
         coach_api : String(),
         coach_uname : String(),
         coach_language: String(),
@@ -314,13 +321,16 @@ err=err+1;
                                <div style="padding:0 30px;  position: relative; z-index: 2;line-height: 22px;font-family: 'Lato', sans-serif;font-weight: 600;text-align: center;">
                              
                                <p style="font-size: 18px; text-align: center; color: #864985;">Hello Admin,</p>
-                               <p style="font-size: 18px; text-align: center; color: #864985;">A new coach has registered on our platform.</p>
+                               <p style="font-size: 18px; text-align: center; color: #864985;">A new coach has registered on your platform.</p>
                                <p style="font-size: 18px; text-align: center; color: #864985;">Here are the user's details:</p>
      
    
                                <p style="font-size: 16px; text-align: center; margin:0 0 20px;color: #242424;">Name: ${name} </p>
     <p style="font-size: 16px; text-align: center; margin:0 0 20px;color: #242424;">Email: ${email} </p>
   
+    <p style="font-size: 16px; text-align: center; margin:0 0 20px;color: #242424;">Gender: ${coachGender} </p>
+    
+    <p style="font-size: 16px; text-align: center; margin:0 0 20px;color: #242424;">Associate Certified Coach: ${coachCertificate} </p>
     <hr style="border: 1px solid #1c686b;">
     <p style="font-size: 14px; color: #242424; text-align: center;">Thank you,<br>Wabya Team</p>
      </div>  
@@ -335,7 +345,7 @@ err=err+1;
        </body>
     </html>
 `;
-  sendMailFunc('abhinavkumar3256@gmail.com',adminmsg,'Coach Registration'); 
+  sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Coach Registration'); 
   router.push('/coach/login');
   
         })
@@ -438,8 +448,9 @@ onChange={handleGender}
   
                   
 
-<option value="female" selected={coachGender === 'female'}> Female</option>
-<option value="male" selected={coachGender === 'male'}> Male</option>
+<option value="female" selected={coachGender === 'female'}> female</option>
+<option value="male" selected={coachGender === 'male'}> male</option>
+<option value="other" selected={coachGender === 'other'}> other</option>
 
                   </select>
                   {genderErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{genderErr}</Alert>}      
@@ -449,11 +460,53 @@ onChange={handleGender}
        
 
 
+
+
+
+
+
+
+
+
+
                               <div className="col-sm-6 form-group"><input type="password" className="form-control" name="pass" placeholder="password" value={pass} onChange={(event) => setpass(event.target.value)}/> {passErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{passErr}</Alert>}</div>     
 
 
                               <div className="col-sm-6 form-group"><textarea className="form-control" placeholder="a bit about me" value={msg} onChange={(event) => setmsg(event.target.value)}></textarea>  {msgErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{msgErr}</Alert>}
           {msgLenErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{msgLenErr}</Alert>}</div>
+
+
+
+
+          <div className="col-sm-6 form-group">  
+          
+         <h6>i hold an associate certified coach (acc) credential - or its equivalent</h6>
+           <select className="form-control select"  name='clientCertificate'
+  id='clientCertificate'
+onChange={handleCertificate}
+  
+  
+  >
+  
+                  
+
+<option value="yes" selected={coachCertificate === 'yes'}> yes</option>
+<option value="no" selected={coachCertificate === 'no'}> no</option>
+<option value="applying" selected={coachCertificate === 'applying'}> currently applying</option>
+
+                  </select>
+                        
+          </div>
+         
+
+
+
+
+
+
+
+
+
 
           <div className="col-sm-6 form-group"></div>
           <div className="col-sm-12 form-group">

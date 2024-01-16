@@ -4286,7 +4286,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 >
           <div className="modal-data">
 
-   
+          <div className="back-arrow" onClick={rescheduleCancel}><i aria-hidden="true" className="fa fa-arrow-left"></i></div>
           {clientIsDiscoveryDone != 0 ? (
 <>
             {next ? (

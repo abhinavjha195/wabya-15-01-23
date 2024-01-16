@@ -94,9 +94,11 @@ const ViewBasic = () => {
 
   return (
     <section className='clients-listing'>
+       
       <div className='container'>
         <div className='row'>
-          <div className='col-sm-12 filter-coll'>
+        
+          {/* <div className='col-sm-12 filter-coll'>
             <div className='client-filter'>
               <div className='dropdown'>
                 <div className='inner'>
@@ -133,7 +135,7 @@ const ViewBasic = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           { meeting.map((data) => {
             return (
@@ -141,12 +143,12 @@ const ViewBasic = () => {
                   <div className='col-sm-3 cl-coll'>
                     <div className='info'>
                       <figure> <img src='../../../images/clients-01.png' alt='' /> </figure>
-                      <h3> { data.anonymized_name } <span>Private</span> </h3>
-                      <p> <span>Next Session</span> </p>
+                      <h3> { data.anonymized_name }  </h3>
+                      {/* <p> <span>Next Session</span> </p> */}
                       <p>client id : <br/> {data.id} </p>
-                      <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { weekday: 'long' }) }</p>
+                      {/* <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { weekday: 'long' }) }</p>
                       <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) }</p>
-                      <p>{ data.meetingTime }</p>
+                      <p>{ data.meetingTime }</p> */}
                     </div>
                   </div>
                 </>

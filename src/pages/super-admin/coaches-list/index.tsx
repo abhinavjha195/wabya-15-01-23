@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { app, database } from '../../../../firebaseConfig';
-import { collection, getDocs,doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs,doc, deleteDoc,updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -75,13 +75,43 @@ const CoachesList = ()  => {
   //   }
     
   // }, [fireData]);
+
+
+
+  // update record
+  const updateApproved = (value,coach_id) => {
+    let fieldToEdit = doc(database, 'coaches_user', coach_id);
+    updateDoc(fieldToEdit, {
+      isApproved: value,
+     
+    })
+    .then(() => {
+      toast.success('Data updated successfully!')
+      getData()
+   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
   return (
     <section className='coaches-list'>
    
       <div className='container'>
         <div className='row'>
           <div className='col-sm-12 mrb-30'>
-            <h2>Coaches List</h2>
+            <h2>coaches list</h2>
           </div>
           <div className='col-sm-12'>
           <div className='coach-table'>
@@ -91,9 +121,10 @@ const CoachesList = ()  => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Coach Name</th>
-                      <th>Email</th>
-                      <th>Actions</th>
+                      <th>coach name</th>
+                      <th>email</th>
+                      <th>approve/decline</th>
+                      <th>actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -104,6 +135,20 @@ const CoachesList = ()  => {
                         <td>{count++} </td>
                         <td>{data.coach_name}</td>
                         <td>{data.coach_email}</td>
+                        <td>
+
+                        {data.isApproved === 1
+    ? <><p>approved</p>
+    </>
+    : data.isApproved === 0
+      ? <><p>declined</p>
+      </>
+      : <div>
+          <button className='btn btn-darkgreen' onClick={() => updateApproved(1, data.coach_id)}>approve</button>
+          <button className='btn btn-chestnutred'onClick={() => updateApproved(0, data.coach_id)}>decline</button>
+        </div>
+  }
+                        </td>
                         <td>
 
                             <Link href={`/super-admin/view-client/${data.coach_id}`} passHref>

@@ -104,10 +104,10 @@ const ViewBasic = () => {
                     <div className='info'>
                       <figure> <img src='../../images/clients-01.png' alt='' /> </figure>
                       <h3> Client Name <span>Private</span> </h3>
-                      <p> <span>Next Session</span> </p>
+                      {/* <p> <span>Next Session</span> </p>
                       <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { weekday: 'long' }) }</p>
                       <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) }</p>
-                      <p>{ data.meetingTime }</p>
+                      <p>{ data.meetingTime }</p> */}
                     </div>
                   </div>
                 </>
