@@ -1112,10 +1112,18 @@ setallWeekDay(next7Days);
      // setisShowmsg(false);
     };
 
+    const handleScrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // You can change this to 'auto' for an instant scroll
+      });
+    };
+  
 
     const handleSchedule = (e) => {
       e.preventDefault();
       setisSesShow(true);
+      handleScrollToTop();
      // setisShowmsg(false);
     };
   
@@ -3764,7 +3772,7 @@ footer={[]}
   
   <section className="calendar-mobile user-detail-mobile">
     <div className="container">
-      <div className="row align-items-center calendar-profile">
+      <div className={`row align-items-center calendar-profile ${!isSesShow ? '' : 'page-not-show'}`}>
         <div className="col-8 left-top">
           <h2>
             hello <br />
@@ -3780,7 +3788,7 @@ footer={[]}
       </div>
       <div className="row">
         <div className="col-12">
-          <div className="calendar-weeksheet">
+          <div className= {`calendar-weeksheet ${!isSesShow ? '' : 'page-not-show'}`}>
 
           {daysOfWeek.map((day, index) => (
          <div className={`col-weeksheet ${day.getDate() === checkedDateMob ? 'active' : ''}`}  key={index} onClick={() => handleDateClick(day)}>
@@ -3791,7 +3799,7 @@ footer={[]}
             
           </div>
           {/*/ calendar-weeksheet */}
-          <div className="calendar-timesheet">
+          <div className={`calendar-timesheet ${!isSesShow ? '' : 'page-not-show'}`}>
             <div className="row">
               
             {array1.map((timeslot, index) => {
@@ -3884,7 +3892,7 @@ footer={[]}
 
 
           <>
-          <Modal
+          {/* <Modal
           centered
           className="session-modal background-dark"
           visible={isSesShow}
@@ -3894,7 +3902,9 @@ footer={[]}
          
           footer={[]}
          
-        >
+        > */}
+
+        { isSesShow ?(
   <section className="schedule-session-new">
     <div className="">
       <div className="row">
@@ -3990,7 +4000,8 @@ footer={[]}
       {/*/ row */}
     </div>
   </section>
-  </Modal>
+        ):null }
+  {/* </Modal> */}
   {/*/ availability */}
 </>
 
@@ -3999,7 +4010,7 @@ footer={[]}
 
 <Modal
           centered
-          className="session-modal background-dark"
+          className={`session-modal background-dark ${!isSesShow ? '' : 'page-not-show'}`}
           visible={isAvblShow}
           onOk={handleavbl}
           onCancel={handleavblCancel}
@@ -4441,7 +4452,7 @@ footer={[]}
   </Modal>
 
 
-          <div className="calendar-btns">
+          <div className={`calendar-btns ${!isSesShow ? '' : 'page-not-show'}`}>
             <p className="btn-p">
               <a href="#" className="btn btn-lightgreen">
                 sync calendar

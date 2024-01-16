@@ -3852,4 +3852,5 @@ left: 75px !important;
 }
 
 .react-calendar__navigation__label__labelText{text-transform: lowercase !important;}
+.page-not-show{display: none !important;}
 
