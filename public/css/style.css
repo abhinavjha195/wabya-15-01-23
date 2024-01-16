@@ -3588,6 +3588,8 @@ button{font-family: Gothic A1 !important;}
    .new-plans .btn{width: 100% !important;}
    .new-plans .plans-list ul{margin: 0; padding: 0 !important; display: block; gap: 0;}
    .new-plans .plans-list ul li{padding: 0 0 10px !important; list-style: none !important;}
+   .schedule-session-new .schedule-cross{position: absolute; right: 0; top: 0; cursor: pointer; z-index: 2; background: #ef7655; height: 40px; width: 40px; text-align: center; line-height: 40px;
+  border-radius: 100%; font-size: 14px; color: #fff;}
    .schedule-session-new h3, .schedule-session-new h4{font-weight: 500;}
    .timesheet-carousel .owl-stage-outer{padding: 20px 0;}
    .timesheet-carousel .owl-item div::after{display: none;}
