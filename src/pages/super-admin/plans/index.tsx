@@ -254,9 +254,9 @@ const AddPlan = () => {
                               </button>
 
 
-                              <button className='btn btn-delete' onClick={() => deleteDocument(data.plan_id)}>
+                              {/* <button className='btn btn-delete' onClick={() => deleteDocument(data.plan_id)}>
                                 <i className='fa fa-trash'></i>
-                              </button>
+                              </button> */}
 
                           </td>
                         </tr>

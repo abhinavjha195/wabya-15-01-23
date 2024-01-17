@@ -137,23 +137,25 @@ const ViewBasic = () => {
             </div>
           </div> */}
 
-          { meeting.map((data) => {
-            return (
-                <>
-                  <div className='col-sm-3 cl-coll'>
-                    <div className='info'>
-                      <figure> <img src='../../../images/clients-01.png' alt='' /> </figure>
-                      <h3> { data.anonymized_name }  </h3>
-                      {/* <p> <span>Next Session</span> </p> */}
-                      <p>client id : <br/> {data.id} </p>
-                      {/* <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { weekday: 'long' }) }</p>
-                      <p>{ new Date(data.meetingDate).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) }</p>
-                      <p>{ data.meetingTime }</p> */}
-                    </div>
-                  </div>
-                </>
-              );
-            })}
+{meeting.length === 0 ? (
+  <h4 className='text-center'>no client present</h4>
+) : (
+  <>
+    <h4 className='text-center' style={{'margin-bottom':'80px'}}>client list</h4>
+    {meeting.map((data) => (
+      <div className='col-sm-3 cl-coll' key={data.id}>
+        <div className='info'>
+          <figure> <img src='../../../images/clients-01.png' alt='' /> </figure>
+          <h3>{data.anonymized_name}</h3>
+          <p>client id: <br/> {data.id} </p>
+          {/* Other details */}
+        </div>
+      </div>
+    ))}
+  </>
+)}
+
+
 
         </div>
         {/* <!--/ row --> */}
