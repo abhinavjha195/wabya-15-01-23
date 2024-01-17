@@ -69,10 +69,12 @@ const ViewBasic = () => {
       <div className="col-sm-12 top">
         <div className="inner-info">
           <figure><img src={`${router.basePath}/images/clients-01.png`} alt=""/></figure>
-          <h2> {!clientData ? null : clientData.client_name} <span>Private</span></h2>
+          <h2> {!clientData ? null : clientData.client_name}
+           <span>Private</span>
+           </h2>
 
         <div className="right-area">
-          <p><a href="#" className="btn">Start Call</a></p>
+          {/* <p><a href="#" className="btn">Start Call</a></p> */}
         </div>
         </div>
       </div>
@@ -86,7 +88,9 @@ const ViewBasic = () => {
         <p>Current Package <span>{!planData ? null : planData.plan_name}</span></p>
         <p>Last Session: <span>10 November 2023</span></p>
         <p>Completed Sessions: <span>00</span></p>
-        <p>Next Sessions: <span>Thursday</span><span>10 November 2023</span><span>09:30</span></p>
+        <p>Next Sessions: 
+          {/* <span>Thursday</span><span>10 November 2023</span><span>09:30</span> */}
+          </p>
         </div>
       </div>
 
@@ -98,7 +102,7 @@ const ViewBasic = () => {
         <div className="info-grid">
 
 
-              <div className="client-light">
+              {/* <div className="client-light">
                   <div className="icons-bottom">
                     <span className="icons"><i className="fa fa-microphone-slash" aria-hidden="true"></i></span>
                     <span className="icons"><i className="fa fa-video-camera" aria-hidden="true"></i></span>
@@ -106,7 +110,7 @@ const ViewBasic = () => {
                     <span className="icons"><i className="fa fa-arrows-alt" aria-hidden="true"></i></span>
                     <span className="icons"><i className="fa fa-bars" aria-hidden="true"></i></span>
                   </div>
-              </div>
+              </div> */}
             </div>
 
 

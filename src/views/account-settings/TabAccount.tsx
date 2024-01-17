@@ -303,6 +303,7 @@ const dialerCodes = {
     const [proLanguage, setLanguage] = useState('');
     const [proTimeZone, setTimeZone] = useState('');
     const [proBio, setBio] = useState('');
+    //const [proCertifiacte, setCertifiacte] = useState('no');
     const [proAbout, setAbout] = useState('');
     const [proImage,setImage] = useState('');
     const [message, setMessage] = useState(false);
@@ -508,6 +509,7 @@ const dialerCode = getDialerCode(country_sel);
         setLanguage(userDoc.data().coach_language),
         setTimeZone(userDoc.data().coach_timezone),
         setBio(userDoc.data().coach_bio),
+      //  setCertifiacte(userDoc.data().coach_certificate),
         setAbout(userDoc.data().coach_about),
         setImage(userDoc.data().coach_profile),
         setfileUrl(userDoc.data().coach_profile)
@@ -556,6 +558,7 @@ setend_time_minute(parts2[1])
         coach_language : proLanguage,
         coach_bio : proBio,
         coach_about : proAbout,
+       
         
         start_time:s_time,
         end_time:e_time,
@@ -699,6 +702,10 @@ setend_time_minute(parts2[1])
           <Grid item xs={12} sm={6}>
             <TextField fullWidth type='text' label='Phone' placeholder='Phone' name='pro_phone' id='pro_phone' value={`${dialerCode} ${proPhone}`} onChange={event => setPhone(event.target.value)} />
           </Grid>
+
+         
+
+
           <Grid item xs={12} sm={6}>
             {/* <TextField fullWidth type='text' label='Country' placeholder='Country' name='pro_country' id='pro_country' value={proCountry} onChange={event => setCountry(event.target.value)} /> */}
             <Select
@@ -727,6 +734,32 @@ setend_time_minute(parts2[1])
           <Grid item xs={12} sm={6}>
             <TextField fullWidth type='text' label='Time Zone' placeholder='Time Zone' name='pro_timezone' id='pro_timezone' value={proTimeZone} onChange={event => setTimeZone(event.target.value)} />
           </Grid>
+
+          {/* <Grid item xs={12} sm={12}>
+          <FormControl fullWidth>
+    <InputLabel id="demo-simple-select-label">i hold an associate certified coach (acc) credential - or its equivalent</InputLabel>
+            {/* <TextField fullWidth type='text' label='Country' placeholder='Country' name='pro_country' id='pro_country' value={proCountry} onChange={event => setCountry(event.target.value)} /> */}
+            {/* <Select
+  
+  fullWidth
+ 
+  name='coachCertifiacte'
+  id='coachCertifiacte'
+  label='coachCertifiacte'
+  className='coachCertifiacte'
+
+  value={proCertifiacte}
+  onChange={event => setCertifiacte(event.target.value)}
+
+>
+
+<MenuItem value='yes'> yes</MenuItem>
+<MenuItem value='no'> no</MenuItem>
+
+
+</Select>
+</FormControl> *
+          </Grid> */}
 
           {/* <Grid item xs={12} sm={2}>
             <TextField fullWidth type='number' label='Start Time Hour'  value={start_time_hour} name='pro_timezone' id='pro_timezone' onChange={handleStartTimeHour}  />
