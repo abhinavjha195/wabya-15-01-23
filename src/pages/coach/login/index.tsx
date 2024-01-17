@@ -66,6 +66,8 @@ const ClientLoginPage = () => {
     const handleLogin = async (event) => {
       event.preventDefault();
 console.log('working');
+
+setError('');
       // try {
       //   // Check if the user exists in the database
       //   const usersRef = collection(database, 'client_user');
@@ -98,6 +100,12 @@ console.log('working');
         throw new Error('Incorrect password');
         
       }
+
+      if (user2.isApproved !== 1) {
+        setError('your account is not approved by superadmin');
+        throw new Error('your account is not approved by superadmin');
+        
+      }
       
       // Set the user ID as a session variable
         sessionStorage.setItem('coachId', querySnapshot2.docs[0].id);
@@ -108,7 +116,20 @@ console.log('working');
 
     } catch (error2) {
       //setError(error2.message);
-      setError('Incorrect password');
+
+      console.log(error2);
+
+      if(error2){
+
+        
+        if(error2.message == 'your account is not approved by superadmin'){
+          setError('your account is not approved by superadmin');
+        }
+        else{
+          setError('Incorrect password');
+        }
+      }
+     // setError('Incorrect password');
     }
       //  }
 
