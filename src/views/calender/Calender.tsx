@@ -184,6 +184,7 @@ const Calender = () => {
     const [isFormShow, setisFormShow] = useState(false);
     const [scheduleSuccess, setscheduleSuccess] = useState(false);
     const [isSesShow, setisSesShow] = useState(false);
+    const [isSesShow_desk, setisSesShow_desk] = useState(false);
     const [isStandShow, setisStandShow] = useState(false);
     const [isAvblShow, setisAvblShow] = useState(false);
     const [isSyncFormShow, setisSyncFormShow] = useState(false);
@@ -1127,8 +1128,20 @@ setallWeekDay(next7Days);
      // setisShowmsg(false);
     };
   
+
+    const handleSchedule_desk = (e) => {
+      e.preventDefault();
+      setisSesShow_desk(true);
+    //  handleScrollToTop();
+     // setisShowmsg(false);
+    };
     const handleScheduleCancel = () => {
       setisSesShow(false);
+     // setisShowmsg(false);
+    };
+
+    const handleScheduleCancel_desk = () => {
+      setisSesShow_desk(false);
      // setisShowmsg(false);
     };
 
@@ -2909,7 +2922,7 @@ console.log('day',nextSevenDay[index].date);
       </Menu>
                         </Fragment>
 
-                  <button className='btn btn-darkblue' onClick={handleSchedule}>schedule session</button>
+                  <button className='btn btn-darkblue' onClick={handleSchedule_desk}>schedule session</button>
 
               </div>
             </div>
@@ -3892,6 +3905,144 @@ footer={[]}
 
 
           <>
+
+
+
+
+
+
+
+
+      <Modal
+          centered
+          className={`session-modal background-dark `}
+          visible={isSesShow_desk}
+          onOk={handleSchedule_desk}
+          onCancel={handleScheduleCancel_desk}
+          width={800}
+         
+          footer={[]}
+         
+        >
+
+
+  <section className="schedule-session-new">
+    <div className="">
+      <div className="row">
+        <div className="col-12">
+        
+          <h3 className="mrb-20">schedule a session</h3>
+          <div className="form-group mrb-30">
+            <h4 className="mrb-5">select the date</h4>
+            <Calendar onChange={getTimeslots} value={date} minDate={today} />
+          </div>
+          {/*/ form-group */}
+
+
+          <div className="availability-wrap availability-wrap-session"><h4>select the time</h4>
+          <div className="availability-box availability-box-edit">
+            <div className="inner">
+              <span><small>from</small>  <select name="cars" className="form-control" onChange={handleTimeClick}> 
+              <option >00:00</option>
+              {array2.map((timeSlot, index) => (
+    
+    <option   data-key={index}
+    key={index}
+    data-time={timeSlot}
+   
+    onClick={handleTimeClick} >{timeSlot.replace(/:00$/, '')}</option>
+  
+))}
+</select></span>
+              <span><small>to</small>{meetingendtime ? meetingendtime : '00:00'}</span>
+              </div>
+              </div>
+              
+              </div>
+
+
+
+
+
+
+
+
+
+
+          <div className="form-group mrb-30">
+            {/* <h4 className="mrb-5">select the time</h4> */}
+           
+           
+            {/* <select name="cars" class="form-control" onChange={handleTimeClick}>
+            
+            <option value="">
+          Select Time
+        </option>
+            {array2.map((timeSlot, index) => (
+    
+      <option   data-key={index}
+      key={index}
+      data-time={timeSlot}
+     
+      >{timeSlot}</option>
+    
+  ))}
+               </select> */}
+          
+            {/*/ inner */}
+          </div>
+          {/*/ form-group */}
+          <div className="form-group mrb-30">
+            <h4 className="mrb-5">select your client</h4>
+            <select name="cars" className="form-control" onChange={handleClientClick}>
+            <option value="" data-value="" data-email="">
+          Select Client
+        </option>
+            {myClient.map((client, index) => (
+        <option key={index} value={client.c_id} data-value={client.c_id} data-email={client.client_email}>
+          {client.client_name}
+        </option>
+        
+      ))}
+      </select>
+          </div>
+          {/*/ form-group */}
+          <div className="form-group mrb-30">
+            <h4 className="mrb-5">notes</h4>
+            <textarea className="form-control" defaultValue={""} />
+          </div>
+          {/*/ form-group */}
+          {meetingSuccessMsg &&  <Alert severity='success' style={{ margin :'0 0 20px 0',width:'70%'}}>{meetingSuccessMsg}</Alert>} 
+          <div className="form-group form-btn">
+            <button className="btn btn-orange schedule-btnn" style={{'color':'white'}}  disabled={meetingclient === ''} onClick={scheduleNext}   >save</button>
+          </div>
+        </div>
+        {/*/ cl-coll */}
+      </div>
+      {/*/ row */}
+    </div>
+  </section>
+        
+  </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           {/* <Modal
           centered
           className="session-modal background-dark"
@@ -3993,7 +4144,7 @@ footer={[]}
           {/*/ form-group */}
           {meetingSuccessMsg &&  <Alert severity='success' style={{ margin :'0 0 20px 0',width:'70%'}}>{meetingSuccessMsg}</Alert>} 
           <div className="form-group form-btn">
-            <button className="btn btn-orange schedule-btnn" onClick={scheduleNext}   >save</button>
+            <button className="btn btn-orange schedule-btnn"  disabled={meetingclient === ''} style={{'color':'white'}} onClick={scheduleNext}   >save</button>
           </div>
         </div>
         {/*/ cl-coll */}
