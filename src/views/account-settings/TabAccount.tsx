@@ -671,7 +671,7 @@ if(is_certificate_checked == 'yes'){
      </body>
   </html>
 `;
-sendMailFunc('abhinavkumar3256@gmail.com',adminmsg,'Notification: Coach Profile Update - Associate Certified Coach Credential'); 
+sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Notification: Coach Profile Update - Associate Certified Coach Credential'); 
 
 
 

@@ -244,7 +244,7 @@ err=err+1;
         coach_bio: String(),
         coach_profile: 'https://firebasestorage.googleapis.com/v0/b/wabya-45dba.appspot.com/o/coach%2Fprofile%2Fdefault-pic.png?alt=media&token=e8f166da-9d52-4c00-a978-60669f3a0929&_gl=1*3mksep*_ga*MTIzMzY1Njg1LjE2OTA4MDU4Nzg.*_ga_CW55HF8NVT*MTY5NzEwMzk4Ni45Mi4xLjE2OTcxMDcyNTIuMjkuMC4w',
         coach_uid : Number(),
-      })
+      }) 
         .then(() => {
         setsuccess('Registered Successfully');
         //  router.push('/pages/login')

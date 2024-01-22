@@ -133,6 +133,7 @@ const [modal_action, setmodal_action] = useState("");
   const [planId, setplanId] = useState('');
   const [clientRegisteredId, setclientRegisteredId] = useState('');
   const [coach_prefer, setcoach_prefer] = useState('');
+  const [plan_prefer, setplan_prefer] = useState('6ZpZd4IrzORGQfyu0IqT');
 
   const [client_emailId, setclient_emailId] = useState('');
   const [client_detail, setclient_detail] = useState(null);
@@ -206,7 +207,8 @@ if(clientRegisteredId != ''){
     if(client_detail != null){
     console.log(client_detail);
     setcoach_prefer(client_detail[0].coach_prefer);
-    setclient_emailId(client_detail[0].client_email)
+    setclient_emailId(client_detail[0].client_email);
+    setplan_prefer(client_detail[0].prefer_plan_id);
    // setclient_remaining_ses(client_detail[0].remainingSession);
     }
      }, [client_detail]);
@@ -480,6 +482,16 @@ const sortedCoaches = coachData && clientData ? coachData.slice().sort((a, b) =>
         return 1;
       }
     }
+
+
+  //   if (plan_prefer === 'sH2iLHtr5PWg3gdSjIIn') {
+  //     // Prioritize coaches with coach_certificate 'yes' when plan_prefer is 'sH2iLHtr5PWg3gdSjIIn'
+  //     if (a.coach_certificate === 'yes' && b.coach_certificate !== 'yes') {
+  //         return -1;
+  //     } else if (a.coach_certificate !== 'yes' && b.coach_certificate === 'yes') {
+  //         return 1;
+  //     }
+  // }
 
     return countA - countB; // Change to countB - countA for descending order
   })
@@ -1089,14 +1101,14 @@ if(client_emailId != ""){
                 <div className="col-sm-12 date-time">
                   <h3>select your date & time</h3>
 
-                  {/* {sortedCoaches && sortedCoaches.map((coach) => (
+                  {sortedCoaches && sortedCoaches.map((coach) => (
         <div key={coach.coach_idd}>
           <h1>Coach: {coach.coach_name}  - {coach.coach_gender} </h1>
           <p>Number of Clients: {coachClientCounts[coach.coach_idd]}</p>
         </div>
       ))}
 
-assign coach - {coachId} */}
+assign coach - {coachId}
       
                 <div className="time-btn"><button className="btn" id="myButton" onClick={scheduleNewSes}>select an available time</button></div>
                 </div>
