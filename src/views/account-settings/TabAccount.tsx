@@ -31,6 +31,9 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import FormControl from '@mui/material/FormControl'
 import Button, { ButtonProps } from '@mui/material/Button'
 
+
+import { sendMail } from "../../services/sendMail"
+
 // ** Third Party Imports
 // import DatePicker from 'react-datepicker'
 
@@ -85,6 +88,11 @@ const TabAccount = () => {
   const [date, setDate] = useState<Date | null | undefined>(null)
 
 
+  async function sendMailFunc (email,content,$subject){   
+    let response = await sendMail(email,$subject,content);   
+  
+    console.log('response',response);
+  } 
 
   // Define dialer codes for each country
 const dialerCodes = {
@@ -303,7 +311,9 @@ const dialerCodes = {
     const [proLanguage, setLanguage] = useState('');
     const [proTimeZone, setTimeZone] = useState('');
     const [proBio, setBio] = useState('');
-    //const [proCertifiacte, setCertifiacte] = useState('no');
+    const [proCertifiacte, setCertifiacte] = useState('no');
+    const [is_certificate_apply, set_is_certificate_apply] = useState('no');
+    const [is_certificate_checked, set_is_certificate_checked] = useState('no');
     const [proAbout, setAbout] = useState('');
     const [proImage,setImage] = useState('');
     const [message, setMessage] = useState(false);
@@ -311,6 +321,11 @@ const dialerCodes = {
     const [start_time_hour, setstart_time_hour] = useState("00");
 
     const [start_time_minute, setstart_time_minute] = useState("00");
+
+    const handleCheckboxClick = () => {
+      // Toggle between 'yes' and 'no'
+      set_is_certificate_checked((prevValue) => (prevValue === 'yes' ? 'no' : 'yes'));
+  };
 
     const handleStartTimeHour = (event) => {
       const value = parseInt(event.target.value, 10);
@@ -510,9 +525,25 @@ const dialerCode = getDialerCode(country_sel);
         setTimeZone(userDoc.data().coach_timezone),
         setBio(userDoc.data().coach_bio),
       //  setCertifiacte(userDoc.data().coach_certificate),
+   
+      //  set_is_certificate_apply(userDoc.data().is_certificate_apply),
         setAbout(userDoc.data().coach_about),
         setImage(userDoc.data().coach_profile),
         setfileUrl(userDoc.data().coach_profile)
+
+        if (userDoc.data().coach_certificate === undefined || userDoc.data().coach_certificate === null) {
+          setCertifiacte("no");
+      } else {
+        setCertifiacte(userDoc.data().coach_certificate);
+      }
+
+      
+      if (userDoc.data().is_certificate_apply === undefined || userDoc.data().is_certificate_apply === null) {
+        set_is_certificate_apply("no");
+    } else {
+      set_is_certificate_apply(userDoc.data().is_certificate_apply)
+     
+    }
         if(userDoc.data().start_time){
           var s_time = userDoc.data().start_time;
 var parts1 = s_time.split(":");
@@ -558,6 +589,7 @@ setend_time_minute(parts2[1])
         coach_language : proLanguage,
         coach_bio : proBio,
         coach_about : proAbout,
+        is_certificate_apply:is_certificate_checked,
        
         
         start_time:s_time,
@@ -566,6 +598,98 @@ setend_time_minute(parts2[1])
       };
       await updateDoc(userDocRef, updatedData);
       setMessage(true);
+
+
+
+
+
+
+
+
+
+if(is_certificate_checked == 'yes'){
+
+
+
+
+
+
+
+      const logoUrl = 'https://wabya.com/images/logo-new.png';
+     
+
+
+    const adminmsg = `
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Wabya</title>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+        <style type="text/css">
+           body{padding-top: 0 !important; padding-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin:0 !important; width: 100% !important; -webkit-text-size-adjust: 100% !important; -ms-text-size-adjust: 100% !important; -webkit-font-smoothing: antialiased !important; font-size:14px; line-height:22px; font-family: 'Lato', sans-serif; font-weight:400;}
+        </style>
+     </head>
+     <body paddingwidth="0" paddingheight="0"  style="" offset="0" toppadding="0" leftpadding="0">
+     <div style="display:table; width:600px !important; margin: 0 auto; background: #fff; padding:20px;">
+        <table width="600" border="0" cellspacing="0" cellpadding="0" class="tableContent bgBody" align="center" style='width: 600px; display: block;'>
+           <tbody>
+              <tr>
+                 <table class="MainContainer" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ece6d5" align="center" style='width: 600px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>
+                    <tbody style=''>
+  <tr>
+                          <td colspan="2"><div style="text-align: center; margin:35px 0 0" class="contentLogo"><a href="https://www.#.com"><img src="${logoUrl}" width="200px" alt="" border="0" style=""></a></div></td>
+                       </tr>
+                       <tr>
+                          <td>
+                             <div style="padding:0 30px;  position: relative; z-index: 2;line-height: 22px;font-family: 'Lato', sans-serif;font-weight: 600;text-align: center;">
+                           
+                             <p style="font-size: 18px; text-align: center; color: #864985;">Hello Admin,</p>
+                             <p style="font-size: 18px; text-align: center; color: #864985;">a coach has recently edited their profile on our platform and has indicated that they hold an Associate Certified Coach (ACC) credential or its equivalent.</p>
+                            
+                             <p style="font-size: 18px; text-align: center; color: #864985;">Please take a moment to verify this information in the admin panel and ensure that the coach profile reflects the accurate details regarding their coaching credentials.</p>            
+                             <p style="font-size: 18px; text-align: center; color: #864985;">Here are the user's details:</p>
+   
+ 
+                             <p style="font-size: 16px; text-align: center; margin:0 0 20px;color: #242424;">Name: ${proName} </p>
+  <p style="font-size: 16px; text-align: center; margin:0 0 20px;color: #242424;">Email: ${proEmail} </p>
+
+  
+  
+  <hr style="border: 1px solid #1c686b;">
+  <p style="font-size: 14px; color: #242424; text-align: center;">Thank you,<br>Wabya Team</p>
+   </div>  
+                          </td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </tr>
+           </tbody>
+        </table>
+   </div>
+     </body>
+  </html>
+`;
+sendMailFunc('abhinavkumar3256@gmail.com',adminmsg,'Notification: Coach Profile Update - Associate Certified Coach Credential'); 
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       //reflect changes instant
       const nameField = document.getElementById("pro_fullname");
@@ -810,6 +934,14 @@ setend_time_minute(parts2[1])
             />
           </Grid>
 
+{is_certificate_apply =='no' && (proCertifiacte == 'no' || proCertifiacte == '') ?
+
+          <Grid item xs={12} sm={12}>
+          <input type='checkbox' className='' checked={is_certificate_checked === 'yes'}   onClick={handleCheckboxClick} style={{'width':'50px'}}/>
+           <label>i hold an associate certified coach (acc) credential - or its equivalent</label>
+          
+          </Grid>
+          :null }
           <Grid item xs={12}>
 
             <button type='submit' className="btn btn-save" onClick={handleSubmit}>

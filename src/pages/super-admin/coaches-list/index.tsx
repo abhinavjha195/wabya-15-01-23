@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { sendMail } from "../../../services/sendMail"
+
 const CoachesList = ()  => {
 
   const router = useRouter()
@@ -29,6 +31,13 @@ const CoachesList = ()  => {
     //   router.push('/super-admin/login')
     // }
   }, [])
+
+  
+  async function sendMailFunc (email,content,$subject){   
+    let response = await sendMail(email,$subject,content);   
+  
+    console.log('response',response);
+  } 
 
   // fetch all coaches records
   const getData = async () => {
@@ -99,6 +108,95 @@ const CoachesList = ()  => {
 
 
 
+    // update record
+    const updateAccC = (value,coach_id,coach_em) => {
+      let fieldToEdit = doc(database, 'coaches_user', coach_id);
+      let is_certificate_apply='no';
+      let coach_certificate='';
+      let accc_action='';
+    
+      if(value == 'yes'){
+        coach_certificate='yes';
+        accc_action='confirmed';
+      }else{
+        coach_certificate='no';
+        accc_action='declined';
+      }
+      updateDoc(fieldToEdit, {
+        coach_certificate: coach_certificate,
+        is_certificate_apply:is_certificate_apply,
+       
+      })
+      .then(() => {
+        toast.success('Data updated successfully!')
+
+        getData()
+
+
+
+
+
+
+
+        const logoUrl = 'https://wabya.com/images/logo-new.png';
+     
+
+
+        const adminmsg = `
+      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml">
+         <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Wabya</title>
+            <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+            <style type="text/css">
+               body{padding-top: 0 !important; padding-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin:0 !important; width: 100% !important; -webkit-text-size-adjust: 100% !important; -ms-text-size-adjust: 100% !important; -webkit-font-smoothing: antialiased !important; font-size:14px; line-height:22px; font-family: 'Lato', sans-serif; font-weight:400;}
+            </style>
+         </head>
+         <body paddingwidth="0" paddingheight="0"  style="" offset="0" toppadding="0" leftpadding="0">
+         <div style="display:table; width:600px !important; margin: 0 auto; background: #fff; padding:20px;">
+            <table width="600" border="0" cellspacing="0" cellpadding="0" class="tableContent bgBody" align="center" style='width: 600px; display: block;'>
+               <tbody>
+                  <tr>
+                     <table class="MainContainer" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ece6d5" align="center" style='width: 600px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>
+                        <tbody style=''>
+      <tr>
+                              <td colspan="2"><div style="text-align: center; margin:35px 0 0" class="contentLogo"><a href="https://www.#.com"><img src="${logoUrl}" width="200px" alt="" border="0" style=""></a></div></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div style="padding:0 30px;  position: relative; z-index: 2;line-height: 22px;font-family: 'Lato', sans-serif;font-weight: 600;text-align: center;">
+                               
+                                 <p style="font-size: 18px; text-align: center; color: #864985;">Hello coach,</p>
+                                 <p style="font-size: 18px; text-align: center; color: #864985;">admin ${accc_action}  your request to update your profile to hold an Associate Certified Coach (ACC) credential or its equivalent.</p>
+                                
+                                 
+      
+      
+      <hr style="border: 1px solid #1c686b;">
+      <p style="font-size: 14px; color: #242424; text-align: center;">Thank you,<br>Wabya Team</p>
+       </div>  
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </tr>
+               </tbody>
+            </table>
+       </div>
+         </body>
+      </html>
+    `;
+    sendMailFunc(coach_em,adminmsg,'Notification: Associate Certified Coach Credential'); 
+    
+    
+     
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
 
 
 
@@ -124,6 +222,7 @@ const CoachesList = ()  => {
                       <th>coach name</th>
                       <th>email</th>
                       <th>approve/decline</th>
+                      <th>acc credential</th>
                       <th>actions</th>
                     </tr>
                   </thead>
@@ -141,7 +240,7 @@ const CoachesList = ()  => {
     ? <>approved
     </>
     : data.isApproved === 0
-      ? <>declined
+      ? <>declined   <button className='btn btn-desktop btn-darkgreen' onClick={() => updateApproved(1, data.coach_id)}>approve</button>
       </>
       : <div>
           <button className='btn btn-desktop btn-darkgreen' onClick={() => updateApproved(1, data.coach_id)}>approve</button>
@@ -149,6 +248,26 @@ const CoachesList = ()  => {
         </div>
   }
                         </td>
+
+
+
+
+
+
+
+
+
+                        <td>
+
+{data.is_certificate_apply === 'yes'
+? 
+<div>
+<button className='btn btn-desktop btn-darkgreen' onClick={() => updateAccC('yes', data.coach_id, data.coach_email)}>approve</button>
+<button className='btn btn-desktop btn-chestnutred'onClick={() => updateAccC('no', data.coach_id,data.coach_email)}>decline</button>
+</div>
+: null
+}
+</td>
                         <td>
 
                             <Link href={`/super-admin/view-client/${data.coach_id}`} passHref>
