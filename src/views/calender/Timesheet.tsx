@@ -345,6 +345,7 @@ const getWeekDates = () => {
 };
 
 const [proName, setName] = useState('');
+const [myPlan, setMyPlan] = useState('');
 
 const myprofile= async () =>{
   const coachIds = sessionStorage.getItem('coachId');
@@ -353,6 +354,7 @@ const myprofile= async () =>{
   const userDoc = await getDoc(userDocRef);
   console.log(userDoc.data());
   setName(userDoc.data().coach_name);
+  setMyPlan(userDoc.data().coach_certificate);
 }
 
 
@@ -528,8 +530,10 @@ const totalEarnings = filteredMeetingSessions.length * 20; // Assuming $20 per s
             <div className='timesheet-buttons'>
               <div className='row'>
                 <div className='col-sm-12'>
+                  { myPlan == 'yes' ?
                   <button className='btn btn-orange' onClick={() => handleFilterPlan('experienced')}
  >Experienced</button>
+ : null }
                   <button className='btn btn-lightgreen' onClick={() => handleFilterPlan('novice')}
 >Novice</button>
                   <button className='btn btn-thulian-pink' onClick={() => handleFilterPlan('probono')}
@@ -648,7 +652,7 @@ return (
 :null }
 
 
-{(filterPlan == 'all' || filterPlan == 'experienced') &&  (((filteredMeetingSessions2(dateString,dateString).filter(
+{( myPlan == 'yes' && filterPlan == 'all' || filterPlan == 'experienced') &&  (((filteredMeetingSessions2(dateString,dateString).filter(
         meet => meet.client_plan === 'experienced'
       )).length * 30) / 60).toFixed(1) != '0.0' ?
 
@@ -839,7 +843,7 @@ return (
               </div>
             </div>
 
-            <DataTable datesArray={datesArray} meetingSession={meetingSession} coachName={proName}  />
+            <DataTable datesArray={datesArray} meetingSession={meetingSession} coachName={proName} myPlan={myPlan} />
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ function isSameMonth(date, targetMonth, targetYear) {
   );
 }
 
-const DataTable = ({ datesArray, meetingSession, coachName }) => {
+const DataTable = ({ datesArray, meetingSession, coachName ,myPlan }) => {
     const [csvData, setCsvData] = useState('');
     const convertToCSV = () => {
       const csvRows = [];
@@ -253,12 +253,15 @@ return (
               <td className='pay'>novice</td>
               <td>{noviceCount * 0.5} hours</td>
               <td>£{noviceCount * 20}.00</td>
+
           </tr>
+          { myPlan == 'yes' ?
           <tr>
               <td className='probono'>experienced</td>
               <td>{experiencedCount * 0.5} hours</td>
               <td>£{experiencedCount * 50}.00</td>
           </tr>
+          :null }
           <tr>
               <td colspan="2"></td>
               
