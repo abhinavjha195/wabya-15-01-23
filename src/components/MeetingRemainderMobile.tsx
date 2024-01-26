@@ -41,7 +41,7 @@ index == 0 ?(
 <div className='col-sm-12'>
 <div className='client-reminder notification-desktop'>
 <p>
-new client ({new_c.client_name}) joined.
+new client  ( <a href={`/coach/clientDetail//${new_c.c_id}`}><u>{new_c.client_name}</u></a>) joined.
 {/* <span>45 minutes : Coach Name</span> */}
 </p>
 <div className='dismiss' onClick={() => updateNewClientNotified(new_c.c_id)}>

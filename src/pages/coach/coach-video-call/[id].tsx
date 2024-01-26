@@ -15,6 +15,7 @@ const VideoCallPage = () => {
     const videoId=router.query.id;
   const [callObject, setCallObject] = useState(null);
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [backHome, setbackHome] = useState(false);
 
   const [meetId, setmeetId] = useState('');
 
@@ -131,7 +132,9 @@ updateDoc(update, {
   client_end_time: unixTimestamp,
 })
  
+callObject.destroy();
 
+setbackHome(true);
 
         
       });
@@ -142,6 +145,15 @@ updateDoc(update, {
     <>
       {iframeLoaded ? null : <h1>Loading...</h1>}
       <div id="iframeContainer"></div>
+
+
+      { backHome ?
+      <div className="error-message-video">
+  <h3>you left the meeting.</h3>
+  <h3><a href='../../../client/dashboard'>back to home</a></h3>
+ 
+</div>
+    :null }
     </>
   );
 };

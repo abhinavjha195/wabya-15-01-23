@@ -27,6 +27,8 @@ const VideoCallPage = () => {
 
   const [clientName, setClientName] = useState('');
 
+  const [clientPlan, setclientPlan] = useState('');
+
   const [clientEmail, setClientEmail] = useState('');
   const [isSessionAvbl, setisSessionAvbl] = useState(false);
   
@@ -97,6 +99,15 @@ const VideoCallPage = () => {
       setClientName(client.client_name);
 
       setClientEmail(client.client_email);
+
+      if(client.plan_id == '6ZpZd4IrzORGQfyu0IqT'){
+      setclientPlan('novice');
+      }
+
+      if(client.plan_id == 'sH2iLHtr5PWg3gdSjIIn'){
+        setclientPlan('experienced');
+        }
+
         
       if(client.remainingSession > 0 || client.isDiscoverySessionAdded == 1){
         setisSessionAvbl(true);
@@ -146,22 +157,22 @@ const VideoCallPage = () => {
                 border: 'none',
                 backgroundColor: '#f6f6f6',
               },
-              theme: {
-                colors: {
+              // theme: {
+              //   colors: {
                  
                 
-                  accent: '#f79632',
+              //     accent: '#f79632',
                  
                  
                 
-                  baseText: '#0f2540',
-                  border: '#f79632',
-                  mainAreaBg: '#0f2540',
+              //     baseText: '#0f2540',
+              //     border: '#f79632',
+              //     mainAreaBg: '#0f2540',
                  
               
                  
-                },
-              },
+              //   },
+             // },
             });
 
             setCallObject(callObj);
@@ -286,7 +297,7 @@ async function updateMeetingDocument() {
           client_leave: 'no',
           meeting_end:'no',
           coachJoined:'no',
-          client_plan:'novice',
+          client_plan:clientPlan,
     
          
         })
@@ -378,7 +389,7 @@ setbackHome(true);
 { backHome ?
       <div className="error-message-video">
   <h3>you left the meeting.</h3>
-  <h3><a href='../../../client/dashoard'>back to home</a></h3>
+  <h3><a href='../../../client/dashboard'>back to home</a></h3>
  
 </div>
     :null }

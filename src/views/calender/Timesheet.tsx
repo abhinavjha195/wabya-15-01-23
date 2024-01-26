@@ -368,6 +368,7 @@ return meetingSession.filter((meet) => {
 
   const meetingDate = new Date(meet.meeting_start_time.seconds * 1000);
   const meetingMonth = meetingDate.getMonth();
+  console.log('meetingMonth',meetingMonth);
   const isMatchingMonth = meetingMonth === currentMonth;
 
   
@@ -424,6 +425,52 @@ const filteredMeetingSessions3 = (a,b) =>{
   );
   
   }
+
+
+
+
+// Filter meeting sessions for the selected month
+const filteredMeetingSessions_month = (a,b,c) =>{
+
+
+
+  return meetingSession.filter((meet) => {
+  
+    const meetingDate = new Date(meet.meeting_start_time.seconds * 1000);
+    const meetingMonth = meetingDate.getMonth();
+    console.log('meetingMonth',meetingMonth);
+    const isMatchingMonth = meetingMonth === c-1;
+  
+    
+    if (!isMatchingMonth) {
+      return false;
+    }
+  
+    
+  
+    const m_date= meetingDate.getDate();
+  
+    if(m_date >= a  && m_date <= b){
+      return true;
+    }
+  return false;
+  
+  
+  
+  }
+  
+  );
+  
+  }
+
+
+
+
+
+
+
+
+
 
 
   // Calculate earnings based on client plan
@@ -632,19 +679,19 @@ return (
             // </div>
             <></>
             : null }
-{(filterPlan == 'all' || filterPlan == 'novice') &&  (((filteredMeetingSessions2(dateString,dateString).filter(
+{(filterPlan == 'all' || filterPlan == 'novice') &&  (((filteredMeetingSessions_month(dateString,dateString,monthString).filter(
         meet => meet.client_plan === 'novice'
       )).length * 30) / 60).toFixed(1) != '0.0' ?
 
 
             <div className='first'>
                 <p>
-                    {`${ (((filteredMeetingSessions2(dateString,dateString).filter(
+                    {`${ (((filteredMeetingSessions_month(dateString,dateString,monthString).filter(
         meet => meet.client_plan === 'novice'
       )).length * 0.45))}`} <span>hours</span>
                 </p>
                 <p>
-                £ <span>{`${(((filteredMeetingSessions2(dateString, dateString).filter(
+                £ <span>{`${(((filteredMeetingSessions_month(dateString, dateString,monthString).filter(
     meet => meet.client_plan === 'novice'
   )).length) * 20)}`}</span>
                 </p>
@@ -652,20 +699,20 @@ return (
 :null }
 
 
-{( myPlan == 'yes' && filterPlan == 'all' || filterPlan == 'experienced') &&  (((filteredMeetingSessions2(dateString,dateString).filter(
+{( myPlan == 'yes' && filterPlan == 'all' || filterPlan == 'experienced') &&  (((filteredMeetingSessions_month(dateString,dateString,monthString).filter(
         meet => meet.client_plan === 'experienced'
       )).length * 30) / 60).toFixed(1) != '0.0' ?
 
             <div className='second'>
                 <p>
-                {`${ (((filteredMeetingSessions2(dateString,dateString).filter(
+                {`${ (((filteredMeetingSessions_month(dateString,dateString,monthString).filter(
         meet => meet.client_plan === 'experienced'
       )).length * 0.45))}`} <span>hours</span>
                 </p>
                 <p>
-                £ <span>`${(((filteredMeetingSessions2(dateString, dateString).filter(
+                £ <span>{`${(((filteredMeetingSessions_month(dateString, dateString,monthString).filter(
     meet => meet.client_plan === 'experienced'
-  )).length)  * 50).toFixed(2)}`
+  )).length)  * 50).toFixed(2)}`}
  </span>
                 </p>
             </div>

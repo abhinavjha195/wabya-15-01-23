@@ -25,7 +25,7 @@ const MeetingReminder = ({ meeting, newClient, scheduleMeeting, updateNewClientN
           <div className="meeting-reminder" key={new_c.c_id}>
             <div className="info">
               <div className="title">New Client Joined.</div>
-              <p>client name: {new_c.client_name}</p>
+              <p>client name:<a href={`/coach/clientDetail/${new_c.c_id}`}>{new_c.client_name}</a></p>
             </div>
             <div className="meeting-link">
               <a href="#" onClick={() => updateNewClientNotified(new_c.c_id)}>
