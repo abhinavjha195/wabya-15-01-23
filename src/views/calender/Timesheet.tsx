@@ -685,11 +685,21 @@ return (
 
 
             <div className='first'>
-                <p>
-                    {`${ (((filteredMeetingSessions_month(dateString,dateString,monthString).filter(
-        meet => meet.client_plan === 'novice'
-      )).length * 0.45))}`} <span>hours</span>
-                </p>
+   <p>
+  {`${((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+    meet => meet.client_plan === 'novice'
+  )).length % 2 == 1
+    ? Math.floor(( ((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+      meet => meet.client_plan === 'novice'
+    )).length * 45) ) / 60) + (((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+      meet => meet.client_plan === 'novice'
+    )).length *0.45) ) % 60
+    : (((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+      meet => meet.client_plan === 'novice'
+    )).length *45) ) / 60  
+      )}`} <span>hours </span>
+</p>
+
                 <p>
                 £ <span>{`${(((filteredMeetingSessions_month(dateString, dateString,monthString).filter(
     meet => meet.client_plan === 'novice'
@@ -705,9 +715,18 @@ return (
 
             <div className='second'>
                 <p>
-                {`${ (((filteredMeetingSessions_month(dateString,dateString,monthString).filter(
-        meet => meet.client_plan === 'experienced'
-      )).length * 0.45))}`} <span>hours</span>
+                {`${((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+    meet => meet.client_plan === 'experienced'
+  )).length % 2 == 1
+    ? Math.floor(( ((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+      meet => meet.client_plan === 'experienced'
+    )).length * 45) ) / 60) + (((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+      meet => meet.client_plan === 'experienced'
+    )).length *0.45) ) % 60
+    : (((filteredMeetingSessions_month(dateString, dateString, monthString).filter(
+      meet => meet.client_plan === 'experienced'
+    )).length *45) ) / 60  
+      )}`} <span>hours</span>
                 </p>
                 <p>
                 £ <span>{`${(((filteredMeetingSessions_month(dateString, dateString,monthString).filter(
