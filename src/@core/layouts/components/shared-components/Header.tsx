@@ -129,7 +129,7 @@ const Header = () => {
                   <a href='/coach/dashboard' passHref>
                     <a className='navbar-brand'>
 
-                    {router.pathname.startsWith('/coach/clientDetail/') ? (
+                    {router.pathname.startsWith('/coach/clientDetail/') || router.pathname.startsWith('/coach/coach-video-call/') ? (
           <img src="../../../images/admin.png"alt='Wabya Logo' />
         ) : (
           <img src="../../images/admin.png" alt='Wabya Logo' />
