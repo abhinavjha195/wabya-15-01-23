@@ -159,16 +159,16 @@ setError('');
            // Check if the last URL was '/coch/login'
   let lastUrl='';
   if(localStorage.getItem("p_url2")){
-   lastUrl = localStorage.getItem("p_url");
+   lastUrl = localStorage.getItem("p_url2");
 }
 else{
  // setshowpage(true);
 }
   console.log('lastUrl',lastUrl);
-  if (lastUrl == '/joinvideo') {
+  if (lastUrl == '/joinvideo2') {
     // Reload the current page
     console.log('yes');
-    localStorage.removeItem("p_url");
+    localStorage.removeItem("p_url2");
     router.reload();
   }
   
