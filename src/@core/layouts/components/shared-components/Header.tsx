@@ -126,7 +126,7 @@ const Header = () => {
             <div className='container'>
               <nav className='navbar navbar-expand-lg'>
                 <div className='container-fluid'>
-                  <a href='/' passHref>
+                  <a href='/coach/dashboard' passHref>
                     <a className='navbar-brand'>
 
                     {router.pathname.startsWith('/coach/clientDetail/') ? (

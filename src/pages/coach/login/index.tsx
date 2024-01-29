@@ -155,6 +155,22 @@ setError('');
     useEffect(() => {
       // Set the current URL as the previous URL when the component mounts
       //setPreviousUrl();
+
+           // Check if the last URL was '/coch/login'
+  let lastUrl='';
+  if(localStorage.getItem("p_url2")){
+   lastUrl = localStorage.getItem("p_url");
+}
+else{
+ // setshowpage(true);
+}
+  console.log('lastUrl',lastUrl);
+  if (lastUrl == '/joinvideo') {
+    // Reload the current page
+    console.log('yes');
+    localStorage.removeItem("p_url");
+    router.reload();
+  }
   
       localStorage.setItem("last_login_page", '/coach/login');
   console.log('last_login',localStorage.getItem("last_login_page"));
