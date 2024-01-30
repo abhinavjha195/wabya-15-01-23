@@ -385,6 +385,11 @@ let lastUrl='';
     setVideoCall(false);
   };
 
+  const handleDismiss = (e) => {
+    e.preventDefault();
+    setisDismiss(true);
+  };
+
   // Function to toggle the value of viewProfile
 function toggleProfile() {
   setviewProfile(!viewProfile);
@@ -1226,6 +1231,7 @@ const getMeetingSession = async () => {
   const [userId, setUserId] = useState();
   const [meeting, setMeeting] = useState([]);
   const [meetindex, setMeetindex] = useState(null);
+  const [isDismiss, setisDismiss] = useState(false);
   const [timeRemain, setTimeRemain] = useState(null);
 
   const [meetingSession, setMeetingSession] = useState([]);
@@ -4869,7 +4875,7 @@ const isMeetingInProgress = currentTime >= meetingStartDate && currentTime <= me
 
 const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
         return (
-          meetindex == index && meetindex != null ? (
+          meetindex == index && meetindex != null && !isDismiss? (
         <div className="meeting-reminder">
           <div className="info">
             <div className="title">upcoming meeting reminder </div>
@@ -4881,7 +4887,7 @@ const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
             <a href="#">join</a>
           )}
             {/* <a href="#">join</a> */}
-            <a href="#" >dismiss</a>
+            <a href="#" onClick={handleDismiss}>dismiss</a>
 
           </div>
         </div>
