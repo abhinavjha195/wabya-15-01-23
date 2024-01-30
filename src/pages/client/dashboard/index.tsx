@@ -333,6 +333,7 @@ let lastUrl='';
 
 
   const scheduleNewSes = () => {
+    getTimeslots(date);
     setcollectionUpdateId("");
     setmodal_action('SCHEDULE A SESSION');
     setres_action("scheduled");
@@ -1989,19 +1990,19 @@ console.log('on load array');
   };
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log('get timeslot', date);
+  //   console.log('get timeslot', date);
 
-    // Using setTimeout to delay the execution of getTimeslots by 3 seconds
-    const timeoutId = setTimeout(() => {
-      getTimeslots(date);
-    }, 6000);
+  //   // Using setTimeout to delay the execution of getTimeslots by 3 seconds
+  //   const timeoutId = setTimeout(() => {
+  //     getTimeslots(date);
+  //   }, 6000);
   
     // Clean up the timeout if the component unmounts before the timeout is triggered
    // return () => clearTimeout(timeoutId);
   
-  }, []); // The empty dependency array ensures that the effect runs only once, similar to componentDidMount
+  //}, []); // The empty dependency array ensures that the effect runs only once, similar to componentDidMount
   
  
   function setCharAt(str, index, chr) {
