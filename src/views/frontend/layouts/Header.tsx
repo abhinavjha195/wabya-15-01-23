@@ -15,6 +15,10 @@ const Header = () => {
   const [coach, setCoach] = useState(null);
   const [coachId,setCoachId]=useState();
 
+
+  const [user, setUser] = useState(null);
+  const [userId,setUserId]=useState();
+
   const [showpage, setshowpage] = useState(false);
   useEffect(() => {
     // Check if the last URL was '/coch/login'
@@ -74,6 +78,31 @@ let lastUrl='';
 	}
 
 }, [coachId])
+
+
+
+useEffect(() => {
+
+	//const coachId = sessionStorage.getItem('coachId')
+	const userId = sessionStorage.getItem('userId')
+
+	setUserId(userId);
+
+	if (userId) {
+	  const fetchClient = async () => {
+		const clientRef = doc(collection(database, "client_user"), userId);
+		const clientDoc = await getDoc(clientRef);
+
+		if (clientDoc.exists()) {
+		  setUser(clientDoc.data());
+		} else {
+		  console.log("No coach found");
+		}
+	  };
+	  fetchClient();
+	}
+
+}, [userId])
 
   const [logindropdown, setlogindropdown] = useState(false);
   const [signupdropdown, setsignupdropdown] = useState(false);
@@ -243,7 +272,7 @@ let lastUrl='';
                   ) : null
                   }
 
-{ coach ? (
+{ coach   || user ? (
 	<>
                     <div className='dropdown'>
                       <div className='inner'>
@@ -258,10 +287,14 @@ let lastUrl='';
                           coach ?
                           (
                               <>{coach.coach_name}</>
-                          ) : null
+                          ) :  <>{user.client_name}</>
                         }
                         </button>
                         <ul className={`dropdown-menu ${menuCollapse2 ? 'show' : ''}`}>
+
+						{coach ?
+                          (
+                              <>
                           <li>
                             <Link href='/coach/dashboard' passHref>
                               <a className='dropdown-item'>profile</a>
@@ -288,6 +321,19 @@ let lastUrl='';
                           <li>
                               <a className='dropdown-item' onClick={logout}>logout</a>
                           </li>
+						  </>) : <>
+						  <li>
+                            <Link href='/client/dashboard' passHref>
+                              <a className='dropdown-item'>profile</a>
+                            </Link>
+                          </li>
+                          
+                         
+                          <li>
+                              <a className='dropdown-item' onClick={logout}>logout</a>
+                          </li>
+						  
+						  </>}
                         </ul>
 
 
@@ -333,16 +379,39 @@ let lastUrl='';
                     </div>
 
 					}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
                   </div>
 
-				  { !coach ? (
+				  { !coach  && !user? (
 	<>
 				  <div className='profile-button pb-signup'>
                   
 
 
 				  <div className='dropdown'>
-					<div className='inner'>
+					<div className='inner'>  
 					  <button
 						className='btn btn-secondary'
 						type='button'

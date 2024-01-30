@@ -59,8 +59,8 @@ const Header = () => {
             <div className='container'>
               <nav className='navbar navbar-expand-lg'>
                 <div className='container-fluid'>
-                  <a href='/client/dashboard' >
-                    <a className='navbar-brand' href="/client/dashboard/">
+                  <a href='/frontend/about' >
+                    <a className='navbar-brand' href="/frontend/about">
 
                     {router.pathname.startsWith('/client/joinvideo/') ? (
           <img src='../../../images/admin.png' alt='Wabya Logo' />

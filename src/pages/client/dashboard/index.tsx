@@ -1999,7 +1999,7 @@ console.log('on load array');
     }, 6000);
   
     // Clean up the timeout if the component unmounts before the timeout is triggered
-    return () => clearTimeout(timeoutId);
+   // return () => clearTimeout(timeoutId);
   
   }, []); // The empty dependency array ensures that the effect runs only once, similar to componentDidMount
   
@@ -4835,19 +4835,53 @@ meetingDate.setHours(meetingHour);
 meetingDate.setMinutes(meetingMinute);
 meetingDate.setSeconds(0); // Assuming seconds are always 0
 
+
+
+const meetingStartTimeParts = meet.meetingTime.split(':');
+const meetingStartHour = parseInt(meetingStartTimeParts[0], 10);
+const meetingStartMinute = parseInt(meetingStartTimeParts[1], 10);
+
+
+const meetingEndTimeParts = meet.meetingEndTime.split(':');
+const meetingEndHour = parseInt(meetingEndTimeParts[0], 10);
+const meetingEndMinute = parseInt(meetingEndTimeParts[1], 10);
+
+
+
+const meetingStartDate = new Date();
+meetingStartDate.setHours(meetingStartHour);
+meetingStartDate.setMinutes(meetingStartMinute);
+meetingStartDate.setSeconds(0); // Assuming seconds are always 0
+
+
+const meetingEndDate = new Date();
+  meetingEndDate.setHours(meetingEndHour);
+  meetingEndDate.setMinutes(meetingEndMinute);
+  meetingEndDate.setSeconds(0); // Assuming seconds are always 0
+
+
 // Calculate the time remaining in minutes
 const currentTime = new Date();
+
+// Check if the current time is between meetingTime and meetingEndTime
+const isMeetingInProgress = currentTime >= meetingStartDate && currentTime <= meetingEndDate;
+
 const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
         return (
           meetindex == index && meetindex != null ? (
         <div className="meeting-reminder">
           <div className="info">
             <div className="title">upcoming meeting reminder </div>
-            <p>{timeRemain} minutes: {mycoach ? mycoach[0].coach_name : null }</p>
+            <p className="text-center">{timeRemain} minutes: {mycoach ? mycoach[0].coach_name : null }</p>
           </div>
           <div className="meeting-link">
+
+          {isMeetingInProgress && (
             <a href="#">join</a>
-            <a href="#">dismiss</a>
+          )}
+            {/* <a href="#">join</a> */}
+            <a href="#" >dismiss</a>
+
           </div>
         </div>
           ):null 
