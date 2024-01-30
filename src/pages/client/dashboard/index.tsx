@@ -1494,8 +1494,8 @@ const getMeetingSession = async () => {
       // Calculate the time remaining in minutes
       const timeRemaining = Math.floor((meetingDate - currentTime) / 1000 / 60);
   
-      //console.log(timeRemaining, 'timeRemaining1');
-      if (new Date(meet.meetingDate).toLocaleDateString() === new Date().toLocaleDateString() && timeRemaining > 0 && timeRemaining < 30) {
+      console.log(timeRemaining, 'timeRemaining1');
+      if (new Date(meet.meetingDate).toLocaleDateString() === new Date().toLocaleDateString() && timeRemaining > -10 && timeRemaining < 30) {
         //console.log(timeRemaining, 'timeRemaining');
         setMeetindex(index);
         setTimeRemain(timeRemaining);
@@ -4879,13 +4879,20 @@ const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
         <div className="meeting-reminder">
           <div className="info">
             <div className="title">upcoming meeting reminder </div>
-            <p className="text-center">{timeRemain} minutes: {mycoach ? mycoach[0].coach_name : null }</p>
+            {timeRemain >= -10 && timeRemain < 0 ? (
+  <p className="text-center">This is meeting time</p>
+) : (
+  <p className="text-center">
+    {timeRemain} minutes: {mycoach ? mycoach[0].coach_name : null}
+  </p>
+)}
           </div>
           <div className="meeting-link">
 
-          {isMeetingInProgress && (
-            <a href="#">join</a>
-          )}
+          {timeRemain >= -10 && timeRemain <= 0 ? (
+  <a href={`/client/joinvideo/${meet.meetingName}`}>join</a>
+) : null}
+
             {/* <a href="#">join</a> */}
             <a href="#" onClick={handleDismiss}>dismiss</a>
 
