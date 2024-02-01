@@ -18,6 +18,7 @@ const ViewBasic = () => {
 
   const router = useRouter()
   const [meeting,setMeeting] = useState([]);
+  const [coachData, setCoachData] = useState(null);
 
   // next meeting scheduled
   const [nextMeeting, setNextMeeting] = useState(null);
@@ -53,7 +54,7 @@ const ViewBasic = () => {
 
 
   useEffect(() => {
-    const fetchCoaches = async () => {
+    const fetchCoaches = async () => { 
       try {
         if (router.query.coach_id !== undefined) { // check if coach_id is defined
           const coachesCollection = collection(database, 'client_user');
@@ -78,6 +79,33 @@ const ViewBasic = () => {
         console.log(error);
       }
     };
+
+    const getCoachData = async () => {
+      try{
+        if (router.query.coach_id !== undefined) {
+
+        
+
+            const coachRef = doc(collection(database,'coaches_user'),router.query.coach_id);
+            const coachDoc = await getDoc(coachRef);
+
+            if (coachDoc.exists()) {
+              const coachData = coachDoc.data();
+              setCoachData(coachData);
+            }
+
+
+
+           
+          
+        }
+      }catch (error) {
+        console.log(error); 
+      }
+    };
+    getCoachData();
+
+
     fetchCoaches();
   }, [router.query.coach_id]);
 
@@ -137,13 +165,30 @@ const ViewBasic = () => {
             </div>
           </div> */}
 
+
+
+<div className="col-sm-4  client-profile" style={{'padding':'inherit'}}>
+<h4 className='text-center' style={{'margin-bottom':'80px'}}>all detail</h4>
+        <div className="info-grid" style={{'height':'fit-content'}}>
+        <p>Contact Details</p>
+        <p>name: <span>{!coachData ? null : coachData.coach_name}</span></p>
+        <p>email: <span><a href="mailto:name@gmail.com">{!coachData ? null : coachData.coach_email}</a></span></p>
+        <p>gender: <span>{!coachData ? null : coachData.coach_gender}</span></p>
+        <p>phone: <span>{!coachData ? null : coachData.coach_phone}</span></p>
+        <p>country: <span>{!coachData ? null : coachData.coach_country}</span></p>
+        <p>about: <span>{!coachData ? null : coachData.coach_about}</span></p>
+       
+        <p>bio: <span>{!coachData ? null : coachData.coach_bio}</span></p>
+        </div>
+      </div>
+      <div className="col-sm-8  client-profile" style={{'padding':'inherit'}}>
 {meeting.length === 0 ? (
   <h4 className='text-center'>no client present</h4>
 ) : (
   <>
     <h4 className='text-center' style={{'margin-bottom':'80px'}}>client list</h4>
     {meeting.map((data) => (
-      <div className='col-sm-3 cl-coll' key={data.id}>
+      <div className='cl-coll' key={data.id}>
         <div className='info'>
           <figure> <img src='../../../images/clients-01.png' alt='' /> </figure>
           <h3>{data.anonymized_name}</h3>
@@ -151,11 +196,12 @@ const ViewBasic = () => {
           {/* Other details */}
         </div>
       </div>
+    
     ))}
   </>
 )}
 
-
+</div>
 
         </div>
         {/* <!--/ row --> */}
