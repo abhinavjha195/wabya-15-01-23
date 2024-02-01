@@ -38,6 +38,8 @@ const ApplyWabyaBasic = () => {
   const [enqMsg, setenqMsg] = useState(false);
 
   const [pass, setpass] = useState('');
+  const [otp, setotp] = useState('');
+  const [showOtp, setshowOtp] = useState(false);
 
   const [coachGender, setcoachGender] = useState('female');
 
@@ -49,6 +51,8 @@ const ApplyWabyaBasic = () => {
   const [mobileErr, setemobileErr] = useState('');
   const [msgErr, setmsgErr] = useState('');
   const [passErr, setpassErr] = useState('');
+
+  const [otpErr, setotpErr] = useState('');
 
   const [countryErr, setcountryErr] = useState('');
   const [timezoneErr, settimezoneErr] = useState('');
@@ -142,6 +146,7 @@ const handleCertificate = (event) => {
     setcountryErr('');
     settimezoneErr('');
     setgenderErr('');
+    setotpErr('');
     setEmailExist(false);
 
 
@@ -227,7 +232,20 @@ err=err+1;
       // }, (error) => {
       //     console.log(error.text);
       // });
+
+
+
+
       if(await countData(email.toLowerCase()) == 0){
+
+          setshowOtp(true);
+
+          if(otp != '5555'){
+            setotpErr('otp Field is Required');
+           // err=err+1;
+                }
+      else{
+
       addDoc(coachesRef, {
         coach_name:  name,
         coach_country : country_sel,
@@ -345,13 +363,16 @@ err=err+1;
        </body>
     </html>
 `;
-  sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Coach Registration'); 
+ // sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Coach Registration'); 
+  sendMailFunc('abhinavkumar3256@gmail.com',adminmsg,'Coach Registration'); 
   router.push('/coach/login');
   
         })
         .catch((err) => {
           console.error(err);
         })
+
+      }
       }else{
         setEmailExist(true);
       }
@@ -400,6 +421,10 @@ err=err+1;
 
           <div className="inner">
           <form ref={form1}>
+
+
+            { !showOtp ? (
+              <>
             <div className="col-sm-6 form-group"><input className="form-control" name="name" value={name}  placeholder="name" onChange={(event) => setName(event.target.value)}/> {nameErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{nameErr}</Alert>}</div>
 
           <div className="col-sm-6 form-group"><input className="form-control" name="name" value={surname} placeholder="surname" onChange={(event) => setSurname(event.target.value)}/></div>
@@ -519,10 +544,19 @@ onChange={handleCertificate}
               </div>
             </div>
             </div>
+
+            
             {success && <Alert severity='success' style={{ margin :'10px 0 20px 0'}}>{success}</Alert>}
           <div className="col-sm-12 form-group"><input className="btn" value="submit" type="button"  onClick={onSubmit}/></div>
-          
-         
+
+
+          </>):
+
+<>
+           
+          <div className="col-sm-6 form-group"><input type="text" className="form-control" name="otp" placeholder="enter email otp" value={otp} onChange={(event) => setotp(event.target.value)}/> {otpErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{otpErr}</Alert>}</div>
+          <div className="col-sm-12 form-group"><input className="btn" value="verify" type="button"  onClick={onSubmit}/></div>
+         </>}
           </form>
           </div>
         </div> {/* <!--/ col-sm --> */}
