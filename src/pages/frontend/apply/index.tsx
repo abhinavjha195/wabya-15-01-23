@@ -459,7 +459,7 @@ err=err+1;
 
         <div className="col-sm-12">
           <div className="wt-title mrb-30">
-            <h2>Let’s work together</h2>
+            <h2>let’s work together</h2>
 
             {
             isThankModal ?
@@ -473,7 +473,7 @@ err=err+1;
                     </div>
                     <div className="divider"></div>
                     <div className="para-modal">
-                      <p>Well done on taking the first step in your coaching journey with wabya! <br /> Someone from the team will be in touch with you shortly</p>
+                      <p>well done on taking the first step in your coaching journey with wabya! <br /> someone from the team will be in touch with you shortly</p>
                     </div>
                   </div>
                 </div>
@@ -481,7 +481,7 @@ err=err+1;
               ) : null
             } 
 
-            <p><strong>Please note, we only work with coaches who have graduated from an ICF, EMCC or AC-accredited coaching programme.</strong></p>
+            <p><strong>please note, we only work with coaches who have graduated from an ICF, EMCC or AC-accredited coaching programme.</strong></p>
         </div>
 
           <div className="inner">
@@ -507,7 +507,7 @@ err=err+1;
   
   value={country_sel}
   onChange={handleChangeCountry}>
-    <option>Select Country</option>
+    <option>select country</option>
                   {country_data.map((country, index) => (
 <option value= {country.country}> {country.country}</option>
 ))}
@@ -522,7 +522,7 @@ err=err+1;
           <input className="form-control" name='clientTimeZone'
               id='clientZone'
               
-             placeholder='Timezone'
+             placeholder='timezone'
               value={selectedCountryTimezone}
                readOnly /> 
 
