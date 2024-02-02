@@ -21,6 +21,12 @@ import { sendMail } from "../../../services/sendMail"
 import { Router } from 'mdi-material-ui';
 import { useRouter } from 'next/router';
 
+function generateOTP() {
+  // Generate a random 4-digit number
+  return Math.floor(1000 + Math.random() * 9000);
+}
+
+
 const ApplyWabyaBasic = () => {
   const form1 = useRef();
   const router = useRouter()
@@ -39,6 +45,7 @@ const ApplyWabyaBasic = () => {
 
   const [pass, setpass] = useState('');
   const [otp, setotp] = useState('');
+  const [otp_gen, setotp_gen] = useState('');
   const [showOtp, setshowOtp] = useState(false);
 
   const [coachGender, setcoachGender] = useState('female');
@@ -239,9 +246,67 @@ err=err+1;
       if(await countData(email.toLowerCase()) == 0){
 
           setshowOtp(true);
+ 
 
-          if(otp != '5555'){
-            setotpErr('otp Field is Required');
+          if(otp_gen == ''){
+            const otp = generateOTP();
+            console.log("Generated OTP:", otp);
+            setotp_gen(otp);
+          const logoUrl_ = 'https://wabya.com/images/logo-new.png';
+          const otpmsg = `
+          <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+          <html xmlns="http://www.w3.org/1999/xhtml">
+             <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Wabya</title>
+                <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+                <style type="text/css">
+                   body{padding-top: 0 !important; padding-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin:0 !important; width: 100% !important; -webkit-text-size-adjust: 100% !important; -ms-text-size-adjust: 100% !important; -webkit-font-smoothing: antialiased !important; font-size:14px; line-height:22px; font-family: 'Lato', sans-serif; font-weight:400;}
+                </style>
+             </head>
+             <body paddingwidth="0" paddingheight="0"  style="" offset="0" toppadding="0" leftpadding="0">
+             <div style="display:table; width:600px !important; margin: 0 auto; background: #fff; padding:20px;">
+                <table width="600" border="0" cellspacing="0" cellpadding="0" class="tableContent bgBody" align="center" style='width: 600px; display: block;'>
+                   <tbody>
+                      <tr>
+                         <table class="MainContainer" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ece6d5" align="center" style='width: 600px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>
+                            <tbody style=''>
+          <tr>
+                                  <td colspan="2"><div style="text-align: center; margin:35px 0 0" class="contentLogo"><a href="https://www.#.com"><img src="${logoUrl_}" width="200px" alt="" border="0" style=""></a></div></td>
+                               </tr>
+                               <tr>
+                                  <td>
+                                     <div style="padding:0 30px;  position: relative; z-index: 2;line-height: 22px;font-family: 'Lato', sans-serif;font-weight: 600;text-align: center;">
+                                   
+                                     <p style="font-size: 18px; text-align: center; color: #864985;">Hello ${name},</p>
+                                     <p style="font-size: 18px; text-align: center; color: #864985;">OTP for your registration is ${otp}.</p>
+                                   
+          <hr style="border: 1px solid #1c686b;">
+          <p style="font-size: 14px; color: #242424; text-align: center;">Thank you,<br>Wabya Team</p>
+           </div>  
+                                  </td>
+                               </tr>
+                            </tbody>
+                         </table>
+                      </tr>
+                   </tbody>
+                </table>
+           </div>
+             </body>
+          </html>
+      `;
+       // sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Coach Registration'); 
+        sendMailFunc('abhinavkumar3256@gmail.com',otpmsg,'OTP for Coach Registration'); 
+          }
+          if(otp == ''){
+           // setotpErr('otp Field is Required');
+           // err=err+1;
+                }
+          else if(otp != otp_gen){
+            console.log(otp);
+            console.log(otp_gen);
+            setotpErr('otp is incorrect');
            // err=err+1;
                 }
       else{
@@ -546,7 +611,7 @@ onChange={handleCertificate}
             </div>
 
             
-            {success && <Alert severity='success' style={{ margin :'10px 0 20px 0'}}>{success}</Alert>}
+         
           <div className="col-sm-12 form-group"><input className="btn" value="submit" type="button"  onClick={onSubmit}/></div>
 
 
@@ -555,6 +620,7 @@ onChange={handleCertificate}
 <>
            
           <div className="col-sm-6 form-group"><input type="text" className="form-control" name="otp" placeholder="enter email otp" value={otp} onChange={(event) => setotp(event.target.value)}/> {otpErr && <Alert severity='error' style={{ margin :'10px 0 20px 0'}}>{otpErr}</Alert>}</div>
+          {success && <Alert severity='success' style={{ margin :'10px 0 20px 0'}}>{success}</Alert>}
           <div className="col-sm-12 form-group"><input className="btn" value="verify" type="button"  onClick={onSubmit}/></div>
          </>}
           </form>
