@@ -297,7 +297,7 @@ err=err+1;
           </html>
       `;
        // sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Coach Registration'); 
-        sendMailFunc('abhinavkumar3256@gmail.com',otpmsg,'OTP for Coach Registration'); 
+        sendMailFunc(email,otpmsg,'OTP for Coach Registration'); 
           }
           if(otp == ''){
            // setotpErr('otp Field is Required');
