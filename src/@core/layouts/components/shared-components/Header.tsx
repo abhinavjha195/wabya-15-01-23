@@ -12,6 +12,9 @@ const Header = () => {
     const [coach, setCoach] = useState(null);
     const [coachId,setCoachId]=useState();
 
+    const [user, setUser] = useState(null);
+    const [userId,setUserId]=useState();
+
 
     const logout = () => {
       sessionStorage.removeItem('coachId');
@@ -45,6 +48,30 @@ const Header = () => {
       }
 
   }, [coachId])
+
+
+  useEffect(() => {
+
+    const coachId = sessionStorage.getItem('coachId')
+    const userId = sessionStorage.getItem('userId')
+
+    setUserId(userId);
+
+    if (userId) {
+      const fetchClient = async () => {
+        const clientRef = doc(collection(database, "client_user"), userId);
+        const clientDoc = await getDoc(clientRef);
+
+        if (clientDoc.exists()) {
+          setUser(clientDoc.data());
+        } else {
+          console.log("No coach found");
+        }
+      };
+      fetchClient();
+    }
+
+}, [userId])
 
 
   return (
@@ -110,7 +137,7 @@ const Header = () => {
           
           <div className="col-12 logo"><a href="/client/dashboard"><img src="/images/admin.png" alt="" /></a></div>
           
-          <div className="col-12 client-login-info"><figure><a href="/client/dashboard"><img src="/images/dummy-user.png" alt=""/></a></figure><a href="#" className="btn"  onClick={clientLogout}>Log out</a></div>
+          <div className="col-12 client-login-info"><figure><a href="/client/dashboard"><img src={user ? user.client_profile : ''} alt=""/></a></figure><a href="#" className="btn"  onClick={clientLogout}>Log out</a></div>
           </div>
             
           </div>         

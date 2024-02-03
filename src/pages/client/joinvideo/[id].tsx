@@ -19,6 +19,8 @@ const VideoCallPage = () => {
   const [backHome, setbackHome] = useState(false);
   const [notAuthMsg, setnotAuthMsg] = useState(false);
 
+  // const [notAuthMsg, setnotAuthMsg] = useState(false);
+
   const [showFeedback, setshowFeedback] = useState(false);
   const [meetId, setmeetId] = useState('');
   const [coachId, setcoachId] = useState('');
@@ -109,7 +111,11 @@ const VideoCallPage = () => {
         }
 
         
-      if(client.remainingSession > 0 || client.isDiscoverySessionAdded == 1){
+      // if(client.remainingSession > 0 || client.isDiscoverySessionAdded == 1){
+      //   setisSessionAvbl(true);
+      // }
+
+      if(client.remainingSession > 0 || client.isDiscoverySessionDone == 0){
         setisSessionAvbl(true);
       }
       }
@@ -368,7 +374,9 @@ setbackHome(true);
 {showFeedback  ?
     <Feedback   clientName={clientName}
     clientEmail={clientEmail}/> : null }
-      {iframeLoaded  ? null :  !notAuthMsg ? <h3 className='loading-video'>Loading...</h3> : null }
+      {iframeLoaded  ? null :  !notAuthMsg ? 
+      
+      <h3 className='loading-video'>Sorry, you are not authorized to access this content.</h3> : null }
       <div id="iframeContainer">
 
       

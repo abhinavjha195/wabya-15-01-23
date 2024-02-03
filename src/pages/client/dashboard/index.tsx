@@ -407,7 +407,8 @@ function toggleProfile() {
     console.log('response',response);
   }    	
 
-  
+ 
+
 
   const scheduleNext = async () => {
     setbookingLoad(true);
@@ -2155,8 +2156,28 @@ const twoDigitDate = ('0' + dateObject.getDate()).slice(-2);
 
 
 
+const handleLanguageChange = (e) => {
+  const selectedLanguages = [];
+  for (let i = 0; i < e.target.options.length; i++) {
 
+   
+    if (e.target.options[i].selected) {
+      console.log(e.target.options[i]);
+      selectedLanguages.push(e.target.options[i].value);
+    }
+  }
+  setClientLanguage(selectedLanguages);
+};
+const languageOptions = country_data.flatMap((country) =>
+  country.languages.map((language) => ({ country: country.country, language }))
+);
 
+// Use filter and some to remove duplicates based on the 'language' property
+const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
+  return !self.slice(0, index).some((item) => (
+    JSON.stringify(item.language) === JSON.stringify(value.language)
+  ));
+});
 
   
 //   useEffect(() => {
@@ -3787,13 +3808,29 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
         )}
       </select> */}
 
-      <select className="form-control" onChange={e => setClientLanguage(e.target.value)} value={clientLanguage}>
+      {/* <select className="form-control" onChange={e => setClientLanguage(e.target.value)} value={clientLanguage}> */}
 
-<option value="english"  >English</option>
+{/* <option value="english"  >English</option>
 <option value="Afrikaans" >Afrikaans</option>
 <option value="Zulu">Zulu</option>
-<option value="Xhosa">Xhosa</option>
-      </select>
+<option value="Xhosa">Xhosa</option> */}
+
+<select
+          className="form-control"
+          onChange={handleLanguageChange}
+          value={clientLanguage}
+          multiple
+          style={{'height':'auto'}}
+        >
+       {uniqueLanguageOptions.map(({ country, language }, index) => (
+            <option
+              key={index}
+              value={language}
+            >
+              {language}
+            </option>
+          ))}
+        </select>
                               {/* <input
                                 type='text'
                                 name='client_language'
@@ -3861,7 +3898,16 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                         <p>
                           languages:{" "}
                           <span>
-                            {client ? <> {client.client_language} </> : null}
+                          {client ? (
+  Array.isArray(client.client_language) ? (
+    client.client_language.join(', ')
+  ) : (
+    null
+  )
+) : (
+  null
+)}
+
                           </span>
                         </p>
                       </div>
@@ -4359,11 +4405,11 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                       <div className="coach-fig">
                         <figure>
                           <img
-                            src={client.client_profile ? client.client_profile : proImage}
+                            src={mycoach ? mycoach[0].coach_profile : null}
                             alt="Coach Name"
                           />
                         </figure>
-                        <div className="coach-name"><h4>coach name</h4><p><strong>next session</strong></p></div>
+                        <div className="coach-name"><h4>{mycoach ? mycoach[0].coach_name : null }</h4><p><strong>next session</strong></p></div>
                       </div>
                     </div>
                     <div className="col-sm-6">
@@ -4579,7 +4625,7 @@ onClick={handleTimeClick}
   {viewProfile ? (
   
 <>
-
+{/* 
 <Modal
           centered
           className="session-history-modal session-reschedule-modal"
@@ -4588,12 +4634,19 @@ onClick={handleTimeClick}
           onCancel={toggleProfile}
           width={1200}
           footer={[]}
-        >
-          <div className="modal-data">
+        > */}
+
+
+
+        {viewProfile ?
+        <>
+          <div className="modal-data session-history-modal session-reschedule-modal">
   <div className="row">
     <div className="col-12">
       <div className="user-profile new-user-profile mrb-20">
+      <div className="schedule-cross" onClick={toggleProfile}><i aria-hidden="true" className="fa fa-arrow-left"></i></div>
       <figure>
+        
   {file2 ? (
     <img src={URL.createObjectURL(file2)} alt='Profile Pic' />
   ) : (
@@ -4615,7 +4668,7 @@ onClick={handleTimeClick}
                   />
                 </ButtonStyled> ):null }
         <h3>{client ? <> {client.client_name} </> : null}</h3>
-        <div className="info-basic">
+        <div className="info-basic container">
                 
               
                 {/* { client ? ( <p> API key: {client.client_api} </p> )  : null }
@@ -4727,7 +4780,7 @@ onClick={handleTimeClick}
         ))
         )}
       </select> */}
-                              <input
+                              {/* <input
                                 type='text'
                                 name='client_language'
                                 id=''
@@ -4735,7 +4788,24 @@ onClick={handleTimeClick}
                                 placeholder='English; French'
                                 value={clientLanguage}
                                 onChange={e => setClientLanguage(e.target.value)}
-                              />
+                              /> */}
+
+<select
+          className="form-control"
+          onChange={handleLanguageChange}
+          value={clientLanguage}
+          multiple
+          style={{'height':'auto'}}
+        >
+       {uniqueLanguageOptions.map(({ country, language }, index) => (
+            <option
+              key={index}
+              value={language}
+            >
+              {language}
+            </option>
+          ))}
+        </select>
                             </span>
                           </p>
                         </div>
@@ -4821,7 +4891,9 @@ onClick={handleTimeClick}
     </div>
     {/*/ cl-coll */}
   </div>
-  </div></Modal>
+  </div>
+  </> : null }
+  {/* </Modal> */}
   </>
 
 
