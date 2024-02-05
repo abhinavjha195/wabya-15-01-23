@@ -3737,7 +3737,10 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                                 placeholder='123-456-7890'
                                 value={`${dialerCode} ${clientPhone}`}
                                
-                                onChange={e => setClientPhone(e.target.value)}
+                                onChange={e => {
+                                  const inputWithoutDialerCode = e.target.value.replace(dialerCode, '').replace(/\D/g, '');
+                                  setClientPhone(inputWithoutDialerCode);
+                                }}
                               />
                             </span>
                           </p>
@@ -4710,7 +4713,10 @@ onClick={handleTimeClick}
                                 className='form-control'
                                 placeholder='123-456-7890'
                                 value={clientPhone}
-                                onChange={e => setClientPhone(e.target.value)}
+                                onChange={e => {
+                                  const inputWithoutDialerCode = e.target.value.replace(dialerCode, '').replace(/\D/g, '');
+                                  setClientPhone(inputWithoutDialerCode);
+                                }}
                               />
                             </span>
                           </p>
