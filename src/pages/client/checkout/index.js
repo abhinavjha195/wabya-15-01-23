@@ -121,26 +121,26 @@ if(plan_detail != null){
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <h3>Payment Now</h3>  
+            <h3>payment now</h3>  
             <div className="row">
               <div className="col-sm-7">
                 <div className='inner-info'>
 
                 <div className="row">
                     <div className="col-sm-6">	
-                      <label>Journey Type</label>
+                      <label>journey type</label>
                     </div>
                     <div className="col-sm-3">
-                        <input type='radio' className='' onClick={handleJourneyType} name='journey_type' value="bundle" checked={journey_type === "bundle"}></input> Bundle                        
+                        <input type='radio' className='' onClick={handleJourneyType} name='journey_type' value="bundle" checked={journey_type === "bundle"}></input> bundle                        
                     </div> 
                     <div className="col-sm-3">
-                        <input type='radio' className='' onClick={handleJourneyType} name='journey_type' value="payg" checked={journey_type === "payg"}></input> Pay as you go                    
+                        <input type='radio' className='' onClick={handleJourneyType} name='journey_type' value="payg" checked={journey_type === "payg"}></input> pay as you go                    
                     </div>                     
                   </div>
                 
                   <div className="row"  style={{ marginTop: '20px' }}>
                     <div className="col-sm-6">	
-                      <label>Price: £{price}.00</label>
+                      <label>price: £{price}.00</label>
                     </div>
 
                     <div className="col-sm-3">	
