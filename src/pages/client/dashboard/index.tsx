@@ -122,6 +122,7 @@ const Dashboard = () => {
     //console.log(userDoc);
 
     setClientEmail(userDoc.data().client_email),
+    setClientEmailTemp(userDoc.data().client_email),
     setClientPhone(userDoc.data().client_phone),
     setClientCountry(userDoc.data().client_country),
     setClientLanguage(userDoc.data().client_language),
@@ -136,11 +137,27 @@ const Dashboard = () => {
 
  
 
+  const verify = async () => {
+    setShowOtpError(false);
+if(clientEmailOTP == '4444'){
+  setVerifyOTP(true);
+  saveD();
+}else{
+  setVerifyOTP(false);
+  setShowOtpError(true);
+}
+  }
+
 
   const saveD = async () => {
-    setEditDetail(false);
+    
     setdetailSaved(false);
     setsavedMsg("");
+
+    setShowOTP(false);
+   
+    if(clientEmailOTP != '' || clientEmail == clientEmailTemp || verifyOTP == true){
+      setEditDetail(false);
     const plan_id = sessionStorage.getItem('userId');
     const fieldToEdit = doc(database, 'client_user', plan_id);
 
@@ -157,15 +174,23 @@ const Dashboard = () => {
       setdetailSaved(true);
       setsavedMsg("Detail Saved!")
       setClientEmail('')
+      setClientEmailTemp(clientEmail)
       setClientPhone('')
       setClientCountry('')
       setClientLanguage('')
       setClientTimeZone('')
       fetchClient();
+      setVerifyOTP(false);
+      setClientEmailOTP('');
     })
     .catch((err) => {
       //console.log(err);
+      setVerifyOTP(false);
     })
+
+  }else{
+    setShowOTP(true);
+  }
 
   };
 
@@ -1761,6 +1786,14 @@ setmypreferplanName(mypreferplan[0].plan_name);
   const [coachData, setCoachData] = useState([]);
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [clientEmailTemp, setClientEmailTemp] = useState("");
+  const [clientEmailOTP, setClientEmailOTP] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
+  const [verifyOTP, setVerifyOTP] = useState(false);
+
+  const [showOtpError, setShowOtpError] = useState(false);
+
+
   const [clientPhone, setClientPhone] = useState("");
   const [clientCountry, setClientCountry] = useState("");
   const [clientTimeZone, setClientTimeZone] = useState("");
@@ -3684,7 +3717,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 
 
                 </figure> */}
- {editDetail ? (
+ {editDetail &&   !showOTP ? (
                 <ButtonStyled   className='btn' component='label' variant='contained' htmlFor='account-settings-upload-image'>
                   upload
                   <input name='pro_image'
@@ -3708,6 +3741,9 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                       onSubmit={e => e.preventDefault()}
                       className='client-edit-details'
                     >
+
+                      { !showOTP? 
+                      <>
                       <div className='row'>
                         <div className='col-sm-6'>
                           <p>
@@ -3857,7 +3893,39 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                         </div>
                       </div>
 
-                      
+                      </>: <>
+
+                      <div className='row'>
+                        <div className='col-sm-6'>
+                          <p>
+                            otp:
+                            <span>
+                              <input
+                                type='text'
+                                name='otp'
+                                id='otp'
+                                className='form-control'
+                                placeholder='otp'
+                                value={clientEmailOTP}
+                                onChange={e => setClientEmailOTP(e.target.value)}
+                              />
+                            </span>
+                          </p>
+                        </div>
+                        </div>
+
+                        <div className='row'>
+                        <div className='col-sm-12'>
+                          <div className='left-link'>
+                            <a className='' onClick={() => verify()}>
+                              verify otp
+                            </a>
+                          </div>
+
+                          {showOtpError && <Alert message="otp is wrong" className='mt-4' style={{'width':'72%'}} type="error"/> }
+                        </div>
+                      </div>
+                        </> }
                     </form>
                   </>
                 ) : (
