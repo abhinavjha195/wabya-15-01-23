@@ -451,7 +451,7 @@ err=err+1;
     </html>
 `;
  // sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Coach Registration'); 
-  sendMailFunc('abhinavkumar3256@gmail.com',adminmsg,'Coach Registration'); 
+  sendMailFunc('youare@wabya.com',adminmsg,'Coach Registration'); 
   router.push('/coach/login');
   
         })

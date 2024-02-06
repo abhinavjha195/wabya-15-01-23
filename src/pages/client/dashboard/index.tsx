@@ -122,6 +122,7 @@ const Dashboard = () => {
     //console.log(userDoc);
 
     setClientEmail(userDoc.data().client_email),
+    setClientEmailTemp(userDoc.data().client_email),
     setClientPhone(userDoc.data().client_phone),
     setClientCountry(userDoc.data().client_country),
     setClientLanguage(userDoc.data().client_language),
@@ -138,9 +139,13 @@ const Dashboard = () => {
 
 
   const saveD = async () => {
-    setEditDetail(false);
+    
     setdetailSaved(false);
     setsavedMsg("");
+
+    setShowOTP(false);
+    if(clientEmailOTP != '' || clientEmail == clientEmailTemp){
+      setEditDetail(false);
     const plan_id = sessionStorage.getItem('userId');
     const fieldToEdit = doc(database, 'client_user', plan_id);
 
@@ -166,6 +171,10 @@ const Dashboard = () => {
     .catch((err) => {
       //console.log(err);
     })
+
+  }else{
+    setShowOTP(true);
+  }
 
   };
 
@@ -1761,6 +1770,11 @@ setmypreferplanName(mypreferplan[0].plan_name);
   const [coachData, setCoachData] = useState([]);
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [clientEmailTemp, setClientEmailTemp] = useState("");
+  const [clientEmailOTP, setClientEmailOTP] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
+
+
   const [clientPhone, setClientPhone] = useState("");
   const [clientCountry, setClientCountry] = useState("");
   const [clientTimeZone, setClientTimeZone] = useState("");
@@ -3708,6 +3722,9 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                       onSubmit={e => e.preventDefault()}
                       className='client-edit-details'
                     >
+
+                      { !showOTP? 
+                      <>
                       <div className='row'>
                         <div className='col-sm-6'>
                           <p>
@@ -3856,6 +3873,28 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                           </div>
                         </div>
                       </div>
+
+                      </>: <>
+
+                      <div className='row'>
+                        <div className='col-sm-6'>
+                          <p>
+                            otp:
+                            <span>
+                              <input
+                                type='text'
+                                name='otp'
+                                id='otp'
+                                className='form-control'
+                                placeholder='otp'
+                                value={clientEmailOTP}
+                                onChange={e => setClientEmailOTP(e.target.value)}
+                              />
+                            </span>
+                          </p>
+                        </div>
+                        </div>
+                        </> }
                     </form>
                   </>
                 ) : (
