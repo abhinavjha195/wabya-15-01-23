@@ -60,6 +60,8 @@ const Dashboard = () => {
   const [requestPlanId, setrequestPlanId] = useState('');
   const [helpText, sethelpText] = useState('');
   const [ShowHelpErr, setShowHelpErr] = useState(false);
+
+  const [BuyMoreErr, setBuyMoreErr] = useState(false);
   const [ShowHelpSuccess, setShowHelpSuccess] = useState(false);
 
   const [coachText, setcoachText] = useState('');
@@ -944,10 +946,19 @@ const buyMore = (event) => {
   // Redirect to /client/checkout
   event.preventDefault();
   console.log(event.target);
+  setBuyMoreErr(false);
+  if(parseInt(clientRemainingSession) == 0){
 
   localStorage.setItem('price', event.target.getAttribute("data-price"));
   localStorage.setItem('buy_plan_id', event.target.getAttribute("data-plan-id"));
   router.push('/client/checkout');
+  }else{
+    setBuyMoreErr(true);
+
+    setTimeout(() => {
+      setBuyMoreErr(false);
+    }, 4000); // 4000 milliseconds = 4 seconds
+  }
 };
 
 const addNewRequest = async (event :  any) =>{
@@ -4185,10 +4196,12 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
           <div className="plans-sessions">
             <p className="text-right">sessions remaining: {clientRemainingSession}</p>
             <p className="text-right">
+            <p>{BuyMoreErr && <Alert message="you have already session remaining..." className='mt-4' style={{'width':'72%'}} type="error"/> }</p>
               <a href="" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId} data-price='210' onClick={buyMore}>
               {myplanName ? "Buy More" : "Buy"}
 
               </a>
+              
             </p>
           </div>
         </div>
