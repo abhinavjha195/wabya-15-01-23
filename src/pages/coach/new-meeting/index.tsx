@@ -3,6 +3,8 @@ import { useEffect,useState } from 'react'
 
 import { useRouter } from 'next/router'
 import { app,database } from '../../../../firebaseConfig'
+
+
 import {
   collection,
   getDocs,
@@ -11,6 +13,7 @@ import {
   addDoc,
   where,
   query,
+  updateDoc,
 } from "firebase/firestore";
 
 
@@ -39,6 +42,7 @@ console.log('abc');
 
 // get all meeting data
 const getMeeting = async () => {
+  console.log('calling');
   const userId = sessionStorage.getItem("coachId");
 // Get the current date
 const currentDate = new Date();
@@ -79,6 +83,11 @@ const getClients = async () => {
 }
 
 
+const findClientById = (clientId) => {
+  return client.find((c) => c.client_id === clientId);
+};
+
+
 
  // Event handler for the checkboxes
  const handleCheckboxChange = (event) => {
@@ -96,34 +105,119 @@ const getClients = async () => {
   }
 };
 
+
+const cancelMeet = (meet_iddd) => {
+  console.log(meet_iddd);
+ 
+  const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
+
+  updateDoc(fieldToEdit2, {
+    isCoachCancel:1,
+    isCancelNotified:0,
+   
+  })
+  .then(() => {
+  
+   
+
+   
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+  getMeeting();
+ }
+
+
+ const removeNotification = (meet_iddd) => {
+  console.log(meet_iddd);
+ 
+  const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
+
+  updateDoc(fieldToEdit2, {
+    isNotified:1,
+   
+   
+  })
+  .then(() => {
+  
+   
+
+   
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+  getMeeting();
+ }
+
   return (
     <>
     <section className='clients-listing  lower-letter'>
       <div className='container'>
         <div className='row'>
-          <h2 className='new-meet-heading'>New Meeting</h2>
+        
           <div className='col-sm-12 filter-coll'>
+          <div className='coach-block-sec mrb-30'>
+                <h2>new meeting notification</h2>
+              </div>
             <div className='client-filter'>
               
             </div>
           </div>
           </div>
           <div className='row'>
-          {meeting.map((meeting, index) => (
-          <div className='col-sm-6 cl-coll'>
-  
-    <div className='info' key={index}>
-      {/* <h3>Abhinav</h3> */}
-      <p className='new-meet-p'>
-        <span><b>Meeting Date:</b></span> <span>{meeting.meetingDate}</span>
-      </p>
-      <p className='new-meet-p'>
-        <span><b>Meeting Time:</b></span> <span>{meeting.meetingTime}  - {meeting.meetingEndTime}</span>
-      </p>
-      {/* Add additional meeting information as needed */}
+          {meeting.length === 0 ? (
+  <div className="no-meeting-notification">
+    No new meeting data available
+  </div>
+) : (
+  meeting.map((meeting, index) => (
+    <div className='col-sm-6 cl-coll'>
+      <div className='info' key={index}>
+        {/* <h3>Abhinav</h3> */}
+
+        <p className='new-meet-p'>
+          <span><b>#{index + 1}</b></span> 
+        </p>
+        <p className='new-meet-p'>
+          <span><b>client name:</b></span> 
+          
+          <span> <figure>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/wabya-45dba.appspot.com/o/coach%2Fprofile%2Fabhhi.jpg?alt=media&token=5e579895-b432-46ed-b03f-1b3596c05995" alt='' />
+                  </figure></span>
+          <span>{findClientById(meeting.clientId)?.client_name}</span>
+        </p>
+
+        <p className='new-meet-p'>
+          <span><b>meeting date:</b></span> <span>{meeting.meetingDate}</span>
+        </p>
+        <p className='new-meet-p'>
+          <span><b>meeting time:</b></span> <span>{meeting.meetingTime}  - {meeting.meetingEndTime}</span>
+        </p>
+        {/* Add additional meeting information as needed */}
+
+        {meeting.isCoachCancel != undefined && meeting.isCoachCancel !== 1 ? (
+          <p className=''>
+            <u  style={{'cursor':'pointer', 'color': 'red', 'fontSize': '17px'}} onClick={() => cancelMeet(meeting.meeting_id)}>Cancel</u>
+          </p>
+        ) : null}
+
+        {meeting.isCoachCancel !== undefined && meeting.isCoachCancel == 1 ? (
+          <p className='' style={{'color': 'red', 'fontSize': '17px'}}>
+            cancelled
+          </p>
+        ) : null}
+
+        <p className=''>
+          <u  style={{'cursor':'pointer', 'color': 'red', 'fontSize': '17px'}} onClick={() => removeNotification(meeting.meeting_id)}>remove from notification</u>
+        </p>
+      </div>
     </div>
- 
-</div> ))}
+  ))
+)}
 
 
 
@@ -136,120 +230,7 @@ const getClients = async () => {
     </section> 
 
 
-<section className="clients-listing client-listing-mobile" style={{'display':'none'}}>
-  <div className="container">
-    <div className="row">
-      <div className="col-12 filter-coll">
-        <div className="client-filter">
-          <div className="dropdown">
-            <div className="inner">
-              <button
-                className="btn btn-darkgreen dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                filter clients
-              </button>
-              <ul className="dropdown-menu" style={{}}>
-                <div className="form-check">
-                  <div className="checkbox">
-                    <label>
-                      <input type="checkbox" name="filter"
-              value="all"
-              onChange={handleCheckboxChange} checked={isActiveFilter === "all"} />
-                      all
-                    </label>
-                  </div>
-                  <div className="checkbox">
-                    <label>
-                      <input type="checkbox"name="filter"
-              value="active"
-              onChange={handleCheckboxChange}  checked={isActiveFilter === "active"}/>
-                      active
-                    </label>
-                  </div>
-                  <div className="checkbox">
-                    <label>
-                      <input type="checkbox" name="filter"
-              value="inactive"
-              onChange={handleCheckboxChange} checked={isActiveFilter === "inactive"}/>
-                      inactive
-                    </label>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {!client ? null : (
-  client.filter((cl) => {
-    const shouldRenderClient = cl.status === isActiveFilter || isActiveFilter === 'all';
-    return shouldRenderClient;
-  }).length === 0 ? (
-    <h3 className='no-client'>No clients available</h3>
-  ) : (
-    client.map((cl, index) => {
-      const shouldRenderClient = cl.status === isActiveFilter || isActiveFilter === 'all';
-      return shouldRenderClient ? (
-        <div className="col-6 cl-coll" key={index}>
-          {/* <Link href={`${router.basePath}/coach/clientDetail/${cl.client_id}`} passHref> */}
-          <Link href="#" passHref>
-            <div className="info">
-              <figure>
-                <img src="../../images/clients-01.png" alt="" />
-              </figure>
-              <h3>
-                {cl.client_name} <span> {cl.status}</span>
-              </h3>
-              <p>
-                <span>Next Session</span>
-              </p>
-              {
-              (() => {
-    const currentDate = new Date();
-    let k = 0;
-
-    for (let index = 0; index < meeting.length; index++) {
-      const data = meeting[index];
-      const meetingDate = new Date(data.meetingDate);
-
-      if (meetingDate > currentDate && k === 0 && data.clientId == cl.client_id) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = meetingDate.toLocaleDateString(undefined, options);
-
-        k = k + 1; // Increment k without printing
-
-        return (
-          <span key={index}>
-            {formattedDate}
-           -
-            {data.meetingTime}
-          </span>
-        );
-      }
-    }
-
-    return <span>No upcoming meetings</span>; // If no meeting meets the condition
-  })()
-}
-            </div>
-          </Link>
-        </div>
-      ) : null;
-    })
-  )
-)}
-      {/*/ cl-coll */}
-      
-    
-      {/*/ cl-coll */}
-    </div>
-    {/*/ row */}
-  </div>
-</section>
 {/*/ clients-listing */}
 </>
 

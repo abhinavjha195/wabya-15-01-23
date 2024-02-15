@@ -1,4 +1,5 @@
 import { useState, ReactNode, useEffect } from 'react'
+import { useRouter } from "next/router";
 import CheckoutButton from "../../../../src/components/CheckoutButton";		
 import { app, database,storage } from "../../../../firebaseConfig";
 import {
@@ -13,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { event } from 'jquery';
 export default function Home() {
+  const router = useRouter();
   const [price, setPrice] = useState(0);
   const [plan_detail, setplan_detail] = useState(null);
   const [new_plan_id, setNewPlanId] = useState('');
@@ -59,8 +61,33 @@ export default function Home() {
   //   }
   // }, []);
 
+ 
 
   useEffect(() => {
+    let userId = sessionStorage.getItem("userId");
+    if (!userId) {
+      router.push("/client/login");
+    }
+
+    // if (userId) {
+
+    //   const fetchClient = async () => {
+    //     let userId = sessionStorage.getItem("userId");
+    //     const clientRef = doc(collection(database, "client_user"), userId);
+    //     const clientDoc = await getDoc(clientRef);
+    //     if (clientDoc.exists()) {
+    //       setClient(clientDoc.data());
+    
+    //       // ////console.log('here');
+    //       ////console.log(clientDoc.data);
+    //     } else {
+    //       ////console.log("No client found");
+    //     }
+    //   };
+      
+    //   fetchClient();
+      
+    // }
     // Try to get the value from localStorage
     try {
       
@@ -73,7 +100,7 @@ export default function Home() {
       }
 
     
-    } catch (error) {
+    } catch (error) { 
       // Handle potential errors accessing localStorage here
       console.error('Error accessing localStorage:', error);
     }

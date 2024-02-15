@@ -20,7 +20,7 @@ import { Alert } from 'antd'
 import { event } from 'jquery';
 
 const Resources = () => {
-
+  const router = useRouter()
   const [file, setFile] = useState(null);
   const [f_name, setf_name] = useState('');
   const [showpercent, setshowpercent] = useState(false);
@@ -28,6 +28,9 @@ const Resources = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [allFiles, setAllFiles] = useState([]);
+  const [coach, setCoach] = useState(null);
+  const [coachId,setCoachId]=useState();
+  
    // get all meeting data 
 
    const fileInputRef = useRef(null);
@@ -70,6 +73,32 @@ useEffect(() => {
 
   const [SearchVal, setSearchVal] = useState('');
   const [userProfile, setUserProfile] = useState('');
+
+
+  useEffect(() => {
+
+    const coachId = sessionStorage.getItem('coachId')
+    setCoachId(coachId);
+  
+    if (coachId) {
+      const fetchCoach = async () => {
+        const coachRef = doc(collection(database, "coaches_user"), coachId);
+        const coachDoc = await getDoc(coachRef);
+  
+        if (coachDoc.exists()) {
+          setCoach(coachDoc.data());
+        } else {
+          console.log("No coach found");
+        }
+      };
+      fetchCoach();
+    }
+  
+  
+    if(!coachId){
+        router.push('/frontend/apply')
+    }
+  }, [coachId])
 
 
   useEffect(() => {
@@ -138,7 +167,7 @@ useEffect(() => {
   function handleSubmit() {
     // event.preventDefault();
  
- 
+    setErrorMessage('');
      if (file != null) {
       
         console.log(file);
@@ -180,7 +209,7 @@ useEffect(() => {
  // update progress
          setPercent(percent);
          },
-     (err) => console.log(err),
+     (err) => {setErrorMessage('something went wrong'),console.log(err)},
          () => {
      // download url
          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
@@ -312,7 +341,7 @@ setErrorMessage("");
         <div className="row">
 
         <div className="col-sm-2 left mrb-30">
-          <figure><img src="../../images/dummy-user.png" alt=""/></figure>
+          <figure> <img src={coach ? coach.coach_profile : null } alt='' /></figure>
         </div>
 
         <div className="col-sm-10 right mrb-30">

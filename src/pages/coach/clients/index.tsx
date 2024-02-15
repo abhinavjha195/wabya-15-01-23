@@ -22,6 +22,8 @@ const ClientsBasic = () => {
   const [isActiveFilter, setIsActiveFilter] = useState('all');
   const [meeting, setMeeting] = useState([]);
   const meetingRef = collection(database, "meeting");
+  const [coach, setCoach] = useState(null);
+  const [coachId,setCoachId]=useState();
   
 
   useEffect(() => {
@@ -36,6 +38,31 @@ console.log('abc');
       console.log(client);
     }
 }, [])
+
+useEffect(() => {
+
+  const coachId = sessionStorage.getItem('coachId')
+  setCoachId(coachId);
+
+  if (coachId) {
+    const fetchCoach = async () => {
+      const coachRef = doc(collection(database, "coaches_user"), coachId);
+      const coachDoc = await getDoc(coachRef);
+
+      if (coachDoc.exists()) {
+        setCoach(coachDoc.data());
+      } else {
+        console.log("No coach found");
+      }
+    };
+    fetchCoach();
+  }
+
+
+  if(!coachId){
+      router.push('/frontend/apply')
+  }
+}, [coachId])
 
 // get all meeting data
 const getMeeting = async () => {
@@ -101,7 +128,11 @@ const getClients = async () => {
     <section className='clients-listing client-listing-desktop lower-letter'>
       <div className='container'>
         <div className='row'>
+       
           <div className='col-sm-12 filter-coll'>
+          <div className='coach-block-sec mrb-30'>
+                <h2>my clients</h2>
+              </div>
             <div className='client-filter'>
               <div className='dropdown'>
                 <div className='inner'>
@@ -163,7 +194,7 @@ const getClients = async () => {
             <Link href={`${router.basePath}/coach/clientDetail/${cl.client_id}`} passHref>
               <div className='info'>
                 <figure>
-                  <img src='../../images/dummy-user.png' alt='' />
+                  <img src={coach ? coach.coach_profile : null } alt='' />
                 </figure>
                 <h3>
                   {cl.client_name} <span> {cl.status}</span>

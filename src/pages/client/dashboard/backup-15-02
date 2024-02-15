@@ -1,0 +1,1556 @@
+// ** Files Imports
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { app, database, storage } from "../../../../firebaseConfig";
+import emailjs from "@emailjs/browser";
+import { Alert } from "antd";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { countries } from "countries-list";
+import { Select, MenuItem } from "@mui/material";
+import { sendMail } from "../../../services/sendMail";
+import { styled } from "@mui/material/styles";
+import Button, { ButtonProps } from "@mui/material/Button";
+import allCountries from "../../../@core/utils/countries";
+import country_data from "../../../@core/utils/all-countries";
+import {
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  addDoc,
+  updateDoc,
+  where,
+  query,
+} from "firebase/firestore";
+import { Modal } from "antd";
+
+// import Cal, { getCalApi } from "@calcom/embed-react";
+import Calendar from "react-calendar";
+import { AnyAaaaRecord } from "dns";
+import { Video } from "mdi-material-ui";
+import { Clock } from "mdi-material-ui";
+import { ArrowRightCircleOutline } from "mdi-material-ui";
+import MeetingCancelled from "src/components/MeetingCancelled";
+
+async function sendMailFunc(email, content, $subject) {
+  let response = await sendMail(email, $subject, content);
+
+  console.log("response", response);
+}
+
+const Dashboard = () => {
+  const router = useRouter();
+  const form = useRef();
+  const formMobile = useRef();
+  const fileInputRef = useRef(null);
+  const form2 = useRef();
+  const [client, setClient] = useState(null);
+  const [userId, setUserId] = useState();
+
+  const [clientEmail, setClientEmail] = useState("");
+  const [clientEmailTemp, setClientEmailTemp] = useState("");
+  const [clientEmailOTP, setClientEmailOTP] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
+  const [verifyOTP, setVerifyOTP] = useState(false);
+
+  const [showOtpError, setShowOtpError] = useState(false);
+
+  const [clientPhone, setClientPhone] = useState("");
+  const [clientCountry, setClientCountry] = useState("");
+  const [clientTimeZone, setClientTimeZone] = useState("");
+  const [clientLanguage, setClientLanguage] = useState("");
+  const [file, setFile] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [fileUrl2, setfileUrl2] = useState("");
+  const MAX_FILE_SIZE = 800 * 1024;
+  const [showpercent, setshowpercent] = useState(false);
+  const [detailSaved, setdetailSaved] = useState(false);
+  const [savedMsg, setsavedMsg] = useState("");
+  const [newotp, setnewotp] = useState("");
+  const [proImage, setImage] = useState("../../images/dummy-user.png");
+  const [editDetail, setEditDetail] = useState(false);
+
+  const [country_sel, setcountry_sel] = useState("");
+
+  const [f_name, setf_name] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [clientFirebaseName, setclientFirebaseName] = useState("");
+  const [clientFirebaseFirstName, setclientFirebaseFirstName] = useState("");
+  const [clientFirebaseEmail, setclientFirebaseEmail] = useState("");
+  const [clientPlanId, setclientPlanId] = useState("");
+  const [clientJourneyType, setclientJourneyType] = useState("");
+  const [clientPreferPlanId, setclientPreferPlanId] = useState("");
+  const [clientTotalSession, setclientTotalSession] = useState("");
+
+  const [clientCompletedSession, setclientCompletedSession] = useState("");
+  const [clientRemainingSession, setclientRemainingSession] = useState("");
+  const [clientIsDiscoveryDone, setclientIsDiscoveryDone] = useState(-1);
+  const [clientFirebaseId, setclientFirebaseId] = useState("");
+  const [coachesFirebaseId, setcoachesFirebaseId] = useState("");
+
+  const [coach, setCoach] = useState(false);
+
+  const [mycoach, setMyCoach] = useState(null);
+  const [myplan, setMyPlan] = useState(null);
+  const [myplanName, setMyPlanName] = useState("");
+
+  const [mypreferplan, setMyPreferPlan] = useState(null);
+  const [mypreferplanName, setmypreferplanName] = useState("");
+
+  const databaseRef = collection(database, "client_user");
+  const coachRef = collection(database, "coaches_user");
+  const planRef = collection(database, "admin_plans");
+  const meetingRef = collection(database, "meeting");
+  const helpRef = collection(database, "help");
+  const msgRef = collection(database, "message");
+  const requestRef = collection(database, "newPlanRequest");
+  const billingRef = collection(database, "billingInfo");
+  const billingRef3 = collection(database, "billingInfo");
+  const [BuyMoreErr, setBuyMoreErr] = useState(false);
+  const [allNewRequest, setallNewRequest] = useState([]);
+  const [requestPlanId, setrequestPlanId] = useState("");
+  const [isUpdateBilling, setisUpdateBilling] = useState(false);
+  const [isUploadNotes, setisUploadNotes] = useState(false);
+  const [isSeeNotes, setisSeeNotes] = useState(false);
+  const [allFiles, setAllFiles] = useState([]);
+  const [help, setHelp] = useState(null);
+  const [helpText, sethelpText] = useState("");
+  const [ShowHelpErr, setShowHelpErr] = useState(false);
+  const [ShowHelpSuccess, setShowHelpSuccess] = useState(false);
+
+  const [viewProfile, setviewProfile] = useState(false);
+  const today = new Date();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isContactCoach, setisContactCoach] = useState(false);
+
+
+
+
+  useEffect(() => {
+    let userId = sessionStorage.getItem("userId");
+    setUserId(userId);
+
+    if (userId) {
+      const fetchClient = async () => {
+        const clientRef = doc(collection(database, "client_user"), userId);
+        const clientDoc = await getDoc(clientRef);
+        if (clientDoc.exists()) {
+          setClient(clientDoc.data());
+
+          // ////console.log('here');
+          ////console.log(clientDoc.data);
+        } else {
+          ////console.log("No client found");
+        }
+      };
+      fetchClient();
+    }
+
+    if (!userId) {
+      router.push("/client/login");
+    }
+
+    // const token = sessionStorage.getItem('Token')
+  }, [userId]);
+
+  const fetchClient = async () => {
+    let userId = sessionStorage.getItem("userId");
+    const clientRef = doc(collection(database, "client_user"), userId);
+    const clientDoc = await getDoc(clientRef);
+    if (clientDoc.exists()) {
+      setClient(clientDoc.data());
+    } else {
+    }
+  };
+
+  useEffect(() => {
+    if (client != null) {
+      //console.log(client);
+      ////console.log(client.client_api);
+      // setclientCalAPIkey("cal_test_023256ac85011cded16d8d4f8f137d99");
+      //setclientCaluserName(client.client_uname);
+      setclientFirebaseId(client.id);
+      setclientFirebaseName(client.client_name);
+      const firstName = client.client_name.split(" ")[0];
+      setclientFirebaseFirstName(firstName);
+      //console.log(firstName);
+      setclientFirebaseEmail(client.client_email);
+      //setcoachesCalUsername(client.assign_coach_uname);
+      setclientPlanId(client.plan_id);
+      setclientJourneyType(client.journey_type);
+      setclientPreferPlanId(client.prefer_plan_id);
+      setclientTotalSession(client.total_session);
+      setclientCompletedSession(client.completedSession);
+      setclientRemainingSession(client.remainingSession);
+      setclientIsDiscoveryDone(client.isDiscoverySessionDone);
+      setcoachesFirebaseId(client.assign_coach_id);
+
+      // getFiles();
+      // fetchCoach();
+    }
+
+    //     if(!token){
+    //         router.push('/pages/login')
+    //     }
+  }, [client]);
+
+  const fetchMyPlan = async () => {
+    // const myplanRef = doc(collection(database, "admin_plans"), coachesFirebaseId);
+    // const coachDoc = await getDoc(coachRef);
+
+    const queryDoc = query(planRef, where("__name__", "==", clientPlanId));
+
+    await getDocs(queryDoc).then((response) => {
+      setMyPlan(
+        response.docs.map((data) => {
+          //console.log(data);
+          return { ...data.data(), plan_id: data.id };
+        })
+      );
+    });
+  };
+
+  useEffect(() => {
+    if (clientPlanId != "") {
+      //console.log('ne wplan ');
+      console.log("clientPlanId", clientPlanId);
+
+      fetchMyPlan();
+    }
+  }, [clientPlanId]);
+
+  const fetchPreferPlan = async () => {
+    // const myplanRef = doc(collection(database, "admin_plans"), coachesFirebaseId);
+    // const coachDoc = await getDoc(coachRef);
+
+    const queryDoc = query(
+      planRef,
+      where("__name__", "==", clientPreferPlanId)
+    );
+
+    await getDocs(queryDoc).then((response) => {
+      setMyPreferPlan(
+        response.docs.map((data) => {
+          //console.log(data);
+          return { ...data.data(), plan_id: data.id };
+        })
+      );
+    });
+  };
+
+  useEffect(() => {
+    if (clientPreferPlanId != "") {
+      //console.log('ne wplan ');
+      console.log("prefer plan id", clientPreferPlanId);
+
+      fetchPreferPlan();
+    }
+  }, [clientPreferPlanId]);
+
+  useEffect(() => {
+    if (myplan != null) {
+      //console.log('ne wplan ');
+      console.log("myplan", myplan);
+
+      setMyPlanName(myplan[0].plan_name);
+      //getData();
+    }
+  }, [myplan]);
+
+  useEffect(() => {
+    if (mypreferplan != null) {
+      //console.log('ne wplan ');
+      console.log("mypreferplan", mypreferplan);
+
+      setmypreferplanName(mypreferplan[0].plan_name);
+      //getData();
+    }
+  }, [mypreferplan]);
+
+  const getFiles = async () => {
+    const meetRef = collection(database, "resources");
+    const queryDoc = query(
+      meetRef,
+      where("parentId", "in", [
+        coachesFirebaseId,
+        sessionStorage.getItem("userId"),
+      ])
+    );
+    // const queryDoc = query(meetRef, where("parentId", "==", coachesFirebaseId)
+    //  .where("parentId", "==", sessionStorage.getItem("userId"))
+
+    await getDocs(queryDoc).then((response) => {
+      //console.log(response.docs);
+      setAllFiles(
+        response.docs.map((data) => {
+          return { ...data.data(), file_id: data.id };
+        })
+      );
+
+      //console.log(allFiles);
+      // setshowfile(true);
+    });
+  };
+
+  const showUpdateBilling = (event) => {
+    //console.log('testtttt');
+    event.preventDefault();
+    setisUpdateBilling(true);
+  };
+
+  const editD = async () => {
+    setEditDetail(true);
+
+    const userIds = sessionStorage.getItem("userId");
+    const userCollection = collection(database, "client_user");
+    const userDocRef = doc(userCollection, userIds);
+    const userDoc = await getDoc(userDocRef);
+    //console.log(userDoc);
+
+    setClientEmail(userDoc.data().client_email),
+      setClientEmailTemp(userDoc.data().client_email),
+      setClientPhone(userDoc.data().client_phone),
+      setClientCountry(userDoc.data().client_country),
+      setClientLanguage(userDoc.data().client_language),
+      setClientTimeZone(userDoc.data().client_zone);
+
+    if (userDoc.data().client_profile) {
+      setImage(userDoc.data().client_profile);
+    }
+  };
+
+  const verify = async () => {
+    setShowOtpError(false);
+    if (clientEmailOTP == newotp) {
+      setVerifyOTP(true);
+      saveD();
+    } else {
+      setVerifyOTP(false);
+      setShowOtpError(true);
+    }
+  };
+
+  const saveD = async () => {
+    setdetailSaved(false);
+    setsavedMsg("");
+
+    setShowOTP(false);
+
+    setnewotp("");
+
+    if (
+      clientEmailOTP != "" ||
+      clientEmail == clientEmailTemp ||
+      verifyOTP == true
+    ) {
+      setEditDetail(false);
+      const plan_id = sessionStorage.getItem("userId");
+      const fieldToEdit = doc(database, "client_user", plan_id);
+
+      updateDoc(fieldToEdit, {
+        client_email: clientEmail,
+        client_phone: clientPhone,
+        client_country: clientCountry,
+        client_zone: clientTimeZone,
+        client_language: clientLanguage,
+        client_profile: fileUrl2,
+      })
+        .then(() => {
+          toast.success("Client details updated successfully!");
+          setdetailSaved(true);
+          setsavedMsg("Detail Saved!");
+          setClientEmail("");
+          setClientEmailTemp(clientEmail);
+          setClientPhone("");
+          setClientCountry("");
+          setClientLanguage("");
+          setClientTimeZone("");
+          fetchClient();
+          setVerifyOTP(false);
+          setClientEmailOTP("");
+        })
+        .catch((err) => {
+          //console.log(err);
+          setVerifyOTP(false);
+        });
+    } else {
+      setShowOTP(true);
+      const randomNumber = Math.floor(Math.random() * 9000) + 1000;
+
+      setnewotp(randomNumber);
+      if (newotp == "") {
+        const logoUrl = "https://wabya.com/images/logo-new.png";
+        const msg = `
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+       <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Wabya</title>
+          <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+          <style type="text/css">
+             body{padding-top: 0 !important; padding-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin:0 !important; width: 100% !important; -webkit-text-size-adjust: 100% !important; -ms-text-size-adjust: 100% !important; -webkit-font-smoothing: antialiased !important; font-size:14px; line-height:22px; font-family: 'Lato', sans-serif; font-weight:400;}
+          </style>
+       </head>
+       <body paddingwidth="0" paddingheight="0"  style="" offset="0" toppadding="0" leftpadding="0">
+       <div style="display:table; width:600px !important; margin: 0 auto; background: #fff; padding:20px;">
+          <table width="600" border="0" cellspacing="0" cellpadding="0" class="tableContent bgBody" align="center" style='width: 600px; display: block;'>
+             <tbody>
+                <tr>
+                   <table class="MainContainer" width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ece6d5" align="center" style='width: 600px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>
+                      <tbody style=''>
+    <tr>
+                            <td colspan="2"><div style="text-align: center; margin:35px 0 0" class="contentLogo"><a href="https://www.#.com"><img src="${logoUrl}" width="200px" alt="" border="0" style=""></a></div></td>
+                         </tr>
+                         <tr>
+                            <td>
+                               <div style="padding:0 30px;  position: relative; z-index: 2;line-height: 22px;font-family: 'Lato', sans-serif;font-weight: 600;text-align: center;">
+        <p style="color: #3498db;text-align: center;font-size: 36px;">otp for update new email!</p>
+    <p style="font-size: 18px; text-align: center; color: #864985;">Your otp for update new email id is ${randomNumber}.</p>
+   
+    <hr style="border: 1px solid #1c686b;">
+    <p style="font-size: 14px; color: #242424; text-align: center;">Thank you,<br>Wabya Team</p>
+     </div>  
+                            </td>
+                         </tr>
+                      </tbody>
+                   </table>
+                </tr>
+             </tbody>
+          </table>
+     </div>
+       </body>
+    </html>
+`;
+        sendMailFunc(clientEmailTemp, msg, "otp for update new email");
+      }
+    }
+  };
+
+  function handleFileChange2(event) {
+    const selectedFile = event.target.files[0];
+    const allowedTypes = ["image/jpeg", "image/png"];
+
+    if (!allowedTypes.includes(selectedFile.type)) {
+      alert("Only JPEG and PNG files are allowed!");
+
+      return;
+    }
+    if (selectedFile && selectedFile.size > MAX_FILE_SIZE) {
+      alert("File size exceeds the limit of 800kb");
+
+      return;
+    }
+
+    setFile2(selectedFile);
+  }
+
+  const handleChangeCountry = (event) => {
+    setcountry_sel(event.target.value);
+    setClientCountry(event.target.value);
+  };
+
+  const getLanguagesOfSelectedCountry = () => {
+    const selectedCountry = country_data.find(
+      (country) => country.country === country_sel
+    );
+    if (selectedCountry) {
+      return selectedCountry.languages;
+    }
+    return [];
+  };
+
+  const getTimeZoneOfSelectedCountry = () => {
+    const selectedCountry = country_data.find(
+      (country) => country.country === country_sel
+    );
+    if (selectedCountry) {
+      return selectedCountry.timezone;
+    }
+    return "";
+  };
+  const selectedCountryLanguages = getLanguagesOfSelectedCountry();
+  const selectedCountryTimezone = getTimeZoneOfSelectedCountry();
+  useEffect(() => {
+    if (selectedCountryLanguages.length > 0) {
+      setClientLanguage(selectedCountryLanguages[0]);
+      //  values.clientLanguage=selectedCountryLanguages[0];
+    }
+  }, [selectedCountryLanguages]);
+
+  const handleLanguageChange = (e) => {
+    const selectedLanguages = [];
+    for (let i = 0; i < e.target.options.length; i++) {
+      if (e.target.options[i].selected) {
+        console.log(e.target.options[i]);
+        selectedLanguages.push(e.target.options[i].value);
+      }
+    }
+    setClientLanguage(selectedLanguages);
+  };
+  const languageOptions = country_data.flatMap((country) =>
+    country.languages.map((language) => ({
+      country: country.country,
+      language,
+    }))
+  );
+
+  // Use filter and some to remove duplicates based on the 'language' property
+  const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
+    return !self
+      .slice(0, index)
+      .some(
+        (item) =>
+          JSON.stringify(item.language) === JSON.stringify(value.language)
+      );
+  });
+
+  const buyMore = (event) => {
+    // Your logic for buyMore function
+
+    // Redirect to /client/checkout
+    event.preventDefault();
+    console.log(event.target);
+    setBuyMoreErr(false);
+    if (parseInt(clientRemainingSession) == 0) {
+      localStorage.setItem("price", event.target.getAttribute("data-price"));
+      localStorage.setItem(
+        "buy_plan_id",
+        event.target.getAttribute("data-plan-id")
+      );
+      router.push("/client/checkout");
+    } else {
+      setBuyMoreErr(true);
+
+      setTimeout(() => {
+        setBuyMoreErr(false);
+      }, 4000); // 4000 milliseconds = 4 seconds
+    }
+  };
+
+  const getNewRequest = async () => {
+    //const meetRef = collection(database, "resources");
+    const queryDoc = query(
+      requestRef,
+      where("client_id", "==", sessionStorage.getItem("userId")),
+      where("status", "==", 1)
+    );
+    // const queryDoc = query(meetRef, where("parentId", "==", coachesFirebaseId)
+    //  .where("parentId", "==", sessionStorage.getItem("userId"))
+
+    await getDocs(queryDoc).then((response) => {
+      //console.log(response.docs);
+      setallNewRequest(
+        response.docs.map((data) => {
+          return { ...data.data(), new_request_id: data.id };
+        })
+      );
+
+      //console.log(allFiles);
+      // setshowfile(true);
+    });
+  };
+
+  const addNewRequest = async (event: any) => {
+    event.preventDefault();
+    const addButton = event.target;
+    addButton.setAttribute("disabled", true);
+    addButton.textContent = "Loading...";
+    if ((await countMyRequest()) == 0) {
+      var new_plan_id = event.target.getAttribute("data-plan-id");
+
+      addDoc(requestRef, {
+        plan_id: clientPlanId,
+        new_plan_id: new_plan_id,
+        client_id: sessionStorage.getItem("userId"),
+        status: 1,
+      })
+        .then(() => {
+          getNewRequest();
+          toast.success("Data Updated successfully");
+          // Re-enable the button and remove loading state
+        })
+        .catch((err) => {
+          console.error(err);
+          // Re-enable the button and remove loading state
+        });
+    } else {
+      var new_plan_id = event.target.getAttribute("data-plan-id");
+      const client_id = sessionStorage.getItem("userId");
+      // const fieldToEdit = doc(collection(database, "newPlanRequest"),client_id);
+      //const fieldToEdit = query(requestRef, where('client_id', '==', client_id));
+
+      const collectionRef = collection(database, "newPlanRequest");
+      const q = query(
+        collectionRef,
+        where("client_id", "==", client_id),
+        where("status", "==", 1)
+      );
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doce) => {
+        const fieldToEdit = doc(database, "newPlanRequest", doce.id);
+        updateDoc(fieldToEdit, {
+          new_plan_id: new_plan_id,
+          status: 1,
+
+          // ...
+        });
+      });
+      addButton.removeAttribute("disabled");
+      addButton.textContent = "Requested";
+      getNewRequest();
+    }
+  };
+
+  const handleUploadOk = () => {
+    setisUploadNotes(false);
+  };
+
+  const handleSeeNotesOk = () => {
+    setisSeeNotes(false);
+  };
+
+  const handleUploadCancel = () => {
+    setisUploadNotes(false);
+  };
+
+  const handleSeeNotesCancel = () => {
+    setisSeeNotes(false);
+  };
+
+  const showUploadNotes = (event) => {
+    //console.log('testtttt');
+    event.preventDefault();
+    setisSeeNotes(false);
+    setisUploadNotes(true);
+  };
+
+  const showSeeNotes = (event) => {
+    //console.log('testtttt');
+    event.preventDefault();
+    setisUploadNotes(false);
+    setisSeeNotes(true);
+  };
+
+  const sendHelpMsg = () => {
+    setShowHelpErr(false);
+    setShowHelpSuccess(false);
+    if (helpText == "") {
+      setShowHelpErr(true);
+    } else {
+      setShowHelpErr(false);
+      addDoc(msgRef, {
+        message: helpText,
+        status: 1,
+        senderId: sessionStorage.getItem("userId"),
+      })
+        .then(() => {
+          toast.success("Data sent successfully");
+          setShowHelpSuccess("");
+          getData();
+          setShowHelpSuccess(true);
+
+          if (typeof window !== "undefined" && window.innerWidth <= 768) {
+            emailjs
+              .sendForm(
+                "service_48nilue",
+                "template_3uazkzk",
+                form.current,
+                "bHrOxc3becdFqRykK"
+              )
+              .then(
+                (result) => {
+                  //console.log(result.text);
+                  sethelpText("");
+                },
+                (error) => {
+                  //console.log(error.text);
+                }
+              );
+          } else {
+            emailjs
+              .sendForm(
+                "service_48nilue",
+                "template_3uazkzk",
+                formMobile.current,
+                "bHrOxc3becdFqRykK"
+              )
+              .then(
+                (result) => {
+                  //console.log(result.text);
+                  sethelpText("");
+                },
+                (error) => {
+                  //console.log(error.text);
+                }
+              );
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
+  function handleSearch(event) {
+    //console.log(event.target);
+    setSearchVal(event.target.value);
+    //handleSubmit();
+  }
+
+  function handleSubmit() {
+    // event.preventDefault();
+
+    if (file != null) {
+      //console.log(file);
+      // Upload the file to Firebase Cloud Storage
+      // const storageRef = storage().ref();
+      //const fileRef = storageRef.child('files/' + file.name);
+      setshowpercent(true);
+      let randomString = "";
+
+      const randomNum = Math.floor(Math.random() * 1000);
+
+      // Convert the number to a string and pad it with leading zeros if necessary
+      const randomNumber = randomNum.toString().padStart(3, "0");
+      //console.log(randomNumber);
+      randomString += randomNumber;
+
+      // Generate three random letters
+      for (let i = 0; i < 3; i++) {
+        const randomCode = Math.floor(Math.random() * (122 - 97 + 1)) + 97;
+        const randomLetter = String.fromCharCode(randomCode);
+        randomString += randomLetter;
+        //console.log(randomLetter);
+      }
+
+      const uniqueId = new Date().getTime();
+      //console.log(uniqueId);
+      randomString += uniqueId;
+
+      //console.log(randomString);
+      const storageRef = ref(storage, `/resources/` + randomString + ``);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const percent = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          // update progress
+
+          console.log("workkk");
+          setPercent(percent);
+        },
+        (err) => {
+          console.error(err); // Log the error
+        },
+        () => {
+          // download url
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            //console.log(url);
+            setfileName(file.name);
+
+            setfileType(file.type);
+            console.log(url);
+            setfileUrl(url);
+            setshowpercent(false);
+            setfilecount(filecount + 1);
+            setFile(null);
+            //   toast.success('File Uploaded!');
+          });
+        }
+      );
+    }
+  }
+
+  function addInFirebase() {
+    console.log("before");
+    const today = new Date();
+    const date = today.getDate();
+    const month = today.getMonth() + 1; // add 1 because months are zero-indexed
+    const year = today.getFullYear();
+    setSuccessMessage("");
+    setErrorMessage("");
+    addDoc(resourceRef, {
+      resourceURL: fileUrl,
+      parentId: sessionStorage.getItem("userId"),
+      fileName: fileName,
+      fileType: fileType,
+      uploadDate: "" + date + "-" + month + "-" + year,
+    })
+      .then(() => {
+        // toast.success('File Uploaded')
+        //router.push('/client/login')
+        setSuccessMessage("File Uploaded");
+        //setErrorMessage("File Uploaded");
+        getFiles();
+
+        console.log("after");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  const getHelpText = async () => {
+    const queryDoc = query(helpRef, where("status", "==", 1));
+
+    await getDocs(queryDoc).then((response) => {
+      setHelp(
+        response.docs.map((data) => {
+          //console.log(data);
+          return { ...data.data(), help_id: data.id };
+        })
+      );
+    });
+  };
+
+
+
+
+
+  function toggleProfile() {
+    setviewProfile(!viewProfile);
+  
+    // You can perform other actions based on the new value of viewProfile here
+  }
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const ButtonStyled = styled(Button)<
+    ButtonProps & { component?: ElementType; htmlFor?: string }
+  >(({ theme }) => ({
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      textAlign: "center",
+    },
+  }));
+
+  const ImgStyled = styled("img")(({ theme }) => ({
+    width: 120,
+    height: 120,
+    marginRight: theme.spacing(6.25),
+    borderRadius: theme.shape.borderRadius,
+  }));
+
+  return (
+    <>
+      <section className="client-dashboard user-details-desktop lower-letter">
+        <div className="container">
+          <ToastContainer />
+
+          <div className="row">
+            <div className="col-sm-8 left">
+              <div className="banner-text">
+                <h2>
+                  <span>we are because you are</span>welcome{" "}
+                  {client ? <> {client.client_name} </> : null}
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div className="next-session">
+            <div className="row">
+              <div className="col-sm-8 left">
+                <div className="banner-et">
+                  <div className="padd">
+                    <div className="padd-left">
+                      <h3>next session</h3>
+                    </div>
+                    <div className="padd-right">
+                      <button className="btn btn-session">
+                        view session history
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-4 right">
+                <div className="info-basic">
+                  <figure>
+                    {file2 ? (
+                      <img src={URL.createObjectURL(file2)} alt="Profile Pic" />
+                    ) : (
+                      <img
+                        src={client ? client.client_profile : proImage}
+                        alt=""
+                      />
+                    )}
+                  </figure>
+                  {/* <figure>
+                  <img src="../../images/dummy-user.png" alt="" />
+
+
+                </figure> */}
+                  {editDetail && !showOTP ? (
+                    <ButtonStyled
+                      className="btn"
+                      component="label"
+                      variant="contained"
+                      htmlFor="account-settings-upload-image"
+                    >
+                      upload
+                      <input
+                        name="pro_image"
+                        hidden
+                        type="file"
+                        onChange={handleFileChange2}
+                        accept="image/png, image/jpeg"
+                        id="account-settings-upload-image"
+                      />
+                    </ButtonStyled>
+                  ) : null}
+
+                  <h3>{client ? <> {client.client_name} </> : null}</h3>
+
+                  {editDetail ? (
+                    <>
+                      <form
+                        noValidate
+                        autoComplete="off"
+                        onSubmit={(e) => e.preventDefault()}
+                        className="client-edit-details"
+                      >
+                        {!showOTP ? (
+                          <>
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <p>
+                                  email:
+                                  <span>
+                                    <input
+                                      type="email"
+                                      name="client_email"
+                                      id="client_email"
+                                      className="form-control"
+                                      placeholder="name@gmail.com"
+                                      value={clientEmail}
+                                      onChange={(e) =>
+                                        setClientEmail(e.target.value)
+                                      }
+                                    />
+                                  </span>
+                                </p>
+                              </div>
+                              <div className="col-sm-6">
+                                <p>
+                                  mobile:
+                                  <span>
+                                    <input
+                                      type="text"
+                                      name="client_phone"
+                                      id="client_phone"
+                                      className="form-control"
+                                      placeholder="123-456-7890"
+                                      value={`${clientPhone}`}
+                                    />
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <p>
+                                  country:
+                                  <span>
+                                    <select
+                                      id="country"
+                                      value={clientCountry}
+                                      className="form-control"
+                                      onChange={handleChangeCountry}
+                                    >
+                                      <option value="">-- Select --</option>
+                                      {country_data.map((country, index) => (
+                                        <option
+                                          key={index}
+                                          value={country.country}
+                                        >
+                                          {country.country} - {country.flag}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </span>
+                                </p>
+                              </div>
+                              <div className="col-sm-6">
+                                <p>
+                                  time zone:
+                                  <span>
+                                    <input
+                                      type="text"
+                                      name="client_zone"
+                                      id=""
+                                      className="form-control"
+                                      placeholder="London GMT"
+                                      value={clientTimeZone}
+                                      onChange={(e) =>
+                                        setClientTimeZone(e.target.value)
+                                      }
+                                    />
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <p>
+                                  languages:
+                                  <span>
+                                    <select
+                                      className="form-control"
+                                      onChange={handleLanguageChange}
+                                      value={clientLanguage}
+                                      multiple
+                                      style={{ height: "auto" }}
+                                    >
+                                      {uniqueLanguageOptions.map(
+                                        ({ country, language }, index) => (
+                                          <option key={index} value={language}>
+                                            {language}
+                                          </option>
+                                        )
+                                      )}
+                                    </select>
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-sm-12">
+                                <div className="left-link">
+                                  <a className="" onClick={() => saveD()}>
+                                    Save my details
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="row">
+                              <div className="col-sm-6">
+                                <p>
+                                  otp:
+                                  <span>
+                                    <input
+                                      type="text"
+                                      name="otp"
+                                      id="otp"
+                                      className="form-control"
+                                      placeholder="otp"
+                                      value={clientEmailOTP}
+                                      onChange={(e) =>
+                                        setClientEmailOTP(e.target.value)
+                                      }
+                                    />
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="row">
+                              <div className="col-sm-12">
+                                <div className="left-link">
+                                  <a className="">verify otp</a>
+                                </div>
+
+                                {showOtpError && (
+                                  <Alert
+                                    message="otp is wrong"
+                                    className="mt-4"
+                                    style={{ width: "72%" }}
+                                    type="error"
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </form>
+                    </>
+                  ) : (
+                    <>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <p>
+                            email:{" "}
+                            <span>
+                              {client ? <> {client.client_email} </> : null}
+                            </span>
+                          </p>
+                        </div>
+                        <div className="col-sm-6">
+                          <p>
+                            mobile:
+                            <span>
+                              {client ? <> {client.client_phone} </> : null}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <p>
+                            country:{" "}
+                            <span>
+                              {client ? <> {client.client_country} </> : null}
+                            </span>
+                          </p>
+                        </div>
+                        <div className="col-sm-6">
+                          <p>
+                            time zone:{" "}
+                            <span>
+                              {client ? <> {client.client_zone} </> : null}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <p>
+                            languages:{" "}
+                            <span>
+                              {client
+                                ? Array.isArray(client.client_language)
+                                  ? client.client_language.join(", ")
+                                  : null
+                                : null}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-12">
+                          <div className="left-link">
+                            <a className="" onClick={() => editD()}>
+                              Edit my details &nbsp;
+                            </a>
+                            |
+                            <Link href="/client/change-password" passHref>
+                              <a className=""> Change my password</a>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div className="client-plans">
+                <div className="row">
+                  <div className="col-sm-7">
+                    <h3>my plan</h3>
+                    <div className="divider-bottom"></div>
+
+                    {clientIsDiscoveryDone === 0 ? (
+                      <div className="new-plans">
+                        <div className="row">
+                          <div className="col-sm-12 left mrb-10">
+                            Complete Your Discovery Session to Select Your Plan.
+                          </div>
+                        </div>
+                        {/*/ row */}
+                      </div>
+                    ) : (
+                      <>
+                        <div className="new-plans">
+                          <div className="row">
+                            <div className="col-sm-6 left mrb-10">
+                              <div className="plans-content">
+                                <span>
+                                  {" "}
+                                  {myplanName
+                                    ? "current plan :"
+                                    : "prefer  plan :"}
+                                </span>
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                  }}
+                                  className="btn btn-lightgreen"
+                                >
+                                  {myplanName ? myplanName : mypreferplanName}
+                                </a>
+                              </div>
+                              <div className="plans-content">
+                                <span>journey type : </span>
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault(); /* Your custom logic here */
+                                  }}
+                                  className="btn btn-thulian-pink"
+                                >
+                                  {clientJourneyType ? clientJourneyType : "-"}
+                                </a>
+                              </div>
+                            </div>
+                            <div className="col-sm-6 right mrb-30">
+                              <div className="plans-sessions">
+                                <p className="text-right">
+                                  sessions remaining: {clientRemainingSession}
+                                </p>
+                                <p className="text-right">
+                                  <p>
+                                    {BuyMoreErr && (
+                                      <Alert
+                                        message="you have already session remaining..."
+                                        className="mt-4"
+                                        style={{ width: "52%" }}
+                                        type="error"
+                                      />
+                                    )}
+                                  </p>
+                                  <a
+                                    href=""
+                                    className="btn btn-darkgreen"
+                                    data-plan-id={
+                                      clientPlanId
+                                        ? clientPlanId
+                                        : clientPreferPlanId
+                                    }
+                                    data-price="210"
+                                    onClick={buyMore}
+                                  >
+                                    {myplanName ? "Buy More" : "Buy"}
+                                  </a>
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="plans-list col-sm-12">
+                              <ul>
+                                <li>
+                                  <a
+                                    href=""
+                                    className="btn btn-darkgreen"
+                                    data-plan-id={
+                                      clientPlanId
+                                        ? clientPlanId
+                                        : clientPreferPlanId
+                                    }
+                                    onClick={addNewRequest}
+                                  >
+                                    {"6ZpZd4IrzORGQfyu0IqT" === requestPlanId
+                                      ? "Change Plan"
+                                      : "Requested"}
+                                  </a>
+                                </li>
+                                <li>
+                                  <a
+                                    href=""
+                                    className="btn btn-chestnutred"
+                                    data-plan-id={
+                                      clientPlanId
+                                        ? clientPlanId
+                                        : clientPreferPlanId
+                                    }
+                                    data-price="210"
+                                    onClick={buyMore}
+                                  >
+                                    {myplanName ? " change journey type" : "-"}
+                                  </a>
+                                </li>
+                                <li>
+                                  <a
+                                    href=""
+                                    className="btn btn-maroon"
+                                    onClick={showUpdateBilling}
+                                  >
+                                    update my billing information
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-sm-5">
+                    <figure>
+                      <img src="../../images/banner-bg.png" alt="Images Logo" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+
+              <div className="client-notes">
+                <div className="row">
+                  <div className="col-sm-7">
+                    <h3>
+                      my notes.{" "}
+                      <span
+                        className="upload_notes_client"
+                        onClick={showUploadNotes}
+                      >
+                        Upload Notes
+                      </span>
+                      &nbsp;{" "}
+                      <span
+                        className="upload_notes_client"
+                        onClick={showSeeNotes}
+                      >
+                        See Notes
+                      </span>
+                    </h3>
+                    <div className="divider-bottom"> </div>
+                  </div>
+                </div>
+
+                <Modal
+                  centered
+                  className="session-history-modal"
+                  visible={isSeeNotes}
+                  onOk={handleSeeNotesOk}
+                  onCancel={handleSeeNotesCancel}
+                  width={1200}
+                >
+                  <div className="client-bg">
+                    <div className="file-scroll">
+                      <div className="row">
+                        <div className="col-sm-5">
+                          <div class="upload-notes-button">
+                            <span
+                              className="upload_notes_client btn"
+                              onClick={showUploadNotes}
+                            >
+                              Upload Notes
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="col-sm-7">
+                          <div className="product_search_form">
+                            <form id="searchForm" action="" method="POST">
+                              <input
+                                type="text"
+                                name="keyword"
+                                id="keyword"
+                                className="form-control"
+                                placeholder="search"
+                                onKeyUp={handleSearch}
+                              />
+                              <input className="btn btn-search" type="submit" />
+                              <i
+                                className="fa fa-fw fa-search"
+                                title="search"
+                                aria-hidden="true"
+                              ></i>
+                            </form>
+                          </div>
+                        </div>
+
+                        {allFiles.length > 0 ? (
+                          allFiles.map((myfile, index) => {
+                            return myfile.fileName
+                              .toLowerCase()
+                              .indexOf(SearchVal.toLowerCase()) !== -1 ? (
+                              <div className="col-sm-4 fi-coll">
+                                <a href={myfile.resourceURL} target="_blank">
+                                  <div className="inner">
+                                    <figure>
+                                      <img
+                                        src="../../images/file-icon.jpg"
+                                        alt=""
+                                      />
+                                    </figure>
+                                    <h4>
+                                      {myfile.fileName}{" "}
+                                      <span>{myfile.uploadDate}</span>
+                                    </h4>
+                                    <div className="download-right">
+                                      <figure>
+                                        <img
+                                          src="../../images/download.png"
+                                          alt=""
+                                          className="download-file"
+                                        />
+                                      </figure>
+                                      {/* <div className="note-sec-full">
+                        <h4>your notes drive is almost full</h4>
+                        <div className="divider-bottom"></div>
+                      </div> */}
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            ) : null;
+                          })
+                        ) : (
+                          <div
+                            className="col-sm-12 fi-coll"
+                            style={{ "text-align": "center" }}
+                          >
+                            No File Found{" "}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Modal>
+              </div>
+
+              <div className="client-contact">
+                <div className="row">
+                  <div className="col-sm-5">
+                    <div className="coach-resp">
+                      <h5>a coach's responsibility is to :</h5>
+                      <ul>
+                        <li>Create a safe and thought-provoking space</li>
+                        <li>Explore and clarify what you want to achieve</li>
+                        <li>Draw out your solutions and strategies</li>
+                        <li>
+                          Promote accountability for the process and results
+                        </li>
+                        <li>Encourage self-discovery throught</li>
+                      </ul>
+                      <h5>a client's responsibility is to :</h5>
+                      <ul>
+                        <li>Show up with a curious &amp; open mind</li>
+                        <li>Embrace self-discovery</li>
+                        <li>Take inspired action</li>
+                        <li>
+                          Hold yourself accountable for the process and results.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="col-sm-7">
+                    <div className="client-help">
+                      <h3>how can we help you?</h3>
+                      <p>{help ? help[0].helpText : null}</p>
+                      <form
+                        noValidate
+                        autoComplete="off"
+                        onSubmit={(e) => e.preventDefault()}
+                        ref={form}
+                      >
+                        <div className="form-group">
+                          <textarea
+                            name="helpText"
+                            id=""
+                            cols="30"
+                            rows="4"
+                            className="form-control"
+                            placeholder="message"
+                            onChange={(event) =>
+                              sethelpText(event.target.value)
+                            }
+                            value={helpText}
+                          ></textarea>
+                          <input
+                            type="hidden"
+                            name="message"
+                            value={helpText}
+                          />
+                          <input type="hidden" name="name" value="" />
+                        </div>
+                        {ShowHelpErr && (
+                          <Alert
+                            message="Message Can't be Empty"
+                            className="mt-4"
+                            style={{ width: "72%" }}
+                            type="error"
+                          />
+                        )}
+                        {ShowHelpSuccess && (
+                          <Alert
+                            message="Message Sent"
+                            className="mt-4"
+                            type="success"
+                          />
+                        )}
+                        <br />
+                        <div className="two-button">
+                          <button
+                            className="btn btn-send"
+                            onClick={sendHelpMsg}
+                          >
+                            send
+                          </button>
+                          <button className="btn btn-chat">
+                            <i className="fa fa-whatsapp"></i> chat now
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="user-detail-mobile lower-letter">
+  <div className="container">
+    
+  <div className="row">
+      <div className="col-12">
+
+      <div className="client-name mrb-50">
+          <div className="info-name mrb-10">
+            <h2>welcome  {client ? <> {clientFirebaseFirstName} </> : null}</h2>
+           <figure className="edit-figure">  <img src={client ? client.client_profile : proImage} alt="" /></figure>
+          </div>
+          <p className="btn-p text-center">
+            <a href="#" className="btn btn-maroon" onClick={toggleProfile}>
+              view my profile
+            </a>
+          </p>
+        </div>
+
+
+
+
+
+        <div className="session-info mrb-50">
+          <h4 className="mrb-15">next session</h4>
+          <p className="text-center btn-p">
+            <a href="#" className="btn btn-orange" onClick={showModal}>
+              view session history
+            </a>
+          </p>
+          <p className="text-center btn-p">
+            <a href="#" className="btn btn-lightgreen">
+              book a new session
+            </a>
+          </p>
+        </div>
+
+        </div>
+        </div>
+    </div>
+    </section>
+    </>
+  );
+};
+
+export default Dashboard;

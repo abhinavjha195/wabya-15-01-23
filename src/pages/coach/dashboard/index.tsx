@@ -332,8 +332,8 @@ return () => clearInterval(intervalId);
                           <div className="inner">
                           <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">edit my profile</button>
                           <ul className="dropdown-menu">
-                            <li><Link href='/coach/edit-profile' passHref><a className="dropdown-item">edit profile</a></Link></li>
-                          <li><Link href='/coach/change-password' passHref><a className="dropdown-item">change password</a></Link></li>
+                            <li><Link href='/coach/edit-profile' passHref className="dropdown-item" >edit profile</Link></li>
+                          <li><Link href='/coach/change-password' passHref className="dropdown-item">change password</Link></li>
                           </ul>
                         </div>
                       </div>

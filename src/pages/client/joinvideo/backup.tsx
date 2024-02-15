@@ -9,10 +9,9 @@ import { useRouter } from 'next/router'
 import { database } from '../../../../firebaseConfig'
 import { collection, query, addDoc, where, getDocs,doc,getDoc,updateDoc } from 'firebase/firestore';
 import Feedback from "src/components/Feedback";
-import MeetingTimer from "src/components/MeetingTimer";
 
 
-const VideoCallPage = () => {
+const VideoCallPage2 = () => {
     const router = useRouter();
     const videoId=router.query.id;
   const [callObject, setCallObject] = useState(null);
@@ -20,17 +19,7 @@ const VideoCallPage = () => {
   const [backHome, setbackHome] = useState(false);
   const [notAuthMsg, setnotAuthMsg] = useState(false);
 
-  const [notSessionMsg, setnotSessionMsg] = useState(false);
-
-  const [showTimer, setShowTimer] = useState(false);
-  const [showExpiry, setShowExpiry] = useState(false);
-
   // const [notAuthMsg, setnotAuthMsg] = useState(false);
-
-  const [startTime, setStartTime] = useState('11:16:30');
-  const [endTime, setEndTime] = useState('11:20:30');
-
-  const [meetingDate, setMeetingDate] = useState('2024-02-15');
 
   const [showFeedback, setshowFeedback] = useState(false);
   const [meetId, setmeetId] = useState('');
@@ -44,8 +33,6 @@ const VideoCallPage = () => {
 
   const [clientEmail, setClientEmail] = useState('');
   const [isSessionAvbl, setisSessionAvbl] = useState(false);
-  const [timeUntilMeeting, setTimeUntilMeeting] = useState('');
-
   
 
     // get all meeting data
@@ -70,7 +57,6 @@ const VideoCallPage = () => {
         return 0; // Return 0 if there was an error
       }
     };
-
     
     useEffect(() => {
 
@@ -107,29 +93,6 @@ const VideoCallPage = () => {
     }, [router.query.id]);
 
 
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
       
       if(client != null){
@@ -154,10 +117,6 @@ const VideoCallPage = () => {
 
       if(client.remainingSession > 0 || client.isDiscoverySessionDone == 0){
         setisSessionAvbl(true);
-        setnotSessionMsg(false);
-
-      }else{
-        setnotSessionMsg(true);
       }
       }
   
@@ -178,10 +137,7 @@ const VideoCallPage = () => {
   
 
   if(numberOfMeetings == 1 && isSessionAvbl){
-
     setnotAuthMsg(false);
-    if(timeUntilMeeting == '00:00:00'){  
-      setShowTimer(false);
         if (!iframeLoaded) {
           const createCallObject = async () => {
             const userIds = sessionStorage.getItem('userId');
@@ -236,11 +192,6 @@ const VideoCallPage = () => {
           createCallObject();
         }
 
-     }
-      else{
-        setShowTimer(true);
-      }
-
       }
       else{
         setnotAuthMsg(true);
@@ -256,66 +207,7 @@ const VideoCallPage = () => {
       setnotAuthMsg(true);
     }
  // }, [router.query.id, iframeLoaded,client]);
-}, [isSessionAvbl, timeUntilMeeting === '00:00:00']);
-
-
-
-
-
-
-
-
-useEffect(() => {
-   let interval; // Define interval outside of useEffect
-  const calculateTimeUntilMeeting = () => {
-    console.log('running');
-    const meetingDateTime = new Date(`${meetingDate}T${startTime}`);
-    const meetingEndTime = new Date(`${meetingDate}T${endTime}`);
-    const currentTime = new Date();
-
-    // Check if meeting date is in the past
-    if (meetingDateTime < currentTime && meetingEndTime > currentTime) {
-      setTimeUntilMeeting('00:00:00');
-      setShowTimer(false);
-      clearInterval(interval); // Clear the interval to stop the timer
-    } 
-    
-   else if (meetingEndTime < currentTime) {
-     // setTimeUntilMeeting('00:00:00');
-      setShowExpiry(true);
-      clearInterval(interval); // Clear the interval to stop the timer
-    } 
-    
-    else {
-      setShowTimer(true);
-      let timeDifference = meetingDateTime.getTime() - currentTime.getTime();
-      
-      // Calculate hours, minutes, and seconds
-      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-      setTimeUntilMeeting(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-    }
-  };
-
-  // Delay the execution of calculateTimeUntilMeeting by 5 seconds
-  const timer = setTimeout(() => {
-    calculateTimeUntilMeeting(); // Call it immediately to avoid initial delay
-     interval = setInterval(calculateTimeUntilMeeting, 1000);
-
-    return () => clearInterval(interval);
-  }, 5000); // 5000 milliseconds = 5 seconds
-
-  // Cleanup function for clearTimeout
-  return () => clearTimeout(timer);
-}, [startTime, meetingDate]);
-
-
-
-
-
-
+}, [isSessionAvbl]);
 
 async function updateMeetingEnd() {
   const collectionRef = collection(database, "meeting");
@@ -479,65 +371,24 @@ setbackHome(true);
 
   return (
     <>
-   
-
 {showFeedback  ?
     <Feedback   clientName={clientName}
     clientEmail={clientEmail}/> : null }
+      {iframeLoaded  ? null :  !notAuthMsg ? 
       
+      <h3 className='loading-video'>Sorry, you are not authorized to access this content.</h3> : null }
       <div id="iframeContainer">
 
       
       </div>
      
-      { !showTimer && !notAuthMsg && !notSessionMsg ?
+      
+      { notAuthMsg ?
       <div className="error-message-video">
-    <h3>Loading...</h3>
+  <h3>Sorry, you are not authorized to access this content.</h3>
  
 </div>
     :null }
-
-
-
-      { notSessionMsg  ?
-      <div className="error-message-video">
-  <h3>Sorry, you have no session remaining.</h3>
- 
-</div>
-    :null }
-
-
-
-      { notAuthMsg && !notSessionMsg ?
-      <div className="error-message-video">
-  <h3>Sorry, you are not authorized to access this  content.</h3>
- 
-</div>
-    :null }
-
-
-
-
-
-
-{ showTimer && !notAuthMsg && !notSessionMsg ?
-      <div className="error-message-video">
-    <h3>Your meeting will start in: {timeUntilMeeting}</h3>
- 
-</div>
-    :null }
-
-
-
-{ showExpiry && !notAuthMsg && !notSessionMsg ?
-      <div className="error-message-video">
-    <h3>Your meeting link is expired</h3>
- 
-</div>
-    :null }
-
-
-
 
 
 
@@ -554,4 +405,4 @@ setbackHome(true);
   );
 };
 
-export default VideoCallPage;
+export default VideoCallPage2;
