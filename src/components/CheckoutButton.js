@@ -103,7 +103,8 @@ const CheckoutButton = ({price,journey_type}) => {
   return (
   <div>
       {/* Your other JSX elements */}
-      {showPayForm && <button onClick={handleCheckout} className="btn buyagain-btn">pay now</button>}
+      {/* {showPayForm && <button onClick={handleCheckout} className="btn buyagain-btn">pay now</button>} */}
+      <button onClick={handleCheckout} className="btn buyagain-btn">pay now</button>
     </div>	
   )	
 };

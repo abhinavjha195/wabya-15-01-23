@@ -66,7 +66,7 @@ export default function Home() {
   useEffect(() => {
     let userId = sessionStorage.getItem("userId");
     if (!userId) {
-      router.push("/client/login");
+     // router.push("/client/login");
     }
 
     // if (userId) {
