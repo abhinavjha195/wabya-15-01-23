@@ -174,7 +174,7 @@ if(plan_detail != null){
                      
                     </div>
                     <div className="col-sm-3">
-                        <CheckoutButton  price={price} journey_type={journey_type} />                          
+                        <CheckoutButton  price={5.00} journey_type={journey_type} />                          
                     </div>                     
                   </div>
                   
