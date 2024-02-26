@@ -24,11 +24,13 @@ const CheckoutButton = () => {
       });
 
       if (error) {
-        router.push("/error");
+      //  router.push("/error");
+
+      console.log(error);
       }
     } catch (err) {
       console.error("Error in creating checkout session:", err);
-      router.push("/error");
+    //  router.push("/error");
     }
   };
   
