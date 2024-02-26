@@ -13,10 +13,15 @@ import {
   query,
 } from "firebase/firestore";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+// const stripePromise = loadStripe(
+//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+// );
 
+
+
+const stripePromise = loadStripe(
+  'pk_test_51NsKZOSIyeFhYqSuQ7KHAxGER0YSzwc8AISB3yswKP3VCZ5XlwD3TIakGSpQMtxx3YvHqvf30A1atizjDNzQotpu00KAimnjQu'
+);
 const CheckoutButton = ({price,journey_type}) => {
   const router = useRouter();
 
