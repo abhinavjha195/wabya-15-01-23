@@ -20,7 +20,7 @@ import {
 
 
 const stripePromise = loadStripe(
-  'pk_test_51NsKZOSIyeFhYqSuQ7KHAxGER0YSzwc8AISB3yswKP3VCZ5XlwD3TIakGSpQMtxx3YvHqvf30A1atizjDNzQotpu00KAimnjQu'
+  'pk_test_51NsScQSJqZM8AQiwWrJSt8xt7cg21geFwK9MqXHcBQVdbbyUsoC3IK70pitB8hMQkvdArzPNnnd8wtMx4fL5MNiU00Lvk7wYFf'
 );
 const CheckoutButton = ({price,journey_type}) => {
   const router = useRouter();
