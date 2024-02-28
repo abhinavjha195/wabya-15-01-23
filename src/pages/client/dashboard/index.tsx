@@ -4210,7 +4210,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
         <div className="plans-list col-sm-12">
           <ul>
             <li>
-              <a href="" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}  onClick={addNewRequest} >
+              <a href="/client/change-plan" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}  >
                 {'6ZpZd4IrzORGQfyu0IqT' === requestPlanId ? 'Change Plan' : 'Requested'}
               </a>
             </li>
@@ -5207,7 +5207,7 @@ const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
       <div className="plans-list col-sm-12">
         <ul>
           <li>
-            <a href="" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}  onClick={addNewRequest} >
+            <a href="/client/change-plan" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}   >
             {'6ZpZd4IrzORGQfyu0IqT' === requestPlanId ? 'Change Plan' : 'Requested'}
             </a>
           </li>
