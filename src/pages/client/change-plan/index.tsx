@@ -23,6 +23,8 @@ export default function changeplan() {
   const planRef = collection(database, "admin_plans");
   const [client, setClient] = useState(null);
 
+  const [new_plan_request, set_new_plan_request] = useState('');
+
   const [clientPlanId, setclientPlanId] = useState("");
 
   const [myplan, setMyPlan] = useState(null);
@@ -55,8 +57,10 @@ export default function changeplan() {
     const addButton = event.target;
       addButton.setAttribute("disabled", true);
       addButton.textContent = "Loading...";
+
+      if(new_plan_request != clientPlanId){
       if(await countMyRequest() == 0){
-        var new_plan_id=event.target.getAttribute("data-plan-id");
+        var new_plan_id=new_plan_request;
      
         addDoc(requestRef, {
           plan_id: clientPlanId,
@@ -78,31 +82,23 @@ export default function changeplan() {
     
       }
       else{
-    //     var new_plan_id=event.target.getAttribute("data-plan-id");
-    //     const client_id=sessionStorage.getItem("userId");
-    //    // const fieldToEdit = doc(collection(database, "newPlanRequest"),client_id);
-    //     //const fieldToEdit = query(requestRef, where('client_id', '==', client_id));
-    
-    //     const collectionRef = collection(database, "newPlanRequest");
-    //     const q = query(collectionRef, where("client_id", "==", client_id),where("status", "==", 1));
-    //     const querySnapshot = await getDocs(q);
-        
-    //     querySnapshot.forEach((doce) => {
-    //       const fieldToEdit = doc(database, "newPlanRequest", doce.id);
-    //       updateDoc(fieldToEdit, {
-    //         new_plan_id: new_plan_id,
-    //         status:1,
-            
-    //         // ...
-    //       });
-    //     });
-        addButton.removeAttribute("disabled");
-        addButton.textContent = "request"; 
+   
+       
 
 
     setErrMsg('your request is already in process');
        
       }
+
+    }
+else{
+    setErrMsg('you have already selected plan');
+
+}
+
+
+      addButton.removeAttribute("disabled");
+      addButton.textContent = "request"; 
       
       }
   
@@ -225,6 +221,7 @@ export default function changeplan() {
   
       //setcoachesCalUsername(client.assign_coach_uname);
       setclientPlanId(client.plan_id);
+      set_new_plan_request(client.plan_id);
    
     }
 
@@ -296,8 +293,8 @@ if(plan_detail != null){
   }, [plan_detail,journey_type]);
 
   
-  const handleJourneyType = (event) => {
-    setjourney_type(event.target.value);
+  const handleNewPlan = (event) => {
+    set_new_plan_request(event.target.value);
   };
   return (
     <section className="client-password payment-now">		
@@ -331,10 +328,10 @@ if(plan_detail != null){
                       <label>select new plan</label>
                     </div>
                     <div className="col-sm-3">
-                        <input type='radio' className='' onClick={handleJourneyType} name='journey_type' value="novice" checked></input> novice                        
+                        <input type='radio' className='' onClick={handleNewPlan} name='new_plan' value="6ZpZd4IrzORGQfyu0IqT" checked={new_plan_request === "6ZpZd4IrzORGQfyu0IqT"}></input> novice                        
                     </div> 
                     <div className="col-sm-3">
-                        <input type='radio' className='' onClick={handleJourneyType} name='journey_type' value="experienced" ></input> experienced                    
+                        <input type='radio' className='' onClick={handleNewPlan} name='new_plan' value="sH2iLHtr5PWg3gdSjIIn" checked={new_plan_request === "sH2iLHtr5PWg3gdSjIIn"} ></input> experienced                    
                     </div>                     
                   </div>
                 
