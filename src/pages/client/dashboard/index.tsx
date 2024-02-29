@@ -4210,8 +4210,12 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
         <div className="plans-list col-sm-12">
           <ul>
             <li>
-              <a href="/client/change-plan" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}  >
+              {/* <a href="/client/change-plan" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}  >
                 {'6ZpZd4IrzORGQfyu0IqT' === requestPlanId ? 'Change Plan' : 'Requested'}
+              </a> */}
+
+<a href="/client/change-plan" className="btn btn-darkgreen"   >
+               change plan
               </a>
             </li>
             <li>
