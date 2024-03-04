@@ -59,6 +59,10 @@ const AdminVerticalLayout = (props: LayoutProps) => {
   const toggleNavVisibility = () => setNavVisible(!navVisible)
 
   const router = useRouter();
+    // Function to determine if the current page matches the link
+    const isActivePage = (href) => {
+      return router.pathname === href;
+    };
 
   const logout = () => {
     sessionStorage.removeItem('adminId')
@@ -127,42 +131,42 @@ const AdminVerticalLayout = (props: LayoutProps) => {
                     <ul className='navbar-nav'>
                       <li>
                         <Link href='/super-admin/coaches-list' passHref>
-                          <a>Coaches</a>
+                          <a className={isActivePage('/super-admin/coaches-list') ? 'superadmin-active-page' : ''}>Coaches</a>
                         </Link>
-                      </li>
+                      </li >
                       <li>
                         <Link href='/super-admin/client-list' passHref>
-                          <a>Clients</a>
+                          <a className={isActivePage('/super-admin/client-list') ? 'superadmin-active-page' : ''}>Clients</a>
                         </Link>
                       </li>
                       <li>
                         <Link href='/super-admin/plans' passHref>
-                          <a>Plans</a>
+                          <a className={isActivePage('/super-admin/plans') ? 'superadmin-active-page' : ''}>Plans</a>
                         </Link>
                       </li>
 
                       <li>
                         <Link href='/super-admin/faq' passHref>
-                          <a>FAQ</a>
+                          <a className={isActivePage('/super-admin/faq') ? 'superadmin-active-page' : ''}>FAQ</a>
                         </Link>
                       </li>
 
 
                       <li>
                         <Link href='/super-admin/basic' passHref>
-                          <a>Basic</a>
+                          <a className={isActivePage('/super-admin/basic') ? 'superadmin-active-page' : ''}>Basic</a>
                         </Link>
                       </li>
 
                       <li>
                         <Link href='/super-admin/message' passHref>
-                          <a>Message</a>
+                          <a className={isActivePage('/super-admin/basic') ? 'superadmin-active-page' : ''}>Message</a>
                         </Link>
                       </li>
 
                       <li>
                         <Link href='/super-admin/request' passHref>
-                          <a>Request</a>
+                          <a className={isActivePage('/super-admin/request') ? 'superadmin-active-page' : ''}>Request</a>
                         </Link>
                       </li>
                     </ul>
