@@ -40,7 +40,7 @@ const About = () => {
       </div>
     </section>
 
-    <section className="meet-team" id="meet-team">
+    {/* <section className="meet-team" id="meet-team">
         <div className="container">
           <div className="row">
             <div className="col-sm-12 top">
@@ -89,6 +89,64 @@ Nullam mattis ac ex in blandit. Aliquam ut accumsan ex.</p>
                 <h4>ciara</h4>
                 <span>chief people officer</span>
                 <p>Lorem ipsum dolor sit amet, consectetuer</p>
+              </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+    </section> */}
+
+
+    
+<section className="meet-team" id="meet-team">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 top">
+              <h2>the management team</h2>
+              <p>family vibes by this point, tbh... and we wouldn’t have it any other way. </p>
+            </div>
+            <div className="meet-client">
+              <div className="col-sm-4">
+              <div className="meet-client-box">
+                <figure>
+                  <img src="../../../../images/jean-francois.png" alt="Co-founder"  />
+                </figure>
+                <h4>jean-francois (jf)</h4>
+                <span>founder</span>
+                <p>burned out after 14 years in corporate marketing and comms. left a role advising execs to find my purpose and became a professional coach. i’m the kite to craig’s string. </p>
+              </div>
+              </div>
+              <div className="col-sm-4">
+              <div className="meet-client-box">
+                <figure>
+                  <img src="../../../../images/craig.png" alt="Co-founder"  />
+                </figure>
+                <h4>craig</h4>
+                <span>founder</span>
+                <p>worked for multiple multinationals across digital, branding and sales. now i’m driven to make the world a better place for everyone. the string to jf’s kite.</p>
+              </div>
+              </div>
+{/* 
+              <div class="col-sm-3">
+              <div className="meet-client-box">
+                <figure>
+                  <img src="../../../../images/martin.png" alt="Head of Collaboration"  />
+                </figure>
+                <h4>martin</h4>
+                <span>collabs</span>
+                <p>creative marketing professional obsessed with helping all humans build sustainable legacies. i operate on the basis that best results come from collaboration.</p>
+              </div>
+              </div> */}
+
+              <div className="col-sm-4">
+              <div className="meet-client-box">
+                <figure>
+                  <img src="../../../../images/ciara.png" alt="Chief People Officer"  />
+                </figure>
+                <h4>ciara</h4>
+                <span>people</span>
+                <p>leader of people across many businesses and projects over 16 years. professional coach. i rely on communication, awareness and trust to get shit done. </p>
               </div>
               </div>
 

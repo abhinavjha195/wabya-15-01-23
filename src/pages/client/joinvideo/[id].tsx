@@ -265,7 +265,7 @@ async function updateMeetingDocument() {
     console.log("Documents updated successfully!");
   } catch (error) {
     console.error("Error updating documents: ", error);
-  }
+  } 
 }
   useEffect(() => {
    console.log('meetId');

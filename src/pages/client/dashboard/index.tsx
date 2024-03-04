@@ -4198,7 +4198,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
           <div className="plans-sessions">
             <p className="text-right">sessions remaining: {clientRemainingSession}</p>
             <p className="text-right">
-            <p>{BuyMoreErr && <Alert message="you have already session remaining..." className='mt-4' style={{'width':'52%'}} type="error"/> }</p>
+            <p>{BuyMoreErr && <Alert message="You already have sessions remaining " className='mt-4' style={{'width':'52%'}} type="error"/> }</p>
               <a href="" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId} data-price='210' onClick={buyMore}>
               {myplanName ? "Buy More" : "Buy"}
 
@@ -5200,7 +5200,7 @@ const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
         <div className="plans-sessions">
           <p className="text-right">sessions remaning: {clientRemainingSession}</p>
           <p className="text-right">
-          <p>{BuyMoreErr && <Alert message="you have already session remaining..." className='mt-4' style={{'width':'100%'}} type="error"/> }</p>
+          <p>{BuyMoreErr && <Alert message="You already have sessions remaining..." className='mt-4' style={{'width':'100%'}} type="error"/> }</p>
             <a href="" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId} data-price='210' onClick={buyMore}>
               {" "}
               buy more
