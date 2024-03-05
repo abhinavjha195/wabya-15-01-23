@@ -6,6 +6,21 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+function maskString(str) {
+  // Split the string into parts
+  const parts = str.split(' ');
+  
+  // Check if the first part contains more than one character
+  if (parts[0].length > 1) {
+      // Replace all characters in the first part except the first one with '*'
+      parts[0] = parts[0][0] + '*'.repeat(parts[0].length - 1);
+  }
+
+ 
+
+  // Join the parts back together with a space
+  return parts.join(' ');
+}
 const ClientList = ()  => {
 
   const router = useRouter()
@@ -85,7 +100,7 @@ const ClientList = ()  => {
                       <>
                       <tr>
                         <td>{count++} </td>
-                        <td>{data.client_name}</td>
+                        <td>{maskString(data.client_name)}</td>
                         <td>{data.client_email}</td>
                         <td>
                           <Link href={`/super-admin/view-clientDetail/${data.client_id}`} passHref>

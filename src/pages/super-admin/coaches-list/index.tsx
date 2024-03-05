@@ -8,6 +8,23 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { sendMail } from "../../../services/sendMail"
 
+
+function maskString(str) {
+  // Split the string into parts
+  const parts = str.split(' ');
+  
+  // Check if the first part contains more than one character
+  if (parts[0].length > 1) {
+      // Replace all characters in the first part except the first one with '*'
+      parts[0] = parts[0][0] + '*'.repeat(parts[0].length - 1);
+  }
+
+ 
+
+  // Join the parts back together with a space
+  return parts.join(' ');
+}
+
 const CoachesList = ()  => {
 
   const router = useRouter()
@@ -232,7 +249,7 @@ const CoachesList = ()  => {
                       <>
                       <tr>
                         <td>{count++} </td>
-                        <td>{data.coach_name}</td>
+                        <td>{maskString(data.coach_name)}</td>
                         <td>{data.coach_email}</td>
                         <td>
 
