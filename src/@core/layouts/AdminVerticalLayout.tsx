@@ -131,42 +131,42 @@ const AdminVerticalLayout = (props: LayoutProps) => {
                     <ul className='navbar-nav'>
                       <li>
                         <Link href='/super-admin/coaches-list' passHref>
-                          <a className={isActivePage('/super-admin/coaches-list') ? 'superadmin-active-page' : ''}>Coaches</a>
+                          <a className={isActivePage('/super-admin/coaches-list') ? 'superadmin-active-page' : ''}>coaches</a>
                         </Link>
                       </li >
                       <li>
                         <Link href='/super-admin/client-list' passHref>
-                          <a className={isActivePage('/super-admin/client-list') ? 'superadmin-active-page' : ''}>Clients</a>
+                          <a className={isActivePage('/super-admin/client-list') ? 'superadmin-active-page' : ''}>clients</a>
                         </Link>
                       </li>
                       <li>
                         <Link href='/super-admin/plans' passHref>
-                          <a className={isActivePage('/super-admin/plans') ? 'superadmin-active-page' : ''}>Plans</a>
+                          <a className={isActivePage('/super-admin/plans') ? 'superadmin-active-page' : ''}>plans</a>
                         </Link>
                       </li>
 
                       <li>
                         <Link href='/super-admin/faq' passHref>
-                          <a className={isActivePage('/super-admin/faq') ? 'superadmin-active-page' : ''}>FAQ</a>
+                          <a className={isActivePage('/super-admin/faq') ? 'superadmin-active-page' : ''}>faq</a>
                         </Link>
                       </li>
 
 
                       <li>
                         <Link href='/super-admin/basic' passHref>
-                          <a className={isActivePage('/super-admin/basic') ? 'superadmin-active-page' : ''}>Basic</a>
+                          <a className={isActivePage('/super-admin/basic') ? 'superadmin-active-page' : ''}>basic</a>
                         </Link>
                       </li>
 
                       <li>
                         <Link href='/super-admin/message' passHref>
-                          <a className={isActivePage('/super-admin/basic') ? 'superadmin-active-page' : ''}>Message</a>
+                          <a className={isActivePage('/super-admin/message') ? 'superadmin-active-page' : ''}>message</a>
                         </Link>
                       </li>
 
                       <li>
                         <Link href='/super-admin/request' passHref>
-                          <a className={isActivePage('/super-admin/request') ? 'superadmin-active-page' : ''}>Request</a>
+                          <a className={isActivePage('/super-admin/request') ? 'superadmin-active-page' : ''}>request</a>
                         </Link>
                       </li>
                     </ul>
