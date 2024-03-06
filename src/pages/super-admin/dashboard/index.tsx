@@ -44,14 +44,14 @@ return (
               <div className="col-sm-12 top">
                 <div className="inner-info">
                   <figure><img src={ data.profile } alt={ data.name } /></figure>
-                  <h2>{ data.name } </h2>
+                  <h2>{ data.name.toLowerCase() } </h2>
                   <div className="right-area">
                     <div className="dropdown">
                         <div className="inner">
-                          <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Edit My Profile</button>
+                          <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">edit my profile</button>
                           <ul className="dropdown-menu">
-                            <li><Link href='/super-admin/edit-profile' passHref><a className="dropdown-item">Edit Profile</a></Link></li>
-                          <li><Link href='/super-admin/change-password' passHref><a className="dropdown-item">Change Password</a></Link></li>
+                            <li><Link href='/super-admin/edit-profile' passHref><a className="dropdown-item">edit profile</a></Link></li>
+                          <li><Link href='/super-admin/change-password' passHref><a className="dropdown-item">change password</a></Link></li>
                           </ul>
                       </div>
                     </div>
@@ -95,7 +95,7 @@ return (
             <figure>
               <img src={ data.profile } alt={ data.name }   />
             </figure>
-            <h3>{ data.name }</h3>
+            <h3>{ data.name.toLowerCase() }</h3>
         
             <div className="user-bio">
               <ul className="row">

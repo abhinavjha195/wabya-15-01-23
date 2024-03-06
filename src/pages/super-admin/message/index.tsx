@@ -112,7 +112,7 @@ const MsgList = ()  => {
       <div className='container'>
         <div className='row'>
           <div className='col-sm-12 mrb-30'>
-            <h2>Message List</h2>
+            <h2>message list</h2>
           </div>
           <div className='coach-table'>
 

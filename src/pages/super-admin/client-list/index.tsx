@@ -78,7 +78,7 @@ const ClientList = ()  => {
       <div className='container'>
         <div className='row'>
           <div className='col-sm-12 mrb-30'>
-            <h2>Client List</h2>
+            <h2>client list</h2>
           </div>
 
           <div className='col-sm-12'>
