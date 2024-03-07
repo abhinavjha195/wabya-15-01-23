@@ -53,7 +53,7 @@ const VideoCallPage = () => {
     
         return numberOfMeetings;
       } catch (error) {
-        console.error("Error getting meetings: ", error);
+        //console.error("Error getting meetings: ", error);
         return 0; // Return 0 if there was an error
       }
     };
@@ -71,10 +71,10 @@ const VideoCallPage = () => {
           if (clientDoc.exists()) {
             setClient(clientDoc.data());
   
-            // //console.log('here');
-            //console.log(clientDoc.data);
+            // ////console.log('here');
+            ////console.log(clientDoc.data);
           } else {
-            //console.log("No client found");
+            ////console.log("No client found");
           }
         };
         fetchClient();
@@ -96,8 +96,8 @@ const VideoCallPage = () => {
     useEffect(() => {
       
       if(client != null){
-      console.log(client);
-      console.log(client.remainingSession);
+      //console.log(client);
+      //console.log(client.remainingSession);
       setClientName(client.client_name);
 
       setClientEmail(client.client_email);
@@ -133,7 +133,7 @@ const VideoCallPage = () => {
 
         getMeeting()
   .then((numberOfMeetings) => {
-    console.log("Number of meetings: ", numberOfMeetings);
+    //console.log("Number of meetings: ", numberOfMeetings);
   
 
   if(numberOfMeetings == 1 && isSessionAvbl){
@@ -144,8 +144,8 @@ const VideoCallPage = () => {
             const userCollection = collection(database, 'client_user');
             const userDocRef = doc(userCollection, userIds);
             const userDoc = await getDoc(userDocRef);
-            console.log(userDoc);
-            console.log(userDoc.data().assign_coach_id);
+            //console.log(userDoc);
+            //console.log(userDoc.data().assign_coach_id);
             setcoachId(userDoc.data().assign_coach_id);
           
             const dynamicURL = `https://abhinav19.daily.co/${router.query.id}`;
@@ -198,12 +198,12 @@ const VideoCallPage = () => {
       }
     })
     .catch((error) => {
-      console.error("Error: ", error);
+      //console.error("Error: ", error);
       setnotAuthMsg(true);
     });
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       setnotAuthMsg(true);
     }
  // }, [router.query.id, iframeLoaded,client]);
@@ -238,9 +238,9 @@ async function updateMeetingEnd() {
       });
     });
 
-    console.log("Documents updated successfully!");
+    //console.log("Documents updated successfully!");
   } catch (error) {
-    console.error("Error updating documents: ", error);
+    //console.error("Error updating documents: ", error);
   }
 
   setshowFeedback(true);
@@ -262,15 +262,15 @@ async function updateMeetingDocument() {
       });
     });
 
-    console.log("Documents updated successfully!");
+    //console.log("Documents updated successfully!");
   } catch (error) {
-    console.error("Error updating documents: ", error);
+    //console.error("Error updating documents: ", error);
   } 
 }
   useEffect(() => {
-   console.log('meetId');
-   console.log(meetId);
-   console.log(videoId);
+   //console.log('meetId');
+   //console.log(meetId);
+   //console.log(videoId);
 
    if(meetId != ''){
     updateMeetingDocument();
@@ -281,7 +281,7 @@ async function updateMeetingDocument() {
     if (callObject) {
       let mId='';
       callObject.on('joined-meeting', () => {
-        console.log('A user has joined the meeting!');
+        //console.log('A user has joined the meeting!');
 
 
         const clientId = sessionStorage.getItem('userId');
@@ -308,10 +308,10 @@ async function updateMeetingDocument() {
          
         })
           .then((docRef) => {
-            console.log(docRef)
-            console.log(docRef.id)
+            //console.log(docRef)
+            //console.log(docRef.id)
             setmeetId(docRef.id);
-          console.log('testtt');
+          //console.log('testtt');
           mId=docRef.id;
 
 
@@ -328,23 +328,23 @@ async function updateMeetingDocument() {
            
           // })
           //   .then(() => {
-          //   console.log('testtt');
+          //   //console.log('testtt');
           //   })
           //   .catch((err) => {
-          //     console.error(err);
+          //     //console.error(err);
           //   })
     
           })
           .catch((err) => {
-            console.error(err);
+            //console.error(err);
           })
   
       });
 
       callObject.on('left-meeting', (event) => {
-        console.log('Participant left:', event.participant);
+        //console.log('Participant left:', event.participant);
 
-        console.log(mId);
+        //console.log(mId);
 
         const update = doc(collection(database, "meetingSession"), mId);
         const now = new Date();

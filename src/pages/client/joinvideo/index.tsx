@@ -46,15 +46,15 @@ const VideoCallPage = () => {
   }, [iframeLoaded]);
 
   useEffect(() => {
-   console.log('meetId');
-   console.log(meetId);
+   //console.log('meetId');
+   //console.log(meetId);
   }, [meetId]);
 
   useEffect(() => {
     if (callObject) {
       let mId='';
       callObject.on('joined-meeting', () => {
-        console.log('A user has joined the meeting!');
+        //console.log('A user has joined the meeting!');
 
 
         const clientId = sessionStorage.getItem('userId');
@@ -77,10 +77,10 @@ const VideoCallPage = () => {
          
         })
           .then((docRef) => {
-            console.log(docRef)
-            console.log(docRef.id)
+            //console.log(docRef)
+            //console.log(docRef.id)
             setmeetId(docRef.id);
-          console.log('testtt');
+          //console.log('testtt');
           mId=docRef.id;
   
           // addDoc(logRef, {
@@ -94,23 +94,23 @@ const VideoCallPage = () => {
            
           // })
           //   .then(() => {
-          //   console.log('testtt');
+          //   //console.log('testtt');
           //   })
           //   .catch((err) => {
-          //     console.error(err);
+          //     //console.error(err);
           //   })
     
           })
           .catch((err) => {
-            console.error(err);
+            //console.error(err);
           })
   
       });
 
       callObject.on('left-meeting', (event) => {
-        console.log('Participant left:', event.participant);
+        //console.log('Participant left:', event.participant);
 
-        console.log(mId);
+        //console.log(mId);
 
         const update = doc(collection(database, "meetingSession"), mId);
         const now = new Date();

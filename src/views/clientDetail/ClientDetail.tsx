@@ -40,7 +40,7 @@ const ClientDetail = () => {
 
   
   function handleSearch(event) {
-    console.log(event.target);
+    //console.log(event.target);
    setSearchVal(event.target.value);
 //handleSubmit();
 
@@ -48,16 +48,16 @@ const ClientDetail = () => {
   const getFiles = async () => {
     const meetRef = collection(database, "resources");
     const queryDoc = query(meetRef, where("parentId", "==", router.query.id));
-  console.log('here i am');
+  //console.log('here i am');
     await getDocs(queryDoc).then((response) => {
-      console.log(response.docs);
+      //console.log(response.docs);
       setAllFiles(
         response.docs.map((data) => {
           return { ...data.data(), file_id: data.id };
         })
       );
      
-      console.log(allFiles);
+      //console.log(allFiles);
       setshowfile(true);
     });
   };
@@ -67,7 +67,7 @@ const ClientDetail = () => {
       const userId = sessionStorage.getItem("coachId");
   // Get the current date
 const currentDate = new Date();
-console.log(currentDate);
+//console.log(currentDate);
       const queryDoc = query(meetingRef, where("clientId", "==", router.query.id),where("meetingApiCreated", "==", true));
   
       await getDocs(queryDoc).then((response) => {
@@ -83,7 +83,7 @@ console.log(currentDate);
 
   const getMeetingSession = async () => {
 
-    console.log('testtt');
+    //console.log('testtt');
     const coachId = sessionStorage.getItem('coachId');
     const meetingSessionCollection = collection(database, 'meetingSession');
     const queryDoc = query(meetingSessionCollection, where("client_id", "==", router.query.id),where("coach_id", "==", coachId));
@@ -91,7 +91,7 @@ console.log(currentDate);
       await getDocs(queryDoc).then((response) => {
         setmeetingSession(
           response.docs.map((data) => {
-            console.log(data.data());
+            //console.log(data.data());
             return { ...data.data(), meet_id: data.id };
           })
         );
@@ -122,10 +122,10 @@ console.log(currentDate);
 
   useEffect(() => {
   
-    console.log('abcd');
+    //console.log('abcd');
     if(meeting.length > 0){
-      console.log('abcddd');
-      console.log(meeting);
+      //console.log('abcddd');
+      //console.log(meeting);
     }
 
   }, [meeting]);
@@ -138,7 +138,7 @@ console.log(currentDate);
     const getClientData = async () => {
       try{
 
-        console.log(router.query)
+        //console.log(router.query)
         if (router.query.id !== undefined) {
 
           const clientRef = doc(collection(database,"client_user"),router.query.id );
@@ -164,13 +164,13 @@ console.log(currentDate);
             if (coachDoc.exists()) {
               const planData = planDoc.data();
 
-              console.log(planData);
+              //console.log(planData);
               setPlanData(planData);
             }
           }
         }
       }catch (error) {
-        console.log(error); 
+        //console.log(error); 
       }
     };
     if (router.query.id !== undefined) {

@@ -275,7 +275,7 @@ const Calender = () => {
     if (num.length > 1) {
       num = num.charAt(num.length - 1);
     }
-  console.log('num',num);
+  //console.log('num',num);
     return num;
   }
   else{
@@ -302,7 +302,7 @@ const Calender = () => {
     if (num.length > 1) {
       num = num.charAt(num.length - 1);
     }
-  console.log('num',num);
+  //console.log('num',num);
     return num;
   }
   else{
@@ -344,17 +344,17 @@ const Calender = () => {
   
 
   const handleHourChange = (e, day) => {
-    console.log('working');
+    //console.log('working');
     const { name, value } = e.target;
 
   
-    console.log(name,value);
+    //console.log(name,value);
 var format_num='';
   
     format_num=formatNumber(value);
    
     const numericValue = parseInt(format_num, 10);
-    console.log(name,numericValue);
+    //console.log(name,numericValue);
   
     
 
@@ -374,11 +374,11 @@ var format_num='';
     } else {
       // If changing endHour, ensure it is greater than startHour
 
-      console.log('sanitizedValue',sanitizedValue);
+      //console.log('sanitizedValue',sanitizedValue);
 
       const startHour = parseInt(availability[day].startHour, 10);
 
-      console.log('start hour',startHour);
+      //console.log('start hour',startHour);
      // const updatedEndHour = sanitizedValue < startHour ? startHour : sanitizedValue;
 
      const updatedEndHour = sanitizedValue;
@@ -397,10 +397,10 @@ var format_num='';
 
 
   const handleHourChange2 = (e, day) => {
-    console.log('working');
+    //console.log('working');
     const { name, value } = e.target;
 
-    console.log(name,value);
+    //console.log(name,value);
 
     var format_num='';
   
@@ -442,10 +442,10 @@ var format_num='';
 
 
   const handleHourChange3 = (e, day) => {
-    console.log('working');
+    //console.log('working');
     const { name, value } = e.target;
 
-    console.log(name,value);
+    //console.log(name,value);
    // const numericValue = parseInt(value, 10);
    var format_num='';
   
@@ -484,10 +484,10 @@ var format_num='';
 
   const handleMinuteChange = (e, day) => {
     e.preventDefault();
-    console.log("handleMinuteChange called");
+    //console.log("handleMinuteChange called");
    
     const { name, value } = e.target;
-    console.log(e.target);
+    //console.log(e.target);
 
     var format_num='';
   
@@ -496,7 +496,7 @@ var format_num='';
 
     
     const sanitizedValue = Math.max(0, Math.min(59, numericValue));
-    console.log(name,value);
+    //console.log(name,value);
     const updatedAvailability = {
       ...availability,
       [day]: {
@@ -504,7 +504,7 @@ var format_num='';
         [name]: sanitizedValue.toString().padStart(2, '0')
       }
     };
-    console.log(sanitizedValue);
+    //console.log(sanitizedValue);
     if (name === 'endMinute' && updatedAvailability[day].startHour === updatedAvailability[day].endHour) {
       const startMinute = parseInt(updatedAvailability[day].startMinute, 10);
       //const endMinute = sanitizedValue >= startMinute ? sanitizedValue + 1 : startMinute;
@@ -514,7 +514,7 @@ var format_num='';
   
     if (name === 'startMinute' ) {
       
-      console.log(sanitizedValue);
+      //console.log(sanitizedValue);
       const startMinute = parseInt(updatedAvailability[day].startMinute, 10);
       const endMinute = sanitizedValue >= startMinute ? sanitizedValue  : startMinute;
       updatedAvailability[day].startMinute = endMinute.toString().padStart(2, '0');
@@ -530,17 +530,17 @@ var format_num='';
 
   const handleMinuteChange2 = (e, day) => {
     e.preventDefault();
-    console.log("handleMinuteChange called");
+    //console.log("handleMinuteChange called");
    
     const { name, value } = e.target;
-    console.log(e.target);
+    //console.log(e.target);
     var format_num='';
   
     format_num=formatNumber2(value);
     const numericValue = parseInt(format_num, 10);
    // const numericValue = parseInt(e.target.value, 10);
     const sanitizedValue = Math.max(0, Math.min(59, numericValue));
-    console.log(name,value);
+    //console.log(name,value);
     const updatedAvailability = {
       ...availability,
       [day]: {
@@ -548,7 +548,7 @@ var format_num='';
         [name]: sanitizedValue.toString().padStart(2, '0')
       }
     };
-    console.log(sanitizedValue);
+    //console.log(sanitizedValue);
     if (name === 'endMinute2' && updatedAvailability[day].startHour2 === updatedAvailability[day].endHour2) {
       const startMinute2= parseInt(updatedAvailability[day].startMinute2, 10);
      // const endMinute2 = sanitizedValue >= startMinute2 ? sanitizedValue  : startMinute2;
@@ -558,7 +558,7 @@ var format_num='';
   
     if (name === 'startMinute2' ) {
       
-      console.log(sanitizedValue);
+      //console.log(sanitizedValue);
       const startMinute2 = parseInt(updatedAvailability[day].startMinute2, 10);
       const endMinute2 = sanitizedValue >= startMinute2 ? sanitizedValue  : startMinute2;
       updatedAvailability[day].startMinute2 = endMinute2.toString().padStart(2, '0');
@@ -569,17 +569,17 @@ var format_num='';
   
   const handleMinuteChange3 = (e, day) => {
     e.preventDefault();
-    console.log("handleMinuteChange called");
+    //console.log("handleMinuteChange called");
    
     const { name, value } = e.target;
-    console.log(e.target);
+    //console.log(e.target);
     var format_num='';
   
     format_num=formatNumber2(value);
     const numericValue = parseInt(format_num, 10);
    // const numericValue = parseInt(e.target.value, 10);
     const sanitizedValue = Math.max(0, Math.min(59, numericValue));
-    console.log(name,value);
+    //console.log(name,value);
     const updatedAvailability = {
       ...availability,
       [day]: {
@@ -587,7 +587,7 @@ var format_num='';
         [name]: sanitizedValue.toString().padStart(2, '0')
       }
     };
-    console.log(sanitizedValue);
+    //console.log(sanitizedValue);
     if (name === 'endMinute3' && updatedAvailability[day].startHour2 === updatedAvailability[day].endHour3) {
       const startMinute3= parseInt(updatedAvailability[day].startMinute3, 10);
       // const endMinute3 = sanitizedValue >= startMinute3 ? sanitizedValue + 1 : startMinute3;
@@ -597,7 +597,7 @@ var format_num='';
   
     if (name === 'startMinute3' ) {
       
-      console.log(sanitizedValue);
+      //console.log(sanitizedValue);
       const startMinute3 = parseInt(updatedAvailability[day].startMinute3, 10);
       const endMinute3 = sanitizedValue >= startMinute3 ? sanitizedValue : startMinute3;
       updatedAvailability[day].startMinute3 = endMinute3.toString().padStart(2, '0');
@@ -617,13 +617,13 @@ const filteredBookedTimeslots = bookedTimeslot.filter(item => item.meetingDate =
   const isBetweenAvailabilityTimeslot = (timeslot, day) => {
     const validDays = ['tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'mon'];
   
-    //console.log('my day', day);
+    ////console.log('my day', day);
     // Convert the provided day to lowercase
     const lowercaseDay = day.toLowerCase();
   
     // Check if the converted day is valid
     if (!validDays.includes(lowercaseDay)) {
-      console.error(`Invalid day: ${day}`);
+      //console.error(`Invalid day: ${day}`);
       return false;
     }
   
@@ -681,7 +681,7 @@ const days = [
 
 
   const handleIsMoreToggle = (day) => {
-    console.log(day);
+    //console.log(day);
     setAvailability((prevAvailability) => {
       const updatedAvailability = { ...prevAvailability };
       updatedAvailability[day] = {
@@ -695,7 +695,7 @@ const days = [
 
   // const handleIsUnavblToggle = (e,day) => {
   //   e.preventDefault();
-  //   console.log(day);
+  //   //console.log(day);
   //   setAvailability((prevAvailability) => {
   //     const updatedAvailability = { ...prevAvailability };
   //     updatedAvailability[day] = {
@@ -708,15 +708,15 @@ const days = [
   
   const handleIsUnavblToggle = (e, day) => {
     e.preventDefault();
-    console.log(day);
-    console.log('Before update:', availability[day].isUnAvbl);
+    //console.log(day);
+    //console.log('Before update:', availability[day].isUnAvbl);
     setAvailability((prevAvailability) => {
       const updatedAvailability = { ...prevAvailability };
       updatedAvailability[day] = {
         ...prevAvailability[day],
         isUnAvbl: !prevAvailability[day].isUnAvbl,
       };
-      console.log('After update:', updatedAvailability[day].isUnAvbl);
+      //console.log('After update:', updatedAvailability[day].isUnAvbl);
       return updatedAvailability;
     });
 
@@ -728,7 +728,7 @@ const days = [
   
   useEffect(() => {
 
-    console.log('test');
+    //console.log('test');
     const coachId = sessionStorage.getItem('coachId');
     if(!coachId){
       router.push('/coach/login')
@@ -740,8 +740,8 @@ const days = [
 }, [])
 
 const getMyAvailability = async () => {
-  console.log('testtt');
-  console.log(nextSevenDay[0].date, nextSevenDay[1].date,nextSevenDay[2].date,nextSevenDay[3].date,nextSevenDay[4].date,nextSevenDay[5].date,nextSevenDay[6].date);
+  //console.log('testtt');
+  //console.log(nextSevenDay[0].date, nextSevenDay[1].date,nextSevenDay[2].date,nextSevenDay[3].date,nextSevenDay[4].date,nextSevenDay[5].date,nextSevenDay[6].date);
   const coachId = sessionStorage.getItem('coachId');
   const schedulesCollection = collection(database, 'schedules');
   const queryDoc = query(schedulesCollection, where("coach_id", "==", coachId), where(
@@ -753,12 +753,12 @@ const getMyAvailability = async () => {
   try {
     const response = await getDocs(queryDoc);
     const fetchedAvailability = response.docs.map((data) => {
-      console.log(data.data());
+      //console.log(data.data());
       return { ...data.data(), availability_id: data.id };
     });
     setmyAvailability(fetchedAvailability);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    //console.error('Error fetching data:', error);
   }
 };
 
@@ -770,7 +770,7 @@ const getMyAvailability = async () => {
 
 const getMyMeeting = async () => {
 
-  console.log('testtt');
+  //console.log('testtt');
   const coachId = sessionStorage.getItem('coachId');
   const meetingSessionCollection = collection(database, 'meeting');
   const queryDoc = query(meetingSessionCollection, where("coachId", "==", coachId));
@@ -778,7 +778,7 @@ const getMyMeeting = async () => {
     await getDocs(queryDoc).then((response) => {
       setMeeting(
         response.docs.map((data) => {
-          console.log(data.data());
+          //console.log(data.data());
           return { ...data.data(), meet_id: data.id };
         })
       );
@@ -791,7 +791,7 @@ const getMyMeeting = async () => {
 
  const getMyClient = async () => {
 
-  console.log('testtt');
+  //console.log('testtt');
   const coachId = sessionStorage.getItem('coachId');
   const meetingSessionCollection = collection(database, 'client_user');
   const queryDoc = query(meetingSessionCollection, where("assign_coach_id", "==", coachId));
@@ -799,7 +799,7 @@ const getMyMeeting = async () => {
     await getDocs(queryDoc).then((response) => {
       setMyClient(
         response.docs.map((data) => {
-          console.log(data.data());
+          //console.log(data.data());
           return { ...data.data(), c_id: data.id };
         })
       );
@@ -837,14 +837,14 @@ const getMyMeeting = async () => {
     });
     setAvailability(updatedAvailability);
     
-    console.log('my availability');
-    console.log(myAvailability);
-    console.log(updatedAvailability);
+    //console.log('my availability');
+    //console.log(myAvailability);
+    //console.log(updatedAvailability);
 
     myAvailability.forEach((myData) => {
       const { day, startHour } = myData;
       if (updatedAvailability[day]) {
-        console.log(`Start Hour for ${day}: ${updatedAvailability[day].startHour}`);
+        //console.log(`Start Hour for ${day}: ${updatedAvailability[day].startHour}`);
       }
     });
   }
@@ -878,12 +878,12 @@ useEffect(() => {
 
           if (coachDoc.exists()) {
             setCoach(coachDoc.data());
-            console.log('coach data',coachDoc.data());
+            //console.log('coach data',coachDoc.data());
             setcoachesCalApiKey(coachDoc.data().coach_api);
             setcoachesCalUsername(coachDoc.data().coach_uname);
 
           } else {
-            console.log("No coach found");
+            //console.log("No coach found");
           }
         };
         fetchCoach();
@@ -971,10 +971,10 @@ useEffect(() => {
       var now = new Date(); // current date and time
 
  const options = { month: 'short' };
- console.log(now.toLocaleString('default', options));
+ //console.log(now.toLocaleString('default', options));
 
  const options2 = { day: '2-digit'  };
- console.log(now.toLocaleDateString (undefined, options2));
+ //console.log(now.toLocaleDateString (undefined, options2));
 
  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -1025,10 +1025,10 @@ useEffect(() => {
    }
    let month=monthNames[tomorrow.getMonth()].toUpperCase();
   next7Days.push({'date':tomorrow.toLocaleDateString(undefined, options2),'day':dayOfWeekStr,'month':month});
- //console.log();
+ ////console.log();
  }
 
- console.log('next7days',next7Days);
+ //console.log('next7days',next7Days);
 setnextSevenDay(next7Days);
     }
 
@@ -1041,10 +1041,10 @@ setnextSevenDay(next7Days);
       var now = new Date(); // current date and time
 
  const options = { month: 'short' };
- console.log(now.toLocaleString('default', options));
+ //console.log(now.toLocaleString('default', options));
 
  const options2 = { day: '2-digit'  };
- console.log(now.toLocaleDateString (undefined, options2));
+ //console.log(now.toLocaleDateString (undefined, options2));
 
  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -1095,10 +1095,10 @@ setnextSevenDay(next7Days);
    }
    let month=monthNames[tomorrow.getMonth()].toUpperCase();
   next7Days.push({'date':tomorrow.toLocaleDateString(undefined, options2),'day':dayOfWeekStr,'month':month});
- //console.log();
+ ////console.log();
  }
 
- console.log(next7Days);
+ //console.log(next7Days);
 setallWeekDay(next7Days);
     }
 
@@ -1196,7 +1196,7 @@ setallWeekDay(next7Days);
 //   var endTime = "";
 //   const d = date;
 //   var selectedDay = date.getDay();
-//   //console.log("selected days: " + selectedDay + "");
+//   ////console.log("selected days: " + selectedDay + "");
 
 
 //   var scheduleId = 62521;
@@ -1220,13 +1220,13 @@ setallWeekDay(next7Days);
 //       }
 //     );
 //     const data = await res.json();
-//     // //console.log(res);
-//     //console.log(data);
+//     // ////console.log(res);
+//     ////console.log(data);
 
 //     if (res.status == 200) {
-//       //console.log("testing");
+//       ////console.log("testing");
 //       if (data.schedule.availability.length > 0) {
-//         //console.log(data.schedule.availability.length);
+//         ////console.log(data.schedule.availability.length);
 
 //         for (
 //           let index = 0;
@@ -1238,17 +1238,17 @@ setallWeekDay(next7Days);
 //             startTime = data.schedule.availability[index].startTime;
 //             endTime = data.schedule.availability[index].endTime;
 //             let endtimeArr = endTime.split(":");
-//             //console.log(endtimeArr[2]);
+//             ////console.log(endtimeArr[2]);
 
 //             if (endtimeArr[2] != "00") {
 //               endTime = setCharAt(endTime, 6, "0");
 //               endTime = setCharAt(endTime, 7, "0");
 //             }
 
-//             //console.log(endTime);
+//             ////console.log(endTime);
 
-//             //console.log(startTime);
-//             //console.log(endTime);
+//             ////console.log(startTime);
+//             ////console.log(endTime);
 //             included = 1;
 //             break;
 //           } else {
@@ -1257,7 +1257,7 @@ setallWeekDay(next7Days);
 //         }
 
 //         var timeslots = [startTime];
-//         //console.log(coachesEventTimeInterval);
+//         ////console.log(coachesEventTimeInterval);
 
 // //var interval = coachesEventTimeInterval;
 // var interval=90;
@@ -1272,7 +1272,7 @@ setallWeekDay(next7Days);
 //           Date.parse("01/01/2011 " + endTime + "") >
 //           Date.parse("01/01/2011 " + startTime + "")
 //         ) {
-//           //console.log(isBetween); // true
+//           ////console.log(isBetween); // true
 //           startTime = addMinutes(startTime, interval);
 //           if (
 //             Date.parse("01/01/2011 " + endTime + "") >
@@ -1294,15 +1294,15 @@ setallWeekDay(next7Days);
 //           }
 //         }
 
-//         console.log(timeslots);
+//         //console.log(timeslots);
 //       } else {
-//         //console.log("no");
+//         ////console.log("no");
 //         //setisShow(false);
 //       }
 //    //   setarray1(timeslots);
 //     }
 //   } catch (err) {
-//     //console.log(err);
+//     ////console.log(err);
 //   }
 
 
@@ -1339,7 +1339,7 @@ setallWeekDay(next7Days);
     const data = await res.json();
     if (res.status == 200) {
       if (data.busy.length > 0) {
-        //console.log(data.busy);
+        ////console.log(data.busy);
         for (let index = 0; index < data.busy.length; index++) {
           var start = data.busy[index].start;
 
@@ -1348,9 +1348,9 @@ setallWeekDay(next7Days);
           let date_ = new Date(start).getDate();
           let month_ = new Date(start).getMonth();
           let year_ = new Date(start).getFullYear();
-          console.log(date_);
-          console.log(month_);
-          console.log(year_);
+          //console.log(date_);
+          //console.log(month_);
+          //console.log(year_);
        let  meeting_title = data.busy[index].title;
 
 
@@ -1409,16 +1409,16 @@ setallWeekDay(next7Days);
 
           busySchedule.push({ starttime: startTime, endtime: endTime, title:meeting_title,date:date_,month:month_,year:year_ });
 
-          //console.log(bookedTimeslot);
+          ////console.log(bookedTimeslot);
         }
       }
     }
   } catch (err) {
-    //console.log(err);
+    ////console.log(err);
   }
   //setbookedTimeslot(busySchedule);
 
-  console.log(busySchedule); 
+  //console.log(busySchedule); 
   // getTimeslots();
 };
 
@@ -1458,7 +1458,7 @@ const [BookedId, setBookedId] = useState();
   // get all meeting data
   const getMeetingByDate = async (todayDate: string) => {
 
-    console.log('on load date',todayDate);
+    //console.log('on load date',todayDate);
     const coachId = sessionStorage.getItem("coachId");
 
     const queryDoc = query(meetingRef, where("coachId", "==", coachId),where("meetingDate", "==", todayDate));
@@ -1489,7 +1489,7 @@ const [BookedId, setBookedId] = useState();
         }
       );
       const data = await res.json();
-      //console.log(data);
+      ////console.log(data);
       setmeetingLink(data.url);
       setmeetingName(data.name);
       setmeetingApiCreated(data.api_created);
@@ -1604,12 +1604,12 @@ const [BookedId, setBookedId] = useState();
         // setbookingError(true);
       }
 
-      ////console.log(data);
+      //////console.log(data);
     } catch (err) {
       setmeetingSuccessMsg('');
       // setbookingLoad(false);
       // setbookingError(true);
-      ////console.log(err);
+      //////console.log(err);
     }
 
   
@@ -1624,8 +1624,8 @@ const [BookedId, setBookedId] = useState();
 
 const getTimeslots = async (date) => {
   
-console.log('on load here',date);
-  console.log(date);
+//console.log('on load here',date);
+  //console.log(date);
 
   setmeetingendtime('');
   setmeetingtime('');
@@ -1634,7 +1634,7 @@ console.log('on load here',date);
 
   var t_date = new Date();
 
-  console.log('t date', t_date);
+  //console.log('t date', t_date);
 
 
   if(tomorrow.getDay() == 0){
@@ -1668,7 +1668,7 @@ if(t_date.getDate() != tomorrow.getDate()){
 }
   
 
-console.log(tomorrow.getDay(),'tommorow');
+//console.log(tomorrow.getDay(),'tommorow');
 
 
 
@@ -1679,22 +1679,22 @@ console.log(tomorrow.getDay(),'tommorow');
 
   var todayDate = new Date(tomorrow).toISOString().slice(0, 10);
 
-  //console.log(todayDate);
+  ////console.log(todayDate);
 
 
 
   getMeetingByDate(todayDate);
-  console.log('today date', todayDate);
+  //console.log('today date', todayDate);
   setmeetingdate(todayDate);
 
   var startTime = "";
   var endTime = "";
   const d = date;
   var selectedDay = date.getDay();
-  ////console.log("selected days: " + selectedDay + "");
+  //////console.log("selected days: " + selectedDay + "");
 
   setDate(date);
-  console.log('today date nnndhjhg',date);
+  //console.log('today date nnndhjhg',date);
   setMonth(date.toLocaleString("default", { month: "long" }));
   setDate_(date.getDate());
   setDay_(date.toLocaleDateString("default", { weekday: "long" }));
@@ -1704,8 +1704,8 @@ console.log(tomorrow.getDay(),'tommorow');
 
  
 
-    // ////console.log(res);
-    ////console.log(data);
+    // //////console.log(res);
+    //////console.log(data);
 
 
 
@@ -1770,19 +1770,19 @@ const givenDate =date;
 const saTimeZone = 'Africa/Johannesburg';
 const saFormattedDate = givenDate.toLocaleString('en-US', { timeZone: saTimeZone });
 
-console.log(`Given date and time in IST: ${givenDate}`);
-console.log(`Converted date and time in SAST: ${saFormattedDate}`);
+//console.log(`Given date and time in IST: ${givenDate}`);
+//console.log(`Converted date and time in SAST: ${saFormattedDate}`);
   let currentTime=`00:00:00`;
   if(date.getDate() == now.getDate() && date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth()){
   currentTime = `${currentHours}:${currentMinutes < 10 ? '0' : ''}${currentMinutes}:00`;
   }else{
     currentTime = `00:00:00`;
   }
-  console.log(date.getDate(),date.getFullYear(),date.getMonth());
-console.log(now.getDate(),now.getFullYear(),now.getMonth());
-  console.log('terrr');
+  //console.log(date.getDate(),date.getFullYear(),date.getMonth());
+//console.log(now.getDate(),now.getFullYear(),now.getMonth());
+  //console.log('terrr');
 
-  console.log('my avilability', myAvailability);
+  //console.log('my avilability', myAvailability);
 //   if(myData != null){
 //     if(myData.start_time){
 // var starttime = myData.start_time;
@@ -1873,7 +1873,7 @@ var timeslots = [starttime];
 }else{
 var timeslots = [];
 }
-//console.log(meetingByDate);
+////console.log(meetingByDate);
 
 while (starttime < endtime) {
 
@@ -1881,7 +1881,7 @@ starttime = addMinutes(starttime, interval);
 if (starttime >= currentTime) {
 if(starttime < endtime){
   
-    console.log(currentTime);
+    //console.log(currentTime);
 
 if(!isReserved(starttime)){
 
@@ -1902,7 +1902,7 @@ if(!isReserved(starttime)){
 //settimeslot_load(false);
 }
 
-console.log('on load array',timeslots);
+//console.log('on load array',timeslots);
 setarray2(timeslots);
   
 
@@ -1911,7 +1911,7 @@ setarray2(timeslots);
 const checkAvailability = () => {
   const dateString = `${Day_} ${Month} ${Date_}`;
   const isDateAvailable = CoachUnavailability.find((item) => item.date === dateString);
-//console.log(isDateAvailable);
+////console.log(isDateAvailable);
   if(isDateAvailable){
     setUnavailableId(isDateAvailable.un_id);
     setUnavailableStartSlot(isDateAvailable.startSlot);
@@ -1927,14 +1927,14 @@ const checkAvailability = () => {
 
 
 const handleClientClick = (event: any) => {
-  //console.log(event)
+  ////console.log(event)
 
   const selectedIndex = event.target.selectedIndex;
     const selectedOption = event.target.options[selectedIndex];
    // const selectedTime = selectedOption.getAttribute('data-time');
  
-  console.log( selectedOption.getAttribute("data-value"));
-  console.log( selectedOption.getAttribute("data-email"));
+  //console.log( selectedOption.getAttribute("data-value"));
+  //console.log( selectedOption.getAttribute("data-email"));
   setmeetingclient(selectedOption.getAttribute("data-value"));
   setmeetingemail(selectedOption.getAttribute("data-email"));
 
@@ -1952,22 +1952,22 @@ const handleClientClick = (event: any) => {
 
 
 const handleTimeClick = (event: any) => {
-  console.log(event)
+  //console.log(event)
 
   const selectedIndex = event.target.selectedIndex;
     const selectedOption = event.target.options[selectedIndex];
    // const selectedTime = selectedOption.getAttribute('data-time');
-  console.log( selectedOption.getAttribute("data-key"));
-  console.log( selectedOption.getAttribute("data-time"));
+  //console.log( selectedOption.getAttribute("data-key"));
+  //console.log( selectedOption.getAttribute("data-time"));
   setmeetingtime(selectedOption.getAttribute("data-time"));
 
   // selectedTime.splice(0, selectedTime.length);
   //selectedTime.splice(0, array1.length);
   setselectedTime(selectedOption.getAttribute('data-key'));
-  //////console.log(meetingdate);
-  ////console.log(meetingtime);
+  ////////console.log(meetingdate);
+  //////console.log(meetingtime);
   var startTime = meetingdate + " " + meetingtime;
-  ////console.log(startTime);
+  //////console.log(startTime);
 
   var newTime = new Date(
     new Date(
@@ -1979,7 +1979,7 @@ const handleTimeClick = (event: any) => {
     minute: "2-digit",
     hour12: false,
   });
-  ////console.log(newTime);
+  //////console.log(newTime);
   setmeetingendtime(newTime);
   
 };
@@ -2068,7 +2068,7 @@ const getEventTypes = async () => {
      );
      const data = await res.json();
      if (res.status == 200) {
-       //console.log(data);
+       ////console.log(data);
       // setcoachesEvents(data.event_types);
 
         if(data.event_types[0].id != null){
@@ -2079,7 +2079,7 @@ const getEventTypes = async () => {
 
      }
    } catch (err) {
-     //console.log(err);
+     ////console.log(err);
 
    }
 
@@ -2099,7 +2099,7 @@ const getEventTypes = async () => {
     }
 
     // useEffect(() => {
-    //   console.log('workkkk');
+    //   //console.log('workkkk');
     //  getMyAvailability();
     // }, [startLoop]);
 
@@ -2113,7 +2113,7 @@ const getEventTypes = async () => {
     // Query for client data
     const clientQuery = query(clientRef, where("assign_coach_id", "==", coachId));
    // const clientQuery = query(collection(db, 'clients'), where("assign_coach_id", "==", coachId));
-console.log('abcddd');
+//console.log('abcddd');
 try {
   const meetingData = await getDocs(meetingQuery);
   const clientData = await getDocs(clientQuery);
@@ -2133,11 +2133,11 @@ try {
     };
   });
 setMeeting(meetings);
-  console.log(meetings); // Logging the meetings with client details
+  //console.log(meetings); // Logging the meetings with client details
 } catch (error) {
-  console.error("Error fetching data: ", error);
+  //console.error("Error fetching data: ", error);
 }
-    console.error("dfbhbh");
+    //console.error("dfbhbh");
   };
   
 
@@ -2162,7 +2162,7 @@ setMeeting(meetings);
 
   useEffect(() => {
 //  let busySchedule=[];
-//    console.log(meeting);
+//    //console.log(meeting);
 
 // for (let index = 0; index < meeting.length; index++) {
 //   //const element = array[index];
@@ -2174,12 +2174,12 @@ setMeeting(meetings);
 //    busySchedule.push({ starttime: meeting[index].meetingTime, endtime: meeting[index].meetingEndTime, title:meeting[index].meetingName,date:date_,month:month_,year:year_ });
 // }
 
-// console.log('here');
-// console.log(busySchedule);
+// //console.log('here');
+// //console.log(busySchedule);
 //setbookedTimeslot(busySchedule);
 
-console.log('meeting');
-console.log(meeting);
+//console.log('meeting');
+//console.log(meeting);
 getClientData();
   }, [meeting]);
 
@@ -2208,13 +2208,13 @@ getClientData();
       const userCollection = collection(database, 'coaches_user');
       const userDocRef = doc(userCollection, coachIds);
       const userDoc = await getDoc(userDocRef);
-      console.log(userDoc.data());
+      //console.log(userDoc.data());
 
  var data=userDoc.data();
  setMydata(data);
- console.log('here i am')
- console.log(data)
-      console.log('here i am')
+ //console.log('here i am')
+ //console.log(data)
+      //console.log('here i am')
       var starttime ="";
 if(data.start_time != undefined){
   // var starttime =data.start_time;
@@ -2244,7 +2244,7 @@ var interval = "60";
   while (starttime < endtime) {
     // const interval = index % 2 === 0 ? 45 : 15;
 
-    console.log('starttime',starttime);
+    //console.log('starttime',starttime);
     const interval = 60;
     starttime = addMinutes(starttime, interval);
   
@@ -2313,19 +2313,19 @@ var interval = "60";
    useEffect(()=>{
 
     const busySchedule = [];
-    //console.log(meeting[0]);
-    console.log('abty');
-    console.log(meeting);
+    ////console.log(meeting[0]);
+    //console.log('abty');
+    //console.log(meeting);
     for (const meetId in meeting) {
 
      
 
-      console.log(meeting[meetId]);
+      //console.log(meeting[meetId]);
      
-      console.log(meeting[meetId].meet_id);
-      console.log();
+      //console.log(meeting[meetId].meet_id);
+      //console.log();
 
-      console.log(meeting[meetId].meetingDate);
+      //console.log(meeting[meetId].meetingDate);
 
       let date_ = new Date(meeting[meetId].meetingDate).getDate();
       let month_ = new Date(meeting[meetId].meetingDate).getMonth();
@@ -2342,7 +2342,7 @@ var interval = "60";
   //   for (let index2 = 0; index2 < clientData.length; index++) {
 
   //     if(clientData[index2].id == meeting[index].status){
-  //       console.log('loop');
+  //       //console.log('loop');
   //     }
 
   //   }
@@ -2365,21 +2365,21 @@ var interval = "60";
     //   }
     // }
 
-    console.log('join');
-//console.log(joinedData);
+    //console.log('join');
+////console.log(joinedData);
 
    // setmeetingClientJoinedData(busySchedule);
    setbookedTimeslot(busySchedule);
-   console.log('testinnnnn  dhh vhn');
-   console.log(busySchedule);
+   //console.log('testinnnnn  dhh vhn');
+   //console.log(busySchedule);
    }, [meeting]);
 
 
    const [isCancelled, setIsCancelled] = useState(false);
    const cancelMeet = (meet_iddd,clientName,clientEmail,meet_date,meet_day,meet_month,meeting_start_time,meeting_end_time) => {
-    console.log(meet_iddd);
-    console.log(clientName);
-    console.log(clientEmail);
+    //console.log(meet_iddd);
+    //console.log(clientName);
+    //console.log(clientEmail);
     const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
 
     updateDoc(fieldToEdit2, {
@@ -2403,7 +2403,7 @@ var interval = "60";
      
     })
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
     })
 
     getMyMeeting();
@@ -2425,15 +2425,15 @@ var interval = "60";
     const year = inputDate.getFullYear();
     const month = String(inputDate.getMonth() + 1).padStart(2, '0');
     const day_ = String(inputDate.getDate()).padStart(2, '0');
-    console.log('day',day_);
+    //console.log('day',day_);
     const options = { weekday: 'short' };
     const dayName = new Date(day).toLocaleDateString('en-US', options);
-    console.log('dayName',dayName);
+    //console.log('dayName',dayName);
     const formattedDate = `${year}-${month}-${day_}`;
 
 setSelectDateMob(formattedDate);
 setSelectDayMob(dayName);
-console.log(formattedDate);
+//console.log(formattedDate);
 m=0;
   };
 
@@ -2465,9 +2465,9 @@ m=0;
 
    
    const rejectMeet = (meet_iddd,clientName,clientEmail,meet_date,meet_day,meet_month,meeting_start_time,meeting_end_time) => {
-    console.log(meet_iddd);
-    console.log(clientName);
-    console.log(clientEmail);
+    //console.log(meet_iddd);
+    //console.log(clientName);
+    //console.log(clientEmail);
     const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
 
     updateDoc(fieldToEdit2, {
@@ -2490,7 +2490,7 @@ m=0;
      
     })
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
     })
    }
 
@@ -2498,17 +2498,17 @@ m=0;
    async function sendMailFunc2 (email,content,subject){   
     let response = await sendMail(email,subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   } 
 
    async function sendMailFunc (email,content){   
     let response = await sendMail(email,"sample mail",content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   }    	
 
    const acceptMeet = (meet_iddd,meet_date,meet_day,meet_month,meeting_start_time,meeting_end_time) => {
-    console.log(meet_iddd);
+    //console.log(meet_iddd);
     const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
 
     updateDoc(fieldToEdit2, {
@@ -2531,7 +2531,7 @@ m=0;
      
     }) 
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
     })
    }
 
@@ -2539,7 +2539,7 @@ m=0;
    const updateSchedule = (e) => {
     e.preventDefault();
     setscheduleSuccess(false);
-  console.log('here we');
+  //console.log('here we');
     // Convert availability object to an array of objects with day information
     const availabilityData = Object.entries(availability).map(([day, data]) => ({
       day: day, // Include the day information
@@ -2562,8 +2562,8 @@ m=0;
     // Add data to Firebase
     availabilityData.forEach((data,index) => {
 
-console.log('myindex',index);
-console.log('day',nextSevenDay[index].date);
+//console.log('myindex',index);
+//console.log('day',nextSevenDay[index].date);
 
       const coachId = sessionStorage.getItem('coachId');
       const userDocRef = collection(database, 'schedules');
@@ -2601,7 +2601,7 @@ console.log('day',nextSevenDay[index].date);
                
               })
               .catch((err) => {
-                console.error(err);
+                //console.error(err);
               });
           });
         } else {
@@ -2615,8 +2615,8 @@ console.log('day',nextSevenDay[index].date);
 
 
          
-      console.log('data',data);
-      console.log('date',nextSevenDay[index].date);
+      //console.log('data',data);
+      //console.log('date',nextSevenDay[index].date);
 
      
       addDoc(userDocRef, {
@@ -2643,14 +2643,14 @@ console.log('day',nextSevenDay[index].date);
        
       })
         .then((docRef) => {
-          console.log(docRef)
-          console.log(docRef.id)
+          //console.log(docRef)
+          //console.log(docRef.id)
           setscheduleSuccess(true);
 
   
         })
         .catch((err) => {
-          console.error(err);
+          //console.error(err);
         })
       }
     })
@@ -2661,24 +2661,24 @@ console.log('day',nextSevenDay[index].date);
   
 
    useEffect(() => {
-//     console.log(clientData);
-//     console.log("ahhbhu");
-//     //console.log(meeting);
+//     //console.log(clientData);
+//     //console.log("ahhbhu");
+//     ////console.log(meeting);
 
 //     const busySchedule = [];
-//     //console.log(meeting[0]);
+//     ////console.log(meeting[0]);
 
 //     for (const meetId in meeting) {
 
 //       for (const clientIdd in clientData) {
-//        // console.log(clientData[clientIdd].client_id);
+//        // //console.log(clientData[clientIdd].client_id);
 //         if(clientData[clientIdd].client_id == meeting[meetId].clientId){
 
-//       console.log(meeting[meetId]);
-//       console.log(clientData[clientIdd]);
+//       //console.log(meeting[meetId]);
+//       //console.log(clientData[clientIdd]);
 
 
-//       console.log(meeting[meetId].meetingDate);
+//       //console.log(meeting[meetId].meetingDate);
 
 //       let date_ = new Date(meeting[meetId].meetingDate).getDate();
 //       let month_ = new Date(meeting[meetId].meetingDate).getMonth();
@@ -2697,7 +2697,7 @@ console.log('day',nextSevenDay[index].date);
 //   //   for (let index2 = 0; index2 < clientData.length; index++) {
 
 //   //     if(clientData[index2].id == meeting[index].status){
-//   //       console.log('loop');
+//   //       //console.log('loop');
 //   //     }
 
 //   //   }
@@ -2720,18 +2720,18 @@ console.log('day',nextSevenDay[index].date);
 //     //   }
 //     // }
 
-//     console.log('join');
-// //console.log(joinedData);
+//     //console.log('join');
+// ////console.log(joinedData);
 
 //    // setmeetingClientJoinedData(busySchedule);
 //    setbookedTimeslot(busySchedule);
-//    console.log('testinnnnnn');
-//    console.log(busySchedule);
+//    //console.log('testinnnnnn');
+//    //console.log(busySchedule);
    }, [clientData]);
 
   //  useEffect(() => {
   //   let busySchedule=[];
-  //     console.log(meetingClientJoinedData);
+  //     //console.log(meetingClientJoinedData);
 
   //  for (let index = 0; index < meetingClientJoinedData.length; index++) {
   //    //const element = array[index];
@@ -2743,8 +2743,8 @@ console.log('day',nextSevenDay[index].date);
   //     busySchedule.push({ starttime: meetingClientJoinedData[index].meetingTime, endtime: meetingClientJoinedData[index].meetingEndTime, title:meetingClientJoinedData[index].meetingName,date:date_,month:month_,year:year_ ,clientName:meetingClientJoinedData[index].client_name});
   //  }
 
-  //  console.log('here');
-  //  console.log(busySchedule);
+  //  //console.log('here');
+  //  //console.log(busySchedule);
   //  setbookedTimeslot(busySchedule);
 
 
@@ -2760,7 +2760,7 @@ console.log('day',nextSevenDay[index].date);
 
   useEffect(() => {
 
-    console.log('get timeslot', date);
+    //console.log('get timeslot', date);
 
     // Using setTimeout to delay the execution of getTimeslots by 3 seconds
     const timeoutId = setTimeout(() => {

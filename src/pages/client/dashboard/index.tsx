@@ -124,7 +124,7 @@ const Backup = () => {
     const userCollection = collection(database, 'client_user');
     const userDocRef = doc(userCollection, userIds);
     const userDoc = await getDoc(userDocRef);
-    //console.log(userDoc);
+    ////console.log(userDoc);
 
     setClientEmail(userDoc.data().client_email),
     setClientEmailTemp(userDoc.data().client_email),
@@ -173,7 +173,7 @@ if(clientEmailOTP == newotp){
     // });
 
     // const data = await response.json();
-    // console.log(data);
+    // //console.log(data);
 
     setnewotp('');
    
@@ -207,7 +207,7 @@ if(clientEmailOTP == newotp){
       setClientEmailOTP('');
     })
     .catch((err) => {
-      //console.log(err);
+      ////console.log(err);
       setVerifyOTP(false);
     })
 
@@ -274,7 +274,7 @@ if(newotp == ''){
   
 
   const openCalendar = (event) => {
-    ////console.log(event.target.getAttribute("data-interval"));
+    //////console.log(event.target.getAttribute("data-interval"));
     if (
       event.target.getAttribute("data-interval") != null ||
       event.target.getAttribute("data-interval") != ""
@@ -422,10 +422,10 @@ let lastUrl='';
   }else{
     setshowpage(true);
   }
-    console.log('lastUrl',lastUrl);
+    //console.log('lastUrl',lastUrl);
     if (lastUrl == '/joinvideo') {
       // Reload the current page
-      console.log('yes');
+      //console.log('yes');
       localStorage.removeItem("p_url");
       router.reload();
     }
@@ -504,7 +504,7 @@ function toggleProfile() {
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   }    	
 
  
@@ -528,7 +528,7 @@ function toggleProfile() {
         }
       );
       const data = await res.json();
-      //console.log(data);
+      ////console.log(data);
       setmeetingLink(data.url);
       setmeetingName(data.name);
       setmeetingApiCreated(data.api_created);
@@ -642,11 +642,11 @@ function toggleProfile() {
         setbookingError(true);
       }
 
-      ////console.log(data);
+      //////console.log(data);
     } catch (err) {
       setbookingLoad(false);
       setbookingError(true);
-      ////console.log(err);
+      //////console.log(err);
     }
 
   }
@@ -786,10 +786,10 @@ function toggleProfile() {
   };
  
   // const getTimezone = () => {
-  //   //console.log(selectedCountry);
+  //   ////console.log(selectedCountry);
   //   const countryData = countries[selectedCountry];
 
-  //   //console.log(countryData);
+  //   ////console.log(countryData);
 
   //   if (countryData) {
   //     const { languages } = countryData;
@@ -840,25 +840,25 @@ setShowHelpErr(true);
     
       if (typeof window !== 'undefined' && window.innerWidth <= 768) {
       emailjs.sendForm('service_48nilue', 'template_3uazkzk', form.current, 'bHrOxc3becdFqRykK') .then((result) => {
-        //console.log(result.text);
+        ////console.log(result.text);
         sethelpText('')
         
     }, (error) => {
-        //console.log(error.text);
+        ////console.log(error.text);
     });
       }else{
         emailjs.sendForm('service_48nilue', 'template_3uazkzk', formMobile.current, 'bHrOxc3becdFqRykK') .then((result) => {
-          //console.log(result.text);
+          ////console.log(result.text);
           sethelpText('')
       }, (error) => {
-          //console.log(error.text);
+          ////console.log(error.text);
       });
       }
      
      
     })
     .catch((err) => {
-      console.error(err);
+      //console.error(err);
     })
   }
 }
@@ -917,12 +917,12 @@ setShowCoachErr(true);
 
     //  emailjs.sendForm('service_48nilue', 'template_l4z15n1', form2.current, 'bHrOxc3becdFqRykK')
       // .then((result) => {
-      //     //console.log(result.text);
+      //     ////console.log(result.text);
       //     setcoachText('')
       //     // handleContactCancel();
       //     setShowEmailSuccess(true)
       // }, (error) => {
-      //     //console.log(error.text);
+      //     ////console.log(error.text);
       // });
 
       setcoachText('')
@@ -937,7 +937,7 @@ setShowCoachErr(true);
 
 
 function test(){
-  //console.log('abc');
+  ////console.log('abc');
 }
 
 const buyMore = (event) => {
@@ -945,7 +945,7 @@ const buyMore = (event) => {
 
   // Redirect to /client/checkout
   event.preventDefault();
-  console.log(event.target);
+  //console.log(event.target);
   setBuyMoreErr(false);
    if(parseInt(clientRemainingSession) == 0){
 
@@ -984,7 +984,7 @@ const addButton = event.target;
     
       })
       .catch((err) => {
-        console.error(err);
+        //console.error(err);
          // Re-enable the button and remove loading state
         
       })
@@ -1060,7 +1060,7 @@ if(err == 0){
           setShowBillingSuccess(true);
         })
         .catch((err) => {
-          console.error(err);
+          //console.error(err);
         })
     }
     else{
@@ -1096,32 +1096,32 @@ if(err == 0){
 
   // coach data fetch
   const countMyRequest = async () => {
-    //console.log('test');
-    //console.log(sessionStorage.getItem("userId"));
+    ////console.log('test');
+    ////console.log(sessionStorage.getItem("userId"));
     const collectionRef = collection(database, "newPlanRequest");
     const queryDoc = query(collectionRef, where("client_id", "==", sessionStorage.getItem("userId")),where("status", "==", 1));
   
     const snapshot = await getDocs(queryDoc);
     const count_data = snapshot.size;
   
-    //console.log(`Number of documents in collection: ${count_data}`);
-        //console.log(count_data);
+    ////console.log(`Number of documents in collection: ${count_data}`);
+        ////console.log(count_data);
         return count_data;
       }
 
 
        // count billig info 
   const countBillingInfo = async () => {
-    //console.log('test');
-    //console.log(sessionStorage.getItem("userId"));
+    ////console.log('test');
+    ////console.log(sessionStorage.getItem("userId"));
     const collectionRef = collection(database, "billingInfo");
     const queryDoc = query(collectionRef, where("user_id", "==", sessionStorage.getItem("userId")));
   
     const snapshot = await getDocs(queryDoc);
     const count_data = snapshot.size;
   
-    //console.log(`Number of documents in collection: ${count_data}`);
-        //console.log(count_data);
+    ////console.log(`Number of documents in collection: ${count_data}`);
+        ////console.log(count_data);
         return count_data;
       }
 
@@ -1142,35 +1142,35 @@ if(err == 0){
 //       }
 //     );
 //     const data = await res.json();
-//     //console.log(data);
+//     ////console.log(data);
 
 
 
 //     if (res.status == 200) {
 
-// //console.log('meeting');
-// ////console.log(data);
-// ////console.log(meeting);
+// ////console.log('meeting');
+// //////console.log(data);
+// //////console.log(meeting);
 
 // for (let index = 0; index < data.data.length; index++) {
 
 
-// ////console.log(data.data[index].room);
+// //////console.log(data.data[index].room);
 
 //   for (let index2 = 0; index2 < meeting.length; index2++) {
 
-//     ////console.log(meeting[index].meetingName);
+//     //////console.log(meeting[index].meetingName);
 
 //     if(data.data[index].room == meeting[index2].meetingName){
-//       // //console.log(index);
-//       // //console.log(index2);
-//       // //console.log(data.data[index].room);
-//       // //console.log(data.data[index].start_time);
-//       // //console.log(data.data[index].duration);
+//       // ////console.log(index);
+//       // ////console.log(index2);
+//       // ////console.log(data.data[index].room);
+//       // ////console.log(data.data[index].start_time);
+//       // ////console.log(data.data[index].duration);
 //       let todate=new Date(data.data[index].start_time * 1000).getDate();
 //     let tomonth=new Date(data.data[index].start_time * 1000).getMonth()+1;
 //     let toyear=new Date(data.data[index].start_time * 1000).getFullYear();
-//     let original_date=tomonth+'/'+todate+'/'+toyear; //console.log(original_date);
+//     let original_date=tomonth+'/'+todate+'/'+toyear; ////console.log(original_date);
 //     let start_time=new Date(data.data[index].start_time * 1000).toLocaleTimeString();
 //       session.push({date:original_date,start_time:start_time,duration:data.data[index].duration,coach_name:meeting[index2].coach_name})
 //     }
@@ -1185,7 +1185,7 @@ if(err == 0){
 
 //     }
 
-//     ////console.log(data);
+//     //////console.log(data);
 //   } catch (err) {
 
 //   }
@@ -1204,7 +1204,7 @@ if(err == 0){
 
 const getMeetingSession = async () => {
 
-  //console.log('testtt');
+  ////console.log('testtt');
   
   const clientId = sessionStorage.getItem('userId');
   const meetingSessionCollection = collection(database, 'meetingSession');
@@ -1217,12 +1217,12 @@ const getMeetingSession = async () => {
   try {
     const response = await getDocs(queryDoc);
     const sessionsData = response.docs.map((data) => {
-      //console.log(data.data());
+      ////console.log(data.data());
       return { ...data.data(), meet_id: data.id };
     });
     setMeetingSession(sessionsData);
   } catch (error) {
-    console.error(error);
+    //console.error(error);
   }
  
  
@@ -1256,13 +1256,13 @@ const getMeetingSession = async () => {
   };
 
   const showContactCoach = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisContactCoach(true);
   };
 
   const showUploadNotes = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisSeeNotes(false);
     setisUploadNotes(true);
@@ -1270,7 +1270,7 @@ const getMeetingSession = async () => {
 
 
   const showSeeNotes = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisUploadNotes(false);
     setisSeeNotes(true);
@@ -1278,7 +1278,7 @@ const getMeetingSession = async () => {
 
 
   const showUpdateBilling = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisUpdateBilling(true);
   };
@@ -1367,10 +1367,10 @@ const getMeetingSession = async () => {
         if (clientDoc.exists()) {
           setClient(clientDoc.data());
 
-          // ////console.log('here');
-          ////console.log(clientDoc.data);
+          // //////console.log('here');
+          //////console.log(clientDoc.data);
         } else {
-          ////console.log("No client found");
+          //////console.log("No client found");
         }
       };
       fetchClient();
@@ -1406,12 +1406,12 @@ const getMeetingSession = async () => {
 
   useEffect(() => {
     if (userId) {
-    console.log('abc'); 
+    //console.log('abc'); 
     
     const intervalId = setInterval(() => {
     //  Call your function here
-     console.log('Function called!');
-     console.log(cancelMeet);
+     //console.log('Function called!');
+     //console.log(cancelMeet);
     getCancelMeet()
 
     }, 10000000); // 10 seconds
@@ -1431,10 +1431,10 @@ const getMeetingSession = async () => {
     if (clientDoc.exists()) {
       setClient(clientDoc.data());
 
-      // ////console.log('here');
-      ////console.log(clientDoc.data);
+      // //////console.log('here');
+      //////console.log(clientDoc.data);
     } else {
-      ////console.log("No client found");
+      //////console.log("No client found");
     }
   };
   
@@ -1466,19 +1466,19 @@ const getMeetingSession = async () => {
     await getDocs(queryDoc).then((response) => {
       setHelp(
         response.docs.map((data) => {
-          //console.log(data);
+          ////console.log(data);
           return { ...data.data(), help_id: data.id };
         })
       );
     });
-   //  //console.log(coachDoc);
+   //  ////console.log(coachDoc);
     // if (coachDoc.exists()) {
     //   setMyCoach(coachDoc.data());
 
-    //   // ////console.log('here');
-    //   //console.log(coachDoc.data);
+    //   // //////console.log('here');
+    //   ////console.log(coachDoc.data);
     // } else {
-    //   ////console.log("No client found");
+    //   //////console.log("No client found");
     // }
   };
   const fetchCoach = async () => {
@@ -1490,7 +1490,7 @@ const getMeetingSession = async () => {
     await getDocs(queryDoc).then((response) => {
       setMyCoach(
         response.docs.map((data) => {
-          //console.log(data);
+          ////console.log(data);
           return { ...data.data(), coach_id: data.id };
         })
       );
@@ -1503,14 +1503,14 @@ const getMeetingSession = async () => {
 
 
     
-   //  //console.log(coachDoc);
+   //  ////console.log(coachDoc);
     // if (coachDoc.exists()) {
     //   setMyCoach(coachDoc.data());
 
-    //   // ////console.log('here');
-    //   //console.log(coachDoc.data);
+    //   // //////console.log('here');
+    //   ////console.log(coachDoc.data);
     // } else {
-    //   ////console.log("No client found");
+    //   //////console.log("No client found");
     // }
   };
 
@@ -1527,7 +1527,7 @@ const getMeetingSession = async () => {
     await getDocs(queryDoc).then((response) => {
       setMyPlan(
         response.docs.map((data) => {
-          //console.log(data);
+          ////console.log(data);
           return { ...data.data(), plan_id: data.id };
         })
       );
@@ -1555,7 +1555,7 @@ const getMeetingSession = async () => {
      await getDocs(queryDoc).then((response) => {
        setMyPreferPlan(
          response.docs.map((data) => {
-           //console.log(data);
+           ////console.log(data);
            return { ...data.data(), plan_id: data.id };
          })
        );
@@ -1606,9 +1606,9 @@ const getMeetingSession = async () => {
       // Calculate the time remaining in minutes
       const timeRemaining = Math.floor((meetingDate - currentTime) / 1000 / 60);
   
-      console.log(timeRemaining, 'timeRemaining1');
+      //console.log(timeRemaining, 'timeRemaining1');
       if (new Date(meet.meetingDate).toLocaleDateString() === new Date().toLocaleDateString() && timeRemaining > -10 && timeRemaining < 30) {
-        //console.log(timeRemaining, 'timeRemaining');
+        ////console.log(timeRemaining, 'timeRemaining');
         setMeetindex(index);
         setTimeRemain(timeRemaining);
         num=num+1;
@@ -1639,15 +1639,15 @@ const getMeetingSession = async () => {
   }, [meeting]);
   useEffect(() => {
     if (client != null) {
-      //console.log(client);
-      ////console.log(client.client_api);
+      ////console.log(client);
+      //////console.log(client.client_api);
      // setclientCalAPIkey("cal_test_023256ac85011cded16d8d4f8f137d99");
       //setclientCaluserName(client.client_uname);
       setclientFirebaseId(client.id);
       setclientFirebaseName(client.client_name);
       const firstName = client.client_name.split(' ')[0];
       setclientFirebaseFirstName(firstName);
-//console.log(firstName);
+////console.log(firstName);
       setclientFirebaseEmail(client.client_email);
       //setcoachesCalUsername(client.assign_coach_uname);
       setclientPlanId(client.plan_id);
@@ -1674,8 +1674,8 @@ const getMeetingSession = async () => {
 
   useEffect(() => {
     if (clientPlanId !='') {
-      //console.log('ne wplan ');
-      console.log('clientPlanId',clientPlanId)
+      ////console.log('ne wplan ');
+      //console.log('clientPlanId',clientPlanId)
 
 fetchMyPlan();
     }
@@ -1686,8 +1686,8 @@ fetchMyPlan();
 
   useEffect(() => {
     if (clientPreferPlanId !='') {
-      //console.log('ne wplan ');
-      console.log('prefer plan id',clientPreferPlanId)
+      ////console.log('ne wplan ');
+      //console.log('prefer plan id',clientPreferPlanId)
 
 fetchPreferPlan();
     }
@@ -1698,8 +1698,8 @@ fetchPreferPlan();
 
   useEffect(() => {
     if (myplan !=null) {
-      //console.log('ne wplan ');
-      console.log('myplan',myplan)
+      ////console.log('ne wplan ');
+      //console.log('myplan',myplan)
 
 setMyPlanName(myplan[0].plan_name);
  //getData();
@@ -1711,8 +1711,8 @@ setMyPlanName(myplan[0].plan_name);
   
   useEffect(() => {
     if (mypreferplan !=null) {
-      //console.log('ne wplan ');
-      console.log('mypreferplan',mypreferplan)
+      ////console.log('ne wplan ');
+      //console.log('mypreferplan',mypreferplan)
 
 setmypreferplanName(mypreferplan[0].plan_name);
  //getData();
@@ -1727,9 +1727,9 @@ setmypreferplanName(mypreferplan[0].plan_name);
 
   useEffect(() => {
     if (coachesFirebaseId != '') {
-      //console.log(coachesFirebaseId);
-      //console.log('testtttttttt');
-      //console.log(clientPlanId);
+      ////console.log(coachesFirebaseId);
+      ////console.log('testtttttttt');
+      ////console.log(clientPlanId);
       fetchCoach();
       getNewRequest();
     //  fetchMyPlan();
@@ -1747,7 +1747,7 @@ setmypreferplanName(mypreferplan[0].plan_name);
 
   useEffect(() => {
     if (allNewRequest.length > 0) {
-      //console.log('ne wplan ');
+      ////console.log('ne wplan ');
       setrequestPlanId(allNewRequest[0].new_plan_id);
 
 
@@ -1769,14 +1769,14 @@ setmypreferplanName(mypreferplan[0].plan_name);
   //  .where("parentId", "==", sessionStorage.getItem("userId"))
 
     await getDocs(queryDoc).then((response) => {
-      //console.log(response.docs);
+      ////console.log(response.docs);
       setAllFiles(
         response.docs.map((data) => {
           return { ...data.data(), file_id: data.id };
         })
       );
      
-      //console.log(allFiles);
+      ////console.log(allFiles);
      // setshowfile(true);
     });
   };
@@ -1784,16 +1784,16 @@ setmypreferplanName(mypreferplan[0].plan_name);
 
   const getCancelMeet = async () => {
 
-    console.log('testtt');
+    //console.log('testtt');
     const clientId = sessionStorage.getItem('userId');
     const meetingCancelCollection = collection(database, 'meeting');
-    console.log(clientId);
+    //console.log(clientId);
     const queryDoc = query(meetingCancelCollection, where("clientId", "==", clientId), where("isCancelNotified", "==", 0),where("isCoachCancel", "==", 1));
   
       await getDocs(queryDoc).then((response) => {
         setcancelMeet(
           response.docs.map((data) => {
-            console.log(data.data());
+            //console.log(data.data());
             return { ...data.data(), c_id: data.id };
           })
         );
@@ -1811,14 +1811,14 @@ setmypreferplanName(mypreferplan[0].plan_name);
   //  .where("parentId", "==", sessionStorage.getItem("userId"))
 
     await getDocs(queryDoc).then((response) => {
-      //console.log(response.docs);
+      ////console.log(response.docs);
       setallNewRequest(
         response.docs.map((data) => {
           return { ...data.data(), new_request_id: data.id };
         })
       );
      
-      //console.log(allFiles);
+      ////console.log(allFiles);
      // setshowfile(true);
     });
   };
@@ -1840,17 +1840,17 @@ setmypreferplanName(mypreferplan[0].plan_name);
   
 
   const handleTimeClick = (event: any) => {
-    // ////console.log( event.target.getAttribute("data-key"));
-    //////console.log( event.target.getAttribute("data-time"));
+    // //////console.log( event.target.getAttribute("data-key"));
+    ////////console.log( event.target.getAttribute("data-time"));
     setmeetingtime(event.target.getAttribute("data-time"));
 
     // selectedTime.splice(0, selectedTime.length);
     //selectedTime.splice(0, array1.length);
     setselectedTime(event.target.getAttribute("data-key"));
-    //////console.log(meetingdate);
-    ////console.log(meetingtime);
+    ////////console.log(meetingdate);
+    //////console.log(meetingtime);
     var startTime = meetingdate + " " + meetingtime;
-    ////console.log(startTime);
+    //////console.log(startTime);
 
     var newTime = new Date(
       new Date(
@@ -1862,7 +1862,7 @@ setmypreferplanName(mypreferplan[0].plan_name);
       minute: "2-digit",
       hour12: false,
     });
-    ////console.log(newTime);
+    //////console.log(newTime);
     setmeetingendtime(newTime);
     setshowNext(true);
   };
@@ -1980,7 +1980,7 @@ setmypreferplanName(mypreferplan[0].plan_name);
   const checkAvailability = () => {
     const dateString = `${Day_} ${Month} ${Date_}`;
     const isDateAvailable = CoachUnavailability.find((item) => item.date === dateString);
-//console.log(isDateAvailable);
+////console.log(isDateAvailable);
     if(isDateAvailable){
       setUnavailableId(isDateAvailable.un_id);
       setUnavailableStartSlot(isDateAvailable.startSlot);
@@ -1997,7 +1997,7 @@ setmypreferplanName(mypreferplan[0].plan_name);
 
   const getCoachUnavailability = async () => {
 
-    //console.log('testtt');
+    ////console.log('testtt');
     const coachId = coachesFirebaseId;
     const meetingSessionCollection = collection(database, 'unavailability');
     const queryDoc = query(meetingSessionCollection, where("coach_id", "==", coachId));
@@ -2005,7 +2005,7 @@ setmypreferplanName(mypreferplan[0].plan_name);
       await getDocs(queryDoc).then((response) => {
         setCoachUnavailability(
           response.docs.map((data) => {
-            //console.log(data.data());
+            ////console.log(data.data());
             return { ...data.data(), un_id: data.id };
           })
         );
@@ -2024,14 +2024,14 @@ setmypreferplanName(mypreferplan[0].plan_name);
     settimeslot_load(true);
 // after 26-12-2023
 
-console.log('on load array');
-    console.log(date);
+//console.log('on load array');
+    //console.log(date);
     // setmeetingtime('');
       var tomorrow = new Date(date);
     
       var t_date = new Date();
     
-      console.log('t date', t_date);
+      //console.log('t date', t_date);
     
     
       if(tomorrow.getDay() == 0){
@@ -2065,25 +2065,25 @@ console.log('on load array');
     }
       
     
-    console.log(tomorrow.getDay(),'tommorow');
+    //console.log(tomorrow.getDay(),'tommorow');
     
     
     
-    console.log(meetingday);
+    //console.log(meetingday);
     
     
     
     
       var todayDate = new Date(tomorrow).toISOString().slice(0, 10);
     
-      //console.log(todayDate);
+      ////console.log(todayDate);
     
 // 26-12-2023 old
     // var tomorrow = new Date(date);
     // tomorrow.setDate(date.getDate() + 1);
     // var todayDate = new Date(tomorrow).toISOString().slice(0, 10);
 
-    //console.log(todayDate);
+    ////console.log(todayDate);
 
     getMeetingByDate(todayDate);
 
@@ -2093,7 +2093,7 @@ console.log('on load array');
     var endTime = "";
     const d = date;
     var selectedDay = date.getDay();
-    ////console.log("selected days: " + selectedDay + "");
+    //////console.log("selected days: " + selectedDay + "");
 
     setDate(date);
     setMonth(date.toLocaleString("default", { month: "long" }));
@@ -2105,8 +2105,8 @@ console.log('on load array');
 
    getCoachAvailability(todayDate);
 
-      // ////console.log(res);
-      ////console.log(data);
+      // //////console.log(res);
+      //////console.log(data);
 
 
 
@@ -2118,7 +2118,7 @@ console.log('on load array');
 
   // useEffect(() => {
 
-  //   console.log('get timeslot', date);
+  //   //console.log('get timeslot', date);
 
   //   // Using setTimeout to delay the execution of getTimeslots by 3 seconds
   //   const timeoutId = setTimeout(() => {
@@ -2187,16 +2187,16 @@ console.log('on load array');
 
 
   // useEffect(() => {
-  //   //console.log('i am here');
-  //   //console.log(clientCountry);
+  //   ////console.log('i am here');
+  //   ////console.log(clientCountry);
 
   //   if(client != null ){
 
   //     const foundObject = country_data.some(obj => obj.country === country_sel);
 
-  //     //console.log(country_sel);
-  //     //console.log(foundObject); // Output: true (if found), false otherwise
-  //     //console.log('i am here');
+  //     ////console.log(country_sel);
+  //     ////console.log(foundObject); // Output: true (if found), false otherwise
+  //     ////console.log('i am here');
 
   //     if(!foundObject){
   //       client.client_country = 'South Africa';
@@ -2244,29 +2244,29 @@ console.log('on load array');
 
 const getCoachAvailability = async (todayDate :string) => {
 
-  console.log('on load array',todayDate);;
+  //console.log('on load array',todayDate);;
   // Parse the string into a Date object
 const dateObject = new Date(todayDate);
 
 // Get the two-digit date
 const twoDigitDate = ('0' + dateObject.getDate()).slice(-2);
-  console.log('testtt',todayDate,coachesFirebaseId);
-  //console.log(nextSevenDay[0].date, nextSevenDay[1].date,nextSevenDay[2].date,nextSevenDay[3].date,nextSevenDay[4].date,nextSevenDay[5].date,nextSevenDay[6].date);
+  //console.log('testtt',todayDate,coachesFirebaseId);
+  ////console.log(nextSevenDay[0].date, nextSevenDay[1].date,nextSevenDay[2].date,nextSevenDay[3].date,nextSevenDay[4].date,nextSevenDay[5].date,nextSevenDay[6].date);
   const coachId = coachesFirebaseId;
   const schedulesCollection = collection(database, 'schedules');
   const queryDoc = query(schedulesCollection, where("coach_id", "==", coachId), where("date","==",twoDigitDate));
-  console.log('coach avbl');
+  //console.log('coach avbl');
   try {
     const response = await getDocs(queryDoc);
     const fetchedAvailability = response.docs.map((data) => {
-      console.log(data.data());
-      console.log('coach avbl2');
+      //console.log(data.data());
+      //console.log('coach avbl2');
       return { ...data.data(), availability_id: data.id };
     });
     setCoachAvailability(fetchedAvailability);
   } catch (error) {
-    console.log('coach avbl3');
-    console.error('Error fetching data:', error);
+    //console.log('coach avbl3');
+    //console.error('Error fetching data:', error);
   }
 };
 
@@ -2281,7 +2281,7 @@ const handleLanguageChange = (e) => {
 
    
     if (e.target.options[i].selected) {
-      console.log(e.target.options[i]);
+      //console.log(e.target.options[i]);
       selectedLanguages.push(e.target.options[i].value);
     }
   }
@@ -2312,17 +2312,17 @@ const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
 // const saTimeZone = 'Africa/Johannesburg';
 // const saFormattedDate = givenDate.toLocaleString('en-US', { timeZone: saTimeZone });
 
-// console.log(`Given date and time in IST: ${givenDate}`);
-// console.log(`Converted date and time in SAST: ${saFormattedDate}`);
+// //console.log(`Given date and time in IST: ${givenDate}`);
+// //console.log(`Converted date and time in SAST: ${saFormattedDate}`);
 //     let currentTime=`00:00:00`;
 //     if(date.getDate() == now.getDate() && date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth()){
 //     currentTime = `${currentHours}:${currentMinutes < 10 ? '0' : ''}${currentMinutes}:00`;
 //     }else{
 //       currentTime = `00:00:00`;
 //     }
-//     console.log(date.getDate(),date.getFullYear(),date.getMonth());
-// console.log(now.getDate(),now.getFullYear(),now.getMonth());
-//     console.log('terrr');
+//     //console.log(date.getDate(),date.getFullYear(),date.getMonth());
+// //console.log(now.getDate(),now.getFullYear(),now.getMonth());
+//     //console.log('terrr');
 //     if(mycoach != null){
 //       if(mycoach[0].start_time){
 //  var starttime = mycoach[0].start_time;
@@ -2349,7 +2349,7 @@ const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
 // }else{
 //   var timeslots = [];
 // }
-// //console.log(meetingByDate);
+// ////console.log(meetingByDate);
 
 // while (starttime < endtime) {
 
@@ -2357,7 +2357,7 @@ const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
 //   if (starttime >= currentTime) {
 //   if(starttime < endtime){
     
-//       console.log(currentTime);
+//       //console.log(currentTime);
 
 //   if(!isReserved(starttime)){
 //   timeslots.push(starttime);
@@ -2387,17 +2387,17 @@ const givenDate =date;
 const saTimeZone = 'Africa/Johannesburg';
 const saFormattedDate = givenDate.toLocaleString('en-US', { timeZone: saTimeZone });
 
-console.log(`Given date and time in IST: ${givenDate}`);
-console.log(`Converted date and time in SAST: ${saFormattedDate}`);
+//console.log(`Given date and time in IST: ${givenDate}`);
+//console.log(`Converted date and time in SAST: ${saFormattedDate}`);
   let currentTime=`00:00:00`;
   if(date.getDate() == now.getDate() && date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth()){
   currentTime = `${currentHours}:${currentMinutes < 10 ? '0' : ''}${currentMinutes}:00`;
   }else{
     currentTime = `00:00:00`;
   }
-  console.log(date.getDate(),date.getFullYear(),date.getMonth());
-console.log(now.getDate(),now.getFullYear(),now.getMonth());
-  console.log('terrr');
+  //console.log(date.getDate(),date.getFullYear(),date.getMonth());
+//console.log(now.getDate(),now.getFullYear(),now.getMonth());
+  //console.log('terrr');
 //   if(mycoach != null){
 //     if(mycoach[0].start_time){
 // var starttime = mycoach[0].start_time;
@@ -2425,7 +2425,7 @@ if(coachAvailability && coachAvailability.length !=0){
 
   for (let index = 0; index < coachAvailability.length; index++) {
     
-    console.log('meetingday',meetingday);
+    //console.log('meetingday',meetingday);
     if(coachAvailability[index].day == meetingday){
 
 
@@ -2466,7 +2466,7 @@ var timeslots = [starttime];
 }else{
 var timeslots = [];
 }
-//console.log(meetingByDate);
+////console.log(meetingByDate);
 
 while (starttime < endtime) {
 
@@ -2474,7 +2474,7 @@ starttime = addMinutes(starttime, interval);
 if (starttime >= currentTime) {
 if(starttime < endtime){
   
-    console.log(currentTime);
+    //console.log(currentTime);
 
 if(!isReserved(starttime)){
 timeslots.push(starttime);
@@ -2485,7 +2485,7 @@ settimeslot_load(false);
 }
 
 setarray1(timeslots);
-console.log('on load array',timeslots);
+//console.log('on load array',timeslots);
 
 }, [coachAvailability]);
 
@@ -2499,9 +2499,9 @@ console.log('on load array',timeslots);
   
 
 function handleFileChange(event) {
+  ////console.log('test');
   //console.log('test');
-  console.log('test');
-  console.log(event.target.files[0]);
+  //console.log(event.target.files[0]);
   setSuccessMessage('');
   setErrorMessage('');
   setf_name('');
@@ -2551,16 +2551,16 @@ function profile2(){
     uploadTask.on("state_changed",
       (snapshot) => {
 
-        console.log('snapshot');
+        //console.log('snapshot');
 
       },
-  (err) => console.log(err),
+  (err) => //console.log(err),
       () => {
   // download url
       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-      console.log(url);
+      //console.log(url);
       setfileUrl2(url);
-      console.log('File Uploaded!');
+      //console.log('File Uploaded!');
   });
   }
   );
@@ -2584,7 +2584,7 @@ function profile2(){
  
 
   function handleSearch(event) {
-    //console.log(event.target);
+    ////console.log(event.target);
    setSearchVal(event.target.value);
 //handleSubmit();
 
@@ -2597,7 +2597,7 @@ function profile2(){
  
      if (file != null) {
       
-        //console.log(file);
+        ////console.log(file);
        // Upload the file to Firebase Cloud Storage
       // const storageRef = storage().ref();
        //const fileRef = storageRef.child('files/' + file.name);
@@ -2608,7 +2608,7 @@ function profile2(){
 
   // Convert the number to a string and pad it with leading zeros if necessary
   const randomNumber = randomNum.toString().padStart(3, '0');
-  //console.log(randomNumber);
+  ////console.log(randomNumber);
        randomString +=randomNumber;
   
        // Generate three random letters
@@ -2616,16 +2616,16 @@ function profile2(){
          const randomCode = Math.floor(Math.random() * (122 - 97 + 1)) + 97;
          const randomLetter = String.fromCharCode(randomCode);
          randomString += randomLetter;
-         //console.log(randomLetter);
+         ////console.log(randomLetter);
        }
 
     
 
        const uniqueId = new Date().getTime();
-       //console.log(uniqueId);
+       ////console.log(uniqueId);
        randomString +=uniqueId;
 
-       //console.log(randomString);
+       ////console.log(randomString);
      const storageRef = ref(storage, `/resources/`+randomString+``)
        const uploadTask =  uploadBytesResumable(storageRef, file);
        uploadTask.on("state_changed",
@@ -2635,20 +2635,20 @@ function profile2(){
          );
  // update progress
 
- console.log('workkk')
+ //console.log('workkk')
          setPercent(percent);
          },
          (err) => {
-          console.error(err); // Log the error
+          //console.error(err); // Log the error
         },
          () => {
      // download url
          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-         //console.log(url);
+         ////console.log(url);
          setfileName(file.name);
          
          setfileType(file.type);
-         console.log(url);
+         //console.log(url);
          setfileUrl(url);
          setshowpercent(false);
          setfilecount(filecount + 1);
@@ -2664,7 +2664,7 @@ function profile2(){
 
      
      function addInFirebase() {
-       console.log('before');
+       //console.log('before');
       const today = new Date();
 const date = today.getDate();
 const month = today.getMonth() + 1; // add 1 because months are zero-indexed
@@ -2687,11 +2687,11 @@ setErrorMessage("");
             //setErrorMessage("File Uploaded");
             getFiles();
 
-            console.log('after');
+            //console.log('after');
           
           })
           .catch((err) => {
-            console.error(err);
+            //console.error(err);
           })
          
        }
@@ -2704,7 +2704,7 @@ setErrorMessage("");
      }
      
      const updateCancelMeet = async (c_id: any) =>{
-      console.log('notified',c_id);
+      //console.log('notified',c_id);
       let a=0;
     
      
@@ -3683,7 +3683,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                         join video
                     </a>
                 ) : (
-                  <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>
+                  <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); //console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>
                   join video
               </a>
 
@@ -3746,7 +3746,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                                 target="_blank"
                                
                               > */}
-                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
+                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); //console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
                               {/* </Link> */}
                               {/* <Link
                                 passHref

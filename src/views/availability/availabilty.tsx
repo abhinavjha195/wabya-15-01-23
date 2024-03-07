@@ -61,14 +61,14 @@ const Availability = () => {
     tomorrow.setDate(date.getDate() + 1);
     var todayDate = new Date(tomorrow).toISOString().slice(0, 10);
 
-    console.log(todayDate);
+    //console.log(todayDate);
 
 
     var startTime = "";
     var endTime = "";
     const d = date;
     var selectedDay = date.getDay();
-    //console.log("selected days: " + selectedDay + "");
+    ////console.log("selected days: " + selectedDay + "");
 
     setDate(date);
     setMonth(date.toLocaleString("default", { month: "long" }));
@@ -79,8 +79,8 @@ const Availability = () => {
 
    
 
-      // //console.log(res);
-      //console.log(data);
+      // ////console.log(res);
+      ////console.log(data);
 
 
 
@@ -120,7 +120,7 @@ const Availability = () => {
                 getMyUnavailability();
               })
               .catch((err) => {
-                console.error(err);
+                //console.error(err);
               });
           });
         } else {
@@ -138,15 +138,15 @@ const Availability = () => {
      
     })
       .then((docRef) => {
-        console.log(docRef)
-        console.log(docRef.id)
+        //console.log(docRef)
+        //console.log(docRef.id)
       
 setisShowmsg(true);
 getMyUnavailability();
 
       })
       .catch((err) => {
-        console.error(err);
+        //console.error(err);
       })
     }
   })
@@ -167,7 +167,7 @@ getMyUnavailability();
 
   const getMyUnavailability = async () => {
 
-    console.log('testtt');
+    //console.log('testtt');
     const coachId = sessionStorage.getItem('coachId');
     const meetingSessionCollection = collection(database, 'unavailability');
     const queryDoc = query(meetingSessionCollection, where("coach_id", "==", coachId));
@@ -175,7 +175,7 @@ getMyUnavailability();
       await getDocs(queryDoc).then((response) => {
         setMyUnavailability(
           response.docs.map((data) => {
-            console.log(data.data());
+            //console.log(data.data());
             return { ...data.data(), un_id: data.id };
           })
         );
@@ -202,7 +202,7 @@ getMyUnavailability();
 
 
   const showForm = () => {
-    console.log('testtttt');
+    //console.log('testtttt');
     
     setisFormShow(true);
   };
@@ -211,7 +211,7 @@ getMyUnavailability();
   const checkAvailability = () => {
     const dateString = `${Day_} ${Month} ${Date_}`;
     const isDateAvailable = MyUnavailability.find((item) => item.date === dateString);
-console.log(isDateAvailable);
+//console.log(isDateAvailable);
     if(isDateAvailable){
       setUnavailableId(isDateAvailable.un_id);
 
@@ -228,14 +228,14 @@ console.log(isDateAvailable);
 
   const deleteDocument = async (deleteId) => {
     try {
-      console.log("Deleting document with ID:", deleteId); // Debugging
+      //console.log("Deleting document with ID:", deleteId); // Debugging
       const fieldToEdit = doc(database, 'unavailability', deleteId);
-      console.log("Document reference:", fieldToEdit); // Debugging
+      //console.log("Document reference:", fieldToEdit); // Debugging
       await deleteDoc(fieldToEdit);
       setisShowmsg(true);
       await getMyUnavailability();
     } catch (err) {
-      console.error("Error deleting document: ", err);
+      //console.error("Error deleting document: ", err);
     }
   };
 
@@ -258,16 +258,16 @@ console.log(isDateAvailable);
  }, [Day_,Month,Date_,MyUnavailability]);
 
  useEffect(() => {
-  console.log('testtt');
+  //console.log('testtt');
 
   const getProfile = async () => {
 
-   console.log('testtt');
+   //console.log('testtt');
     const coachIds = sessionStorage.getItem('coachId');
     const userCollection = collection(database, 'coaches_user');
     const userDocRef = doc(userCollection, coachIds);
     const userDoc = await getDoc(userDocRef);
-    console.log(userDoc.data());
+    //console.log(userDoc.data());
     setuserProfile(userDoc.data())
     
   
@@ -319,7 +319,7 @@ var endtime = userProfile.end_time;
 //var endtime = "17:00:00";
 var timeslots = [starttime];
 
-//console.log(meetingByDate);
+////console.log(meetingByDate);
 
 while (starttime < endtime) {
 
@@ -335,8 +335,8 @@ timeslots.push(starttime);
 
 setarray1(timeslots);
 
-console.log('here');
-console.log(userProfile);
+//console.log('here');
+//console.log(userProfile);
 }, [userProfile]);
   return (
 

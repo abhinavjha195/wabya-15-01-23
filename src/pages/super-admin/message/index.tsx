@@ -39,21 +39,21 @@ const MsgList = ()  => {
 
   useEffect(() => {
    if(msgData.length>0){
-    console.log(msgData);
+    //console.log(msgData);
 
     const messeges=[];
     for (let index = 0; index < msgData.length; index++) {
 
 
-      //console.log(data.data[index].room);
+      ////console.log(data.data[index].room);
       
         for (let index2 = 0; index2 < fireData.length; index2++) {
       
-          //console.log(meeting[index].meetingName);
+          ////console.log(meeting[index].meetingName);
       
           if(msgData[index].senderId == fireData[index2].client_id){
 
-            console.log('working');
+            //console.log('working');
             messeges.push({client_name:fireData[index2].client_name,msg:msgData[index].message})
           
           }
@@ -65,7 +65,7 @@ const MsgList = ()  => {
 
       setClientMsg(messeges);
    }
-   console.log(fireData);
+   //console.log(fireData);
   }, [msgData])
 
   // fetch all client records

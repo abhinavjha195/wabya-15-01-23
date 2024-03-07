@@ -79,13 +79,13 @@ const RegisterPage = () => {
         setplanId(storedValue);
       }
 else{
-  console.log('i am here in localstorage');
+  //console.log('i am here in localstorage');
   router.push('/frontend/pricing');
 }
     
     } catch (error) {
       // Handle potential errors accessing localStorage here
-      console.error('Error accessing localStorage:', error);
+      //console.error('Error accessing localStorage:', error);
       router.push('/frontend/pricing');
     }
   }, []);
@@ -111,7 +111,7 @@ else{
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   } 
 
   //  yup form validation
@@ -147,7 +147,7 @@ else{
 
     onSubmit: async (values, action) => {
 
-      console.log('here');
+      //console.log('here');
       setConfirmMsg(false);
       setEmailExist(false);
       setTermMsg(false);
@@ -158,7 +158,7 @@ if(termChecked != true){
 else{
 if(values.clientPassword == values.clientRePassword){
       if(await countData(values.clientEmail.toLowerCase()) == 0){
-      console.log(
+      //console.log(
         "🚀 ~ file: index.tsx ~ line 81 ~ Registration ~ values",
         values,
        
@@ -203,11 +203,11 @@ if(values.clientPassword == values.clientRePassword){
       //         };
       //         emailjs.sendForm('service_48nilue', 'template_3uazkzk', emailParams, 'bHrOxc3becdFqRykK')
       // .then((result) => {
-      //    // console.log(result.text);
+      //    // //console.log(result.text);
       //     toast.success('Client registered successfully')
       //     router.push('/client/login')
       // }, (error) => {
-      //     console.log(error.text);
+      //     //console.log(error.text);
       // });
              
 
@@ -315,7 +315,7 @@ setsuccessMsg(true);
 
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
 
       );
@@ -336,7 +336,7 @@ setsuccessMsg(true);
 
   });
 
-console.log(
+//console.log(
   "🚀 ~ file: index.tsx ~ line 90 ~ Registration ~ errors",
   errors
 );
@@ -370,11 +370,11 @@ useEffect(() => {
 
   // coach data fetch
   const getCoachData = async () => {
-console.log('test');
+//console.log('test');
     const queryDoc = query(coachRef, where('coach_email', '!=', ''));
 
     await getDocs(queryDoc).then(response => {
-      console.log(response.docs.length);
+      //console.log(response.docs.length);
       setCoachData(
         response.docs.map(data => {
           return { ...data.data(), coach_id: data.id }
@@ -386,11 +386,11 @@ console.log('test');
 
     // coach data fetch
     const getAllPlans = async () => {
-      console.log('testsss');
+      //console.log('testsss');
           const queryDoc = query(planRef,where('status', '==', '1'));
       
           await getDocs(queryDoc).then(response => {
-            console.log(response.docs.length);
+            //console.log(response.docs.length);
             setplanData(
               response.docs.map(data => {
                 return { ...data.data(), plan_id: data.id }
@@ -410,7 +410,7 @@ console.log('test');
           setTimeout(function() {
           const element =  document.getElementsByName("clientLanguage")[0];
           if (element) {
-            console.log('here');
+            //console.log('here');
             const offsetTop = element.offsetTop + 300;
             window.scrollTo({
               top: offsetTop,
@@ -446,11 +446,11 @@ console.log('test');
         const selectedCountryTimezone = getTimeZoneOfSelectedCountry();
    // coach data fetch
    const countData = async (client_em:string) => {
-    console.log('test');
+    //console.log('test');
         const queryDoc = query(clientRef, where('client_email', '==', client_em));
     let count_data=0
         await getDocs(queryDoc).then(response => {
-          console.log(response.docs.length); 
+          //console.log(response.docs.length); 
           count_data=response.docs.length;
         })
         return count_data;
@@ -493,7 +493,7 @@ console.log('test');
   useEffect(() => {
 
 
-    console.log(coachData);
+    //console.log(coachData);
     
     setrandomNo(Math.floor(Math.random() * (coachData.length - 0 + 1)) + 0);
 

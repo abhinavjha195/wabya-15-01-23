@@ -7,7 +7,7 @@ import { collection, getDoc, doc } from 'firebase/firestore'
 const Header = () => {
   const router = useRouter();
   const { pathname } = useRouter(); 
-  console.log(pathname);
+  //console.log(pathname);
 
 //  const router = useRouter()
   const { asPath, pathname2 } = useRouter();
@@ -29,10 +29,10 @@ let lastUrl='';
   }else{
     setshowpage(true);
   }
-    console.log('lastUrl',lastUrl);
+    //console.log('lastUrl',lastUrl);
     if (lastUrl == '/joinvideo') {
       // Reload the current page
-      console.log('yes');
+      //console.log('yes');
      // localStorage.removeItem("p_url");
 	//  if(!localStorage.getItem("front_reload")){
 	// 	localStorage.setItem("front_reload",'yes');
@@ -71,7 +71,7 @@ let lastUrl='';
 		if (coachDoc.exists()) {
 		  setCoach(coachDoc.data());
 		} else {
-		  console.log("No coach found");
+		  //console.log("No coach found");
 		}
 	  };
 	  fetchCoach();
@@ -96,7 +96,7 @@ useEffect(() => {
 		if (clientDoc.exists()) {
 		  setUser(clientDoc.data());
 		} else {
-		  console.log("No coach found");
+		  //console.log("No coach found");
 		}
 	  };
 	  fetchClient();
@@ -113,14 +113,14 @@ useEffect(() => {
 	setsignupdropdown(false);
   };
   const setsignups = () => {
-	console.log('test');
+	//console.log('test');
     setsignupdropdown(signupdropdown => !signupdropdown);
 	setlogindropdown(false);
   };
 
   const Setmenu = (event) => {
 	event.preventDefault();
-	console.log('test');
+	//console.log('test');
 	setTimeout(() => {
 
 		
@@ -143,7 +143,7 @@ useEffect(() => {
 
   const Setmenu2 = (event) => {
 	event.preventDefault();
-	console.log('test2');
+	//console.log('test2');
 	setTimeout(() => {
 
 		
@@ -168,7 +168,7 @@ useEffect(() => {
 	setmenuCollapse(false);
 	setlogindropdown(false);
 	setsignupdropdown(false);
-	console.log('route changed');
+	//console.log('route changed');
  // 1 second delay
   }, [router.pathname])
   return(

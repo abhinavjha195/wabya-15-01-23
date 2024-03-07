@@ -65,7 +65,7 @@ const ClientLoginPage = () => {
 
     const handleLogin = async (event) => {
       event.preventDefault();
-console.log('working');
+//console.log('working');
 
 setError('');
       // try {
@@ -117,7 +117,7 @@ setError('');
     } catch (error2) {
       //setError(error2.message);
 
-      console.log(error2);
+      //console.log(error2);
 
       if(error2){
 
@@ -147,7 +147,7 @@ setError('');
       //     router.push('/client/dashboard');
 
       // } catch (error) {
-      //  // console.log(error);
+      //  // //console.log(error);
       //   //setError('Incorrect password');
       // }
     };
@@ -164,16 +164,16 @@ setError('');
 else{
  // setshowpage(true);
 }
-  console.log('lastUrl',lastUrl);
+  //console.log('lastUrl',lastUrl);
   if (lastUrl == '/joinvideo2') {
     // Reload the current page
-    console.log('yes');
+    //console.log('yes');
     localStorage.removeItem("p_url2");
     router.reload();
   }
   
       localStorage.setItem("last_login_page", '/coach/login');
-  console.log('last_login',localStorage.getItem("last_login_page"));
+  //console.log('last_login',localStorage.getItem("last_login_page"));
       
     }, []);
   return (

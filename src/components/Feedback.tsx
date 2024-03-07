@@ -24,7 +24,7 @@ const Feedback = ({ clientName,clientEmail }) => {
     const handleInputChange = (event) => {
         const value = event.target.value;
         setstarRating(value);
-        console.log(value);
+        //console.log(value);
       };
 
       const handleCancel2 = () => {
@@ -39,7 +39,7 @@ const Feedback = ({ clientName,clientEmail }) => {
       async function sendMailFunc (email,content,$subject){   
         let response = await sendMail(email,$subject,content);   
       
-        console.log('response',response);
+        //console.log('response',response);
       }   
 
 
@@ -118,7 +118,7 @@ const Feedback = ({ clientName,clientEmail }) => {
   sendMailFunc('youare@wabya.com',adminmsg,'Feedback'); 
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
             setIsModalVisible(false);
           }else{

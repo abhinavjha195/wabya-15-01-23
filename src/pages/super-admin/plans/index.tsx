@@ -65,7 +65,7 @@ const AddPlan = () => {
         setPAYGPrice('')
       })
       .catch((err) => {
-        console.error(err);
+        //console.error(err);
       })
   }
 
@@ -106,7 +106,7 @@ const AddPlan = () => {
       setIsUpdate(false)
     })
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
     })
   }
 

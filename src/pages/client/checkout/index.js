@@ -40,7 +40,7 @@ export default function Home() {
   
     //   return numberOfMeetings;
     } catch (error) {
-      console.error("Error getting plans: ", error);
+      //console.error("Error getting plans: ", error);
    //   return 0; // Return 0 if there was an error
     }
   };
@@ -57,7 +57,7 @@ export default function Home() {
     
   //   } catch (error) {
   //     // Handle potential errors accessing localStorage here
-  //     console.error('Error accessing localStorage:', error);
+  //     //console.error('Error accessing localStorage:', error);
   //   }
   // }, []);
 
@@ -78,10 +78,10 @@ export default function Home() {
     //     if (clientDoc.exists()) {
     //       setClient(clientDoc.data());
     
-    //       // ////console.log('here');
-    //       ////console.log(clientDoc.data);
+    //       // //////console.log('here');
+    //       //////console.log(clientDoc.data);
     //     } else {
-    //       ////console.log("No client found");
+    //       //////console.log("No client found");
     //     }
     //   };
       
@@ -102,7 +102,7 @@ export default function Home() {
     
     } catch (error) { 
       // Handle potential errors accessing localStorage here
-      console.error('Error accessing localStorage:', error);
+      //console.error('Error accessing localStorage:', error);
     }
   }, []);
 
@@ -123,7 +123,7 @@ if(new_plan_id != ""){
     
 if(plan_detail != null){
   
-  console.log('plan_detail',plan_detail);
+  //console.log('plan_detail',plan_detail);
   if(plan_detail.length > 0){
     if(journey_type == 'bundle'){
     setPrice(plan_detail[0].bundle_price);

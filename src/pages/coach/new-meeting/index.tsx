@@ -29,24 +29,24 @@ const Newmeet = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem('coachId')
-console.log('abc');
+//console.log('abc');
 
 
     if(!token){
         router.push('/coach/login')
     }else{
       getClients();
-      console.log(client);
+      //console.log(client);
     }
 }, [])
 
 // get all meeting data
 const getMeeting = async () => {
-  console.log('calling');
+  //console.log('calling');
   const userId = sessionStorage.getItem("coachId");
 // Get the current date
 const currentDate = new Date();
-console.log(currentDate);
+//console.log(currentDate);
   const queryDoc = query(meetingRef, where("coachId", "==", userId),where("isNotified", "==", 0));
 
   await getDocs(queryDoc).then((response) => {
@@ -62,7 +62,7 @@ console.log(currentDate);
 
 useEffect(() => {
 
-    console.log(client);
+    //console.log(client);
     getMeeting();
 
 }, [client])
@@ -93,7 +93,7 @@ const findClientById = (clientId) => {
  const handleCheckboxChange = (event) => {
   const value = event.target.value;
   
-  console.log(value);
+  //console.log(value);
   if (value === 'all') {
     // Handle 'all' checkbox if needed
     setIsActiveFilter('all');
@@ -107,7 +107,7 @@ const findClientById = (clientId) => {
 
 
 const cancelMeet = (meet_iddd) => {
-  console.log(meet_iddd);
+  //console.log(meet_iddd);
  
   const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
 
@@ -123,7 +123,7 @@ const cancelMeet = (meet_iddd) => {
    
   })
   .catch((err) => {
-    console.log(err);
+    //console.log(err);
   })
 
   getMeeting();
@@ -131,7 +131,7 @@ const cancelMeet = (meet_iddd) => {
 
 
  const removeNotification = (meet_iddd) => {
-  console.log(meet_iddd);
+  //console.log(meet_iddd);
  
   const fieldToEdit2 = doc(database, 'meeting', meet_iddd);
 
@@ -147,7 +147,7 @@ const cancelMeet = (meet_iddd) => {
    
   })
   .catch((err) => {
-    console.log(err);
+    //console.log(err);
   })
 
   getMeeting();

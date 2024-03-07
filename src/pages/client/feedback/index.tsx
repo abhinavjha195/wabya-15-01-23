@@ -22,7 +22,7 @@ const Feedback = () => {
     const handleInputChange = (event) => {
         const value = event.target.value;
         setstarRating(value);
-        console.log(value);
+        //console.log(value);
       };
 
 
@@ -46,7 +46,7 @@ const Feedback = () => {
              setMessage(true);
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
           }else{
             seterrmessage(true);

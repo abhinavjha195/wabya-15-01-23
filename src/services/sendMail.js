@@ -12,6 +12,6 @@ export const sendMail = async (to_mail,sub,msg) => {
       });
     return request.status === 200 ? true : false;;
   } catch (err) {
-    console.error(err);
+    //console.error(err);
   }
 };			

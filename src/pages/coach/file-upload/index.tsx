@@ -128,7 +128,7 @@ const FileUpload = () => {
   const [murl, setmurl] = useState('https://abhinav19.daily.co/n8qwqVewdGXwVk9dNDzg');
 
   function handleFileChange(event) {
-    console.log('test');
+    //console.log('test');
     setFile(event.target.files[0]);
 //handleSubmit();
   }
@@ -139,7 +139,7 @@ const FileUpload = () => {
  
      if (file != null) {
       
-        console.log(file);
+        //console.log(file);
        // Upload the file to Firebase Cloud Storage
       // const storageRef = storage().ref();
        //const fileRef = storageRef.child('files/' + file.name);
@@ -150,7 +150,7 @@ const FileUpload = () => {
 
   // Convert the number to a string and pad it with leading zeros if necessary
   const randomNumber = randomNum.toString().padStart(3, '0');
-  console.log(randomNumber);
+  //console.log(randomNumber);
        randomString +=randomNumber;
   
        // Generate three random letters
@@ -158,16 +158,16 @@ const FileUpload = () => {
          const randomCode = Math.floor(Math.random() * (122 - 97 + 1)) + 97;
          const randomLetter = String.fromCharCode(randomCode);
          randomString += randomLetter;
-         console.log(randomLetter);
+         //console.log(randomLetter);
        }
 
     
 
        const uniqueId = new Date().getTime();
-       console.log(uniqueId);
+       //console.log(uniqueId);
        randomString +=uniqueId;
 
-       console.log(randomString);
+       //console.log(randomString);
      const storageRef = ref(storage, `/resources/`+randomString+``)
        const uploadTask =  uploadBytesResumable(storageRef, file);
        uploadTask.on("state_changed",
@@ -178,11 +178,11 @@ const FileUpload = () => {
  // update progress
          setPercent(percent);
          },
-     (err) => console.log(err),
+     (err) => //console.log(err),
          () => {
      // download url
          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-         console.log(url);
+         //console.log(url);
          setfileName(file.name);
          
          setfileType(file.type);
@@ -221,7 +221,7 @@ const year = today.getFullYear();
               //router.push('/client/login')
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
            
          }

@@ -34,7 +34,7 @@ export default function Success() {
         async function sendMailFunc (email,content,subject){   
             let response = await sendMail(email,subject,content);   
           
-            console.log('response',response);
+            //console.log('response',response);
           }   
 
 
@@ -57,7 +57,7 @@ export default function Success() {
           
             //   return numberOfMeetings;
             } catch (error) {
-              console.error("Error getting client: ", error);
+              //console.error("Error getting client: ", error);
            //   return 0; // Return 0 if there was an error
             }
           };
@@ -84,7 +84,7 @@ export default function Success() {
           
             //   return numberOfMeetings;
             } catch (error) {
-              console.error("Error getting plans: ", error);
+              //console.error("Error getting plans: ", error);
            //   return 0; // Return 0 if there was an error
             }
           };
@@ -109,7 +109,7 @@ export default function Success() {
           
             //   return numberOfMeetings;
             } catch (error) {
-              console.error("Error getting meetings: ", error);
+              //console.error("Error getting meetings: ", error);
            //   return 0; // Return 0 if there was an error
             }
           };
@@ -213,13 +213,13 @@ export default function Success() {
        
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       })
 
 
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       })
   
      
@@ -236,7 +236,7 @@ export default function Success() {
             }
            }, [payment_id]);
            useEffect(() => {
-            console.log(payment_detail);
+            //console.log(payment_detail);
 
             if(payment_detail != null){
               setnew_journey_type(payment_detail[0].journey_type)
@@ -256,7 +256,7 @@ export default function Success() {
                 useEffect(() => {
                     if(plan_detail != null){
                     
-                      console.log('plan_detail',plan_detail);
+                      //console.log('plan_detail',plan_detail);
                         setplan_total_ses(plan_detail[0].total_session)
                      getClientDetail();
                     }
@@ -266,7 +266,7 @@ export default function Success() {
 
                 useEffect(() => {
                     if(client_detail != null){
-                    console.log(client_detail);
+                    //console.log(client_detail);
                     setclient_total_ses(client_detail[0].total_session);
                     setclient_remaining_ses(client_detail[0].remainingSession);
                     }
@@ -275,9 +275,9 @@ export default function Success() {
 
                      useEffect(() => {
                         if(client_total_ses != -1){
-                        console.log('client_total_ses',client_total_ses);
-                        console.log('client_remaining_ses',client_remaining_ses);
-                        console.log('plan_total_session',plan_total_ses);
+                        //console.log('client_total_ses',client_total_ses);
+                        //console.log('client_remaining_ses',client_remaining_ses);
+                        //console.log('plan_total_session',plan_total_ses);
                     setclient_remaining_update_ses(parseInt(client_remaining_ses,10) + parseInt(plan_total_ses,10));
                     if(client_remaining_ses == 0){
                         setclient_total_update_ses(plan_total_ses);
@@ -290,8 +290,8 @@ export default function Success() {
 
                          useEffect(() => {
                             if(client_total_update_ses != -1){
-                            console.log('client_total_update_session',client_total_update_ses);
-                            console.log('client_remaining_update_session',client_remaining_update_ses);
+                            //console.log('client_total_update_session',client_total_update_ses);
+                            //console.log('client_remaining_update_session',client_remaining_update_ses);
                             updatePlan();
                      
                             }

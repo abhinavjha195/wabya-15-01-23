@@ -41,7 +41,7 @@ const Header = () => {
           if (coachDoc.exists()) {
             setCoach(coachDoc.data());
           } else {
-            console.log("No coach found");
+            //console.log("No coach found");
           }
         };
         fetchCoach();
@@ -65,7 +65,7 @@ const Header = () => {
         if (clientDoc.exists()) {
           setUser(clientDoc.data());
         } else {
-          console.log("No coach found");
+          //console.log("No coach found");
         }
       };
       fetchClient();

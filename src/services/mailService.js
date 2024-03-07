@@ -26,9 +26,9 @@ export async function sendMail(toEmail,subject,otpText) {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       throw new Error(error);
-	  console.log("Email Err...");  
+	  //console.log("Email Err...");  
     } else {
-      console.log("Email Sent");
+      //console.log("Email Sent");
       return true;
     }
   });

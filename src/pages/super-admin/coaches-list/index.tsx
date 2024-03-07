@@ -53,7 +53,7 @@ const CoachesList = ()  => {
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   } 
 
   // fetch all coaches records
@@ -117,7 +117,7 @@ const CoachesList = ()  => {
    
     })
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
     })
   }
 
@@ -211,7 +211,7 @@ const CoachesList = ()  => {
      
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       })
     }
 

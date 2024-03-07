@@ -73,10 +73,10 @@ const ClientLoginPage = () => {
     else{
       setshowpage(true);
     }
-      console.log('lastUrl',lastUrl);
+      //console.log('lastUrl',lastUrl);
       if (lastUrl == '/joinvideo') {
         // Reload the current page
-        console.log('yes');
+        //console.log('yes');
         localStorage.removeItem("p_url");
         router.reload();
       }
@@ -87,7 +87,7 @@ const ClientLoginPage = () => {
       event.preventDefault();
       localStorage.removeItem('clientRegisteredId');
       setError(null);
-console.log('working');
+//console.log('working');
       try {
         // Check if the user exists in the database
         const usersRef = collection(database, 'client_user');
@@ -156,7 +156,7 @@ console.log('working');
           router.push('/client/dashboard');
 
       } catch (error) {
-       // console.log(error);
+       // //console.log(error);
         //setError('Incorrect password');
       }
     };

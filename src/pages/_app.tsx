@@ -76,8 +76,8 @@ const App = (props: ExtendedAppProps) => {
 
   const { asPath, pathname } = useRouter();
 
-  // console.log(asPath); // '/blog/xyz'
-  // console.log(pathname); // '/blog/[slug]'
+  // //console.log(asPath); // '/blog/xyz'
+  // //console.log(pathname); // '/blog/[slug]'
 
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 

@@ -103,7 +103,7 @@ const VerticalLayout = (props: LayoutProps) => {
         setCalUsername('')
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       })
     }
   }
@@ -122,17 +122,17 @@ const VerticalLayout = (props: LayoutProps) => {
         const field2 = coachDoc.get("coach_uname");
 
         if (!field1 && !field2) {
-          console.log("Error: Both fields are empty.");
+          //console.log("Error: Both fields are empty.");
           setCalApi(false);
         } else {
-          console.log("ok");
+          //console.log("ok");
           setCalApi(true);
         }
 
         if (coachDoc.exists()) {
           setCoach(coachDoc.data());
         } else {
-          console.log("No coach found");
+          //console.log("No coach found");
         }
       };
       fetchCoach();

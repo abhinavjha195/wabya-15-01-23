@@ -40,14 +40,14 @@ const getFiles = async () => {
   const queryDoc = query(meetRef, where("parentId", "==", sessionStorage.getItem("coachId")));
 
   await getDocs(queryDoc).then((response) => {
-    console.log(response.docs);
+    //console.log(response.docs);
     setAllFiles(
       response.docs.map((data) => {
         return { ...data.data(), file_id: data.id };
       })
     );
    
-    console.log(allFiles);
+    //console.log(allFiles);
     setshowfile(true);
   });
 };
@@ -88,7 +88,7 @@ useEffect(() => {
         if (coachDoc.exists()) {
           setCoach(coachDoc.data());
         } else {
-          console.log("No coach found");
+          //console.log("No coach found");
         }
       };
       fetchCoach();
@@ -102,16 +102,16 @@ useEffect(() => {
 
 
   useEffect(() => {
-    console.log('testtt');
+    //console.log('testtt');
   
     const editAdmin = async () => {
   
-     console.log('testtt');
+     //console.log('testtt');
       const coachIds = sessionStorage.getItem('coachId');
       const userCollection = collection(database, 'coaches_user');
       const userDocRef = doc(userCollection, coachIds);
       const userDoc = await getDoc(userDocRef);
-      console.log(userDoc.data());
+      //console.log(userDoc.data());
       setUserProfile(userDoc.data().coach_profile)
       
     
@@ -133,8 +133,8 @@ useEffect(() => {
     
   }, [allFiles]);
   function handleFileChange(event) {
-    console.log('test');
-    console.log(event.target.files[0]);
+    //console.log('test');
+    //console.log(event.target.files[0]);
     setSuccessMessage('');
     setErrorMessage('');
     setf_name('');
@@ -158,7 +158,7 @@ useEffect(() => {
 
 
   function handleSearch(event) {
-    console.log(event.target);
+    //console.log(event.target);
    setSearchVal(event.target.value);
 //handleSubmit();
 
@@ -170,7 +170,7 @@ useEffect(() => {
     setErrorMessage('');
      if (file != null) {
       
-        console.log(file);
+        //console.log(file);
        // Upload the file to Firebase Cloud Storage
       // const storageRef = storage().ref();
        //const fileRef = storageRef.child('files/' + file.name);
@@ -181,7 +181,7 @@ useEffect(() => {
 
   // Convert the number to a string and pad it with leading zeros if necessary
   const randomNumber = randomNum.toString().padStart(3, '0');
-  console.log(randomNumber);
+  //console.log(randomNumber);
        randomString +=randomNumber;
   
        // Generate three random letters
@@ -189,16 +189,16 @@ useEffect(() => {
          const randomCode = Math.floor(Math.random() * (122 - 97 + 1)) + 97;
          const randomLetter = String.fromCharCode(randomCode);
          randomString += randomLetter;
-         console.log(randomLetter);
+         //console.log(randomLetter);
        }
 
     
 
        const uniqueId = new Date().getTime();
-       console.log(uniqueId);
+       //console.log(uniqueId);
        randomString +=uniqueId;
 
-       console.log(randomString);
+       //console.log(randomString);
      const storageRef = ref(storage, `/resources/`+randomString+``)
        const uploadTask =  uploadBytesResumable(storageRef, file);
        uploadTask.on("state_changed",
@@ -209,11 +209,11 @@ useEffect(() => {
  // update progress
          setPercent(percent);
          },
-     (err) => {setErrorMessage('something went wrong'),console.log(err)},
+     (err) => {setErrorMessage('something went wrong'),//console.log(err)},
          () => {
      // download url
          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-         console.log(url);
+         //console.log(url);
          setfileName(file.name);
          
          setfileType(file.type);
@@ -253,7 +253,7 @@ useEffect(() => {
 //     document.body.removeChild(anchor);
 //   } catch (error) {
 //     // Handle any errors that occur during the process
-//     console.error('Error downloading the file:', error);
+//     //console.error('Error downloading the file:', error);
 //   }
 // };
     //  const downloadFile = (e) => {
@@ -274,7 +274,7 @@ useEffect(() => {
     //       a.click();
     //       window.URL.revokeObjectURL(url);
     //     })
-    //     .catch(error => console.error('Error downloading the file:', error));
+    //     .catch(error => //console.error('Error downloading the file:', error));
     // };
 
 
@@ -305,7 +305,7 @@ setErrorMessage("");
   element.scrollIntoView({ behavior: 'smooth' });
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
            
          }

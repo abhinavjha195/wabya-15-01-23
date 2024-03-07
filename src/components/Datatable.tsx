@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 // }
 function isSameMonth(date, targetMonth, targetYear) {
   const meetingDate = new Date(date.seconds * 1000); // Assuming 'seconds' is a Unix timestamp
-  console.log('date', meetingDate.getMonth() + 1); // Adding 1 to get the correct month
+  //console.log('date', meetingDate.getMonth() + 1); // Adding 1 to get the correct month
   return (
     meetingDate.getMonth() === targetMonth && // Adjusting for zero-based index
     meetingDate.getFullYear() === targetYear
@@ -24,13 +24,13 @@ const DataTable = ({ datesArray, meetingSession, coachName ,myPlan }) => {
       csvRows.push("Package,Hours,Earnings"); // Header row
     
       datesArray.forEach((d_arr, index) => {
-        console.log('Processing date:', d_arr);
+        //console.log('Processing date:', d_arr);
     
         const probonoCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'probono' ).length : 0;
         const noviceCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'novice').length : 0;
         const experiencedCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'experienced').length : 0;
     
-        console.log('Counts:', probonoCount, noviceCount, experiencedCount);
+        //console.log('Counts:', probonoCount, noviceCount, experiencedCount);
     
         if (index === 0) {
           const csvRow = `probono, ${probonoCount * 0.5} hours,£ 0.0`;
@@ -62,7 +62,7 @@ const DataTable = ({ datesArray, meetingSession, coachName ,myPlan }) => {
       setCsvData(csvString);
     
       // Trigger download
-      console.log('Before downloadCSV');
+      //console.log('Before downloadCSV');
       downloadCSV(csvString);
     };
     
@@ -132,13 +132,13 @@ const [csvData2, setCsvData2] = useState('');
         const csvRow = `${formattedDate}, 0.5 hours, £ 20, ,£ 20, , £ 20`;
                csvRows.push(csvRow);
 
-        //console.log('Processing date:', d_arr);
+        ////console.log('Processing date:', d_arr);
     
   //       const probonoCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'probono' ).length : 0;
   //       const noviceCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'novice').length : 0;
   //       const experiencedCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'experienced').length : 0;
     
-  //       console.log('Counts:', probonoCount, noviceCount, experiencedCount);
+  //       //console.log('Counts:', probonoCount, noviceCount, experiencedCount);
     
   //       if (index === 0) {
   //         const csvRow = `probono, ${probonoCount * 0.5} hours, £ 0.0`;
@@ -168,7 +168,7 @@ const [csvData2, setCsvData2] = useState('');
       setCsvData2(csvString);
     
       // Trigger download
-      console.log('Before downloadCSV');
+      //console.log('Before downloadCSV');
       downloadCSV2(csvString);
     };
     

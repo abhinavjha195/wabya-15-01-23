@@ -24,13 +24,13 @@ const Videocall = () => {
 
     // Event handler for a participant joining
     callObject.on('joined-meeting', async () => {
-      console.log('A user has joined the meeting!');
+      //console.log('A user has joined the meeting!');
       // ... your logic ...
     });
 
     // Event handler for a participant leaving
     callObject.on('left-meeting', (event) => {
-      console.log('Participant left:', event.participant);
+      //console.log('Participant left:', event.participant);
     });
 
     // Append the callObject's iframe to a container element

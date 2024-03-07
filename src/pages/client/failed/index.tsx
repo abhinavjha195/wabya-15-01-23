@@ -38,7 +38,7 @@ export default function Success() {
           
             //   return numberOfMeetings;
             } catch (error) {
-              console.error("Error getting meetings: ", error);
+              //console.error("Error getting meetings: ", error);
            //   return 0; // Return 0 if there was an error
             }
           };
@@ -61,7 +61,7 @@ export default function Success() {
        
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       })
 
 
@@ -81,7 +81,7 @@ export default function Success() {
             }
            }, [payment_id]);
            useEffect(() => {
-            console.log(payment_detail);
+            //console.log(payment_detail);
 
             if(payment_detail != null){
             setnew_plan_id(payment_detail[0].plan_id)

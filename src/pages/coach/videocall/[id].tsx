@@ -55,21 +55,21 @@ const VideoCallPage = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }, [router.query.id, iframeLoaded]);
 
   useEffect(() => {
-   console.log('meetId');
-   console.log(meetId);
-   console.log(videoId);
+   //console.log('meetId');
+   //console.log(meetId);
+   //console.log(videoId);
   }, [meetId]);
 
   useEffect(() => {
     if (callObject) {
       let mId='';
       callObject.on('joined-meeting', () => {
-        console.log('A user has joined the meeting!');
+        //console.log('A user has joined the meeting!');
 
 
         const coachId = sessionStorage.getItem('coachId');
@@ -104,10 +104,10 @@ const VideoCallPage = () => {
           return Promise.all(updatePromises);
         })
         .then(() => {
-          console.log('All updates completed successfully.');
+          //console.log('All updates completed successfully.');
         })
         .catch((error) => {
-          console.error('Error updating documents:', error);
+          //console.error('Error updating documents:', error);
         });
      
       
@@ -120,9 +120,9 @@ const VideoCallPage = () => {
       });
 
       callObject.on('left-meeting', (event) => {
-        console.log('Participant left:', event.participant);
+        //console.log('Participant left:', event.participant);
 
-        console.log(mId);
+        //console.log(mId);
 
         const update = doc(collection(database, "meetingSession"), mId);
         const now = new Date();

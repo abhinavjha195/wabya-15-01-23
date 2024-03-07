@@ -28,14 +28,14 @@ const ClientsBasic = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem('coachId')
-console.log('abc');
+//console.log('abc');
 
 
     if(!token){
         router.push('/coach/login')
     }else{
       getClients();
-      console.log(client);
+      //console.log(client);
     }
 }, [])
 
@@ -52,7 +52,7 @@ useEffect(() => {
       if (coachDoc.exists()) {
         setCoach(coachDoc.data());
       } else {
-        console.log("No coach found");
+        //console.log("No coach found");
       }
     };
     fetchCoach();
@@ -69,7 +69,7 @@ const getMeeting = async () => {
   const userId = sessionStorage.getItem("coachId");
 // Get the current date
 const currentDate = new Date();
-console.log(currentDate);
+//console.log(currentDate);
   const queryDoc = query(meetingRef, where("coachId", "==", userId),where("meetingApiCreated", "==", true));
 
   await getDocs(queryDoc).then((response) => {
@@ -85,7 +85,7 @@ console.log(currentDate);
 
 useEffect(() => {
 
-    console.log(client);
+    //console.log(client);
     getMeeting();
 
 }, [client])
@@ -111,7 +111,7 @@ const getClients = async () => {
  const handleCheckboxChange = (event) => {
   const value = event.target.value;
   
-  console.log(value);
+  //console.log(value);
   if (value === 'all') {
     // Handle 'all' checkbox if needed
     setIsActiveFilter('all');

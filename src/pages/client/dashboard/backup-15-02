@@ -38,7 +38,7 @@ import MeetingCancelled from "src/components/MeetingCancelled";
 async function sendMailFunc(email, content, $subject) {
   let response = await sendMail(email, $subject, content);
 
-  console.log("response", response);
+  //console.log("response", response);
 }
 
 const Dashboard = () => {
@@ -141,10 +141,10 @@ const Dashboard = () => {
         if (clientDoc.exists()) {
           setClient(clientDoc.data());
 
-          // ////console.log('here');
-          ////console.log(clientDoc.data);
+          // //////console.log('here');
+          //////console.log(clientDoc.data);
         } else {
-          ////console.log("No client found");
+          //////console.log("No client found");
         }
       };
       fetchClient();
@@ -169,15 +169,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (client != null) {
-      //console.log(client);
-      ////console.log(client.client_api);
+      ////console.log(client);
+      //////console.log(client.client_api);
       // setclientCalAPIkey("cal_test_023256ac85011cded16d8d4f8f137d99");
       //setclientCaluserName(client.client_uname);
       setclientFirebaseId(client.id);
       setclientFirebaseName(client.client_name);
       const firstName = client.client_name.split(" ")[0];
       setclientFirebaseFirstName(firstName);
-      //console.log(firstName);
+      ////console.log(firstName);
       setclientFirebaseEmail(client.client_email);
       //setcoachesCalUsername(client.assign_coach_uname);
       setclientPlanId(client.plan_id);
@@ -207,7 +207,7 @@ const Dashboard = () => {
     await getDocs(queryDoc).then((response) => {
       setMyPlan(
         response.docs.map((data) => {
-          //console.log(data);
+          ////console.log(data);
           return { ...data.data(), plan_id: data.id };
         })
       );
@@ -216,8 +216,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (clientPlanId != "") {
-      //console.log('ne wplan ');
-      console.log("clientPlanId", clientPlanId);
+      ////console.log('ne wplan ');
+      //console.log("clientPlanId", clientPlanId);
 
       fetchMyPlan();
     }
@@ -235,7 +235,7 @@ const Dashboard = () => {
     await getDocs(queryDoc).then((response) => {
       setMyPreferPlan(
         response.docs.map((data) => {
-          //console.log(data);
+          ////console.log(data);
           return { ...data.data(), plan_id: data.id };
         })
       );
@@ -244,8 +244,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (clientPreferPlanId != "") {
-      //console.log('ne wplan ');
-      console.log("prefer plan id", clientPreferPlanId);
+      ////console.log('ne wplan ');
+      //console.log("prefer plan id", clientPreferPlanId);
 
       fetchPreferPlan();
     }
@@ -253,8 +253,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (myplan != null) {
-      //console.log('ne wplan ');
-      console.log("myplan", myplan);
+      ////console.log('ne wplan ');
+      //console.log("myplan", myplan);
 
       setMyPlanName(myplan[0].plan_name);
       //getData();
@@ -263,8 +263,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (mypreferplan != null) {
-      //console.log('ne wplan ');
-      console.log("mypreferplan", mypreferplan);
+      ////console.log('ne wplan ');
+      //console.log("mypreferplan", mypreferplan);
 
       setmypreferplanName(mypreferplan[0].plan_name);
       //getData();
@@ -284,20 +284,20 @@ const Dashboard = () => {
     //  .where("parentId", "==", sessionStorage.getItem("userId"))
 
     await getDocs(queryDoc).then((response) => {
-      //console.log(response.docs);
+      ////console.log(response.docs);
       setAllFiles(
         response.docs.map((data) => {
           return { ...data.data(), file_id: data.id };
         })
       );
 
-      //console.log(allFiles);
+      ////console.log(allFiles);
       // setshowfile(true);
     });
   };
 
   const showUpdateBilling = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisUpdateBilling(true);
   };
@@ -309,7 +309,7 @@ const Dashboard = () => {
     const userCollection = collection(database, "client_user");
     const userDocRef = doc(userCollection, userIds);
     const userDoc = await getDoc(userDocRef);
-    //console.log(userDoc);
+    ////console.log(userDoc);
 
     setClientEmail(userDoc.data().client_email),
       setClientEmailTemp(userDoc.data().client_email),
@@ -374,7 +374,7 @@ const Dashboard = () => {
           setClientEmailOTP("");
         })
         .catch((err) => {
-          //console.log(err);
+          ////console.log(err);
           setVerifyOTP(false);
         });
     } else {
@@ -486,7 +486,7 @@ const Dashboard = () => {
     const selectedLanguages = [];
     for (let i = 0; i < e.target.options.length; i++) {
       if (e.target.options[i].selected) {
-        console.log(e.target.options[i]);
+        //console.log(e.target.options[i]);
         selectedLanguages.push(e.target.options[i].value);
       }
     }
@@ -514,7 +514,7 @@ const Dashboard = () => {
 
     // Redirect to /client/checkout
     event.preventDefault();
-    console.log(event.target);
+    //console.log(event.target);
     setBuyMoreErr(false);
     if (parseInt(clientRemainingSession) == 0) {
       localStorage.setItem("price", event.target.getAttribute("data-price"));
@@ -543,14 +543,14 @@ const Dashboard = () => {
     //  .where("parentId", "==", sessionStorage.getItem("userId"))
 
     await getDocs(queryDoc).then((response) => {
-      //console.log(response.docs);
+      ////console.log(response.docs);
       setallNewRequest(
         response.docs.map((data) => {
           return { ...data.data(), new_request_id: data.id };
         })
       );
 
-      //console.log(allFiles);
+      ////console.log(allFiles);
       // setshowfile(true);
     });
   };
@@ -575,7 +575,7 @@ const Dashboard = () => {
           // Re-enable the button and remove loading state
         })
         .catch((err) => {
-          console.error(err);
+          //console.error(err);
           // Re-enable the button and remove loading state
         });
     } else {
@@ -624,14 +624,14 @@ const Dashboard = () => {
   };
 
   const showUploadNotes = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisSeeNotes(false);
     setisUploadNotes(true);
   };
 
   const showSeeNotes = (event) => {
-    //console.log('testtttt');
+    ////console.log('testtttt');
     event.preventDefault();
     setisUploadNotes(false);
     setisSeeNotes(true);
@@ -665,11 +665,11 @@ const Dashboard = () => {
               )
               .then(
                 (result) => {
-                  //console.log(result.text);
+                  ////console.log(result.text);
                   sethelpText("");
                 },
                 (error) => {
-                  //console.log(error.text);
+                  ////console.log(error.text);
                 }
               );
           } else {
@@ -682,23 +682,23 @@ const Dashboard = () => {
               )
               .then(
                 (result) => {
-                  //console.log(result.text);
+                  ////console.log(result.text);
                   sethelpText("");
                 },
                 (error) => {
-                  //console.log(error.text);
+                  ////console.log(error.text);
                 }
               );
           }
         })
         .catch((err) => {
-          console.error(err);
+          //console.error(err);
         });
     }
   };
 
   function handleSearch(event) {
-    //console.log(event.target);
+    ////console.log(event.target);
     setSearchVal(event.target.value);
     //handleSubmit();
   }
@@ -707,7 +707,7 @@ const Dashboard = () => {
     // event.preventDefault();
 
     if (file != null) {
-      //console.log(file);
+      ////console.log(file);
       // Upload the file to Firebase Cloud Storage
       // const storageRef = storage().ref();
       //const fileRef = storageRef.child('files/' + file.name);
@@ -718,7 +718,7 @@ const Dashboard = () => {
 
       // Convert the number to a string and pad it with leading zeros if necessary
       const randomNumber = randomNum.toString().padStart(3, "0");
-      //console.log(randomNumber);
+      ////console.log(randomNumber);
       randomString += randomNumber;
 
       // Generate three random letters
@@ -726,14 +726,14 @@ const Dashboard = () => {
         const randomCode = Math.floor(Math.random() * (122 - 97 + 1)) + 97;
         const randomLetter = String.fromCharCode(randomCode);
         randomString += randomLetter;
-        //console.log(randomLetter);
+        ////console.log(randomLetter);
       }
 
       const uniqueId = new Date().getTime();
-      //console.log(uniqueId);
+      ////console.log(uniqueId);
       randomString += uniqueId;
 
-      //console.log(randomString);
+      ////console.log(randomString);
       const storageRef = ref(storage, `/resources/` + randomString + ``);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
@@ -744,20 +744,20 @@ const Dashboard = () => {
           );
           // update progress
 
-          console.log("workkk");
+          //console.log("workkk");
           setPercent(percent);
         },
         (err) => {
-          console.error(err); // Log the error
+          //console.error(err); // Log the error
         },
         () => {
           // download url
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            //console.log(url);
+            ////console.log(url);
             setfileName(file.name);
 
             setfileType(file.type);
-            console.log(url);
+            //console.log(url);
             setfileUrl(url);
             setshowpercent(false);
             setfilecount(filecount + 1);
@@ -770,7 +770,7 @@ const Dashboard = () => {
   }
 
   function addInFirebase() {
-    console.log("before");
+    //console.log("before");
     const today = new Date();
     const date = today.getDate();
     const month = today.getMonth() + 1; // add 1 because months are zero-indexed
@@ -791,10 +791,10 @@ const Dashboard = () => {
         //setErrorMessage("File Uploaded");
         getFiles();
 
-        console.log("after");
+        //console.log("after");
       })
       .catch((err) => {
-        console.error(err);
+        //console.error(err);
       });
   }
 
@@ -804,7 +804,7 @@ const Dashboard = () => {
     await getDocs(queryDoc).then((response) => {
       setHelp(
         response.docs.map((data) => {
-          //console.log(data);
+          ////console.log(data);
           return { ...data.data(), help_id: data.id };
         })
       );

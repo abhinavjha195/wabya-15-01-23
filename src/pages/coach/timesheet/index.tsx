@@ -33,10 +33,10 @@ if(localStorage.getItem("p_url2")){
 }else{
 setshowpage(true);
 }
-console.log('lastUrl',lastUrl2);
+//console.log('lastUrl',lastUrl2);
 if (lastUrl2 == '/joinvideo2') {
   // Reload the current page
-  console.log('yes');
+  //console.log('yes');
   localStorage.removeItem("p_url2");
   router.reload();
 }

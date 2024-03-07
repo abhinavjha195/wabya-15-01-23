@@ -86,7 +86,7 @@ const EditProfile = () => {
     if (files && files.length !== 0) {
       reader.onload = () => setImgSrc(reader.result as string)
       reader.readAsDataURL(files[0]);
-      console.log(files)
+      //console.log(files)
     }
   }
 
@@ -190,18 +190,18 @@ const EditProfile = () => {
       uploadTask.on("state_changed",
         (snapshot) => {
 
-          console.log('snapshot');
+          //console.log('snapshot');
 
         },
-    (err) => console.log(err),
+    (err) => //console.log(err),
         () => {
     // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-        console.log(url);
+        //console.log(url);
         setfileUrl(url);
 
         // setFile(null);
-        console.log('File Uploaded!');
+        //console.log('File Uploaded!');
     });
     }
     );
@@ -211,7 +211,7 @@ const EditProfile = () => {
 
   useEffect(() => {
 
-    console.log(file);
+    //console.log(file);
     if(file != null){
       profile();
     }

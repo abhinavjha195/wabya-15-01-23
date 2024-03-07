@@ -91,7 +91,7 @@ const TabAccount = () => {
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   } 
 
   // Define dialer codes for each country
@@ -353,7 +353,7 @@ if(end_value <= value){
 
 
     const handleStartTimeMin = (event) => {
-      console.log(event.target.value);
+      //console.log(event.target.value);
       let value = parseInt(event.target.value, 10);
 if(value>=0){
       if(value==1){
@@ -400,7 +400,7 @@ if(value>=0){
 
 
     const handleEndTimeMin = (event) => {
-      console.log(event.target.value);
+      //console.log(event.target.value);
       let value = parseInt(event.target.value, 10);
       if(value>=0){
       if(value==1){
@@ -440,7 +440,7 @@ if(value>=0){
       setTimeout(function() {
       const element =  document.getElementsByName("clientLanguage")[0];
       if (element) {
-        console.log('here');
+        //console.log('here');
         const offsetTop = element.offsetTop + 300;
         window.scrollTo({
           top: offsetTop,
@@ -515,7 +515,7 @@ const dialerCode = getDialerCode(country_sel);
         const userCollection = collection(database, 'coaches_user');
         const userDocRef = doc(userCollection, coachIds);
         const userDoc = await getDoc(userDocRef);
-        console.log(userDoc.data());
+        //console.log(userDoc.data());
         setName(userDoc.data().coach_name),
         setEmail(userDoc.data().coach_email),
         setPhone(userDoc.data().coach_phone),
@@ -745,16 +745,16 @@ sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Notification: Coach Profile Update - 
         uploadTask.on("state_changed",
           (snapshot) => {
 
-            console.log('snapshot');
+            //console.log('snapshot');
 
           },
-      (err) => console.log(err),
+      (err) => //console.log(err),
           () => {
       // download url
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
+          //console.log(url);
           setfileUrl(url);
-          console.log('File Uploaded!');
+          //console.log('File Uploaded!');
       });
       }
       );
@@ -764,7 +764,7 @@ sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Notification: Coach Profile Update - 
 
     useEffect(() => {
       var lang=getLanguagesOfSelectedCountry();
-      console.log(lang);
+      //console.log(lang);
       if(lang.length>0){
  
        setlang_sel(lang[0]);
@@ -776,7 +776,7 @@ sendMailFunc('kaylae@tdmc.co.za',adminmsg,'Notification: Coach Profile Update - 
 
     useEffect(() => {
 
-      console.log(file);
+      //console.log(file);
       if(file != null){
         profile();
       }

@@ -72,7 +72,7 @@ const RequestList = ()  => {
 
   useEffect(() => {
     if (clientData.length > 0) {
-       console.log(clientData);
+       //console.log(clientData);
        
     }
   }, [clientData]);
@@ -91,20 +91,20 @@ const RequestList = ()  => {
 
   function getClientName(id){
    
-        console.log(id);
+        //console.log(id);
        const item = clientData.find((obj) => obj.client_id === id.client_id);
         let a= item ? item.client_name : null;
-console.log(a);
+//console.log(a);
        return a;
   }
 
 
   function getPlanName(id){
    
-    console.log(id);
+    //console.log(id);
    const item = planData.find((obj) => obj.plan_id === id.plan_id );
     let a= item ? item.plan_name : null;
-console.log(a);
+//console.log(a);
    return a;
 }
 
@@ -113,10 +113,10 @@ console.log(a);
 
 function getNewPlanName(id){
    
-    console.log(id);
+    //console.log(id);
    const item = planData.find((obj) => obj.plan_id === id.new_plan_id );
     let a= item ? item.plan_name : null;
-console.log(a);
+//console.log(a);
    return a;
 }
 
@@ -143,13 +143,13 @@ const updateUserPlan = async (event) => {
        
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       })
   
      
     })
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
     })
 
   };

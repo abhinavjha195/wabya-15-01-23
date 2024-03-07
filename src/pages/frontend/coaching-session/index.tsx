@@ -143,7 +143,7 @@ const [modal_action, setmodal_action] = useState("");
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   }  
 
 
@@ -167,7 +167,7 @@ const [modal_action, setmodal_action] = useState("");
   
     //   return numberOfMeetings;
     } catch (error) {
-      console.error("Error getting client: ", error);
+      //console.error("Error getting client: ", error);
    //   return 0; // Return 0 if there was an error
     }
   };
@@ -182,13 +182,13 @@ const [modal_action, setmodal_action] = useState("");
         setclientRegisteredId(storedValue);
       }
 else{
-  console.log('i am here in localstorage');
+  //console.log('i am here in localstorage');
   router.push('/frontend/pricing');
 }
     
     } catch (error) {
       // Handle potential errors accessing localStorage here
-      console.error('Error accessing localStorage:', error);
+      //console.error('Error accessing localStorage:', error);
       router.push('/frontend/pricing');
     }
   }, []);
@@ -205,7 +205,7 @@ if(clientRegisteredId != ''){
 
   useEffect(() => {
     if(client_detail != null){
-    console.log(client_detail);
+    //console.log(client_detail);
     setcoach_prefer(client_detail[0].coach_prefer);
     setclient_emailId(client_detail[0].client_email);
     setplan_prefer(client_detail[0].prefer_plan_id);
@@ -216,12 +216,12 @@ if(clientRegisteredId != ''){
 
      useEffect(() => {
       if(coach_prefer != ''){
-      console.log(client_detail);
+      //console.log(client_detail);
      // setcoach_prefer(client_detail[0].coach_prefer);
      // setclient_remaining_ses(client_detail[0].remainingSession);
 
      const filterData=filterCoachByGender(coachData,coach_prefer);
-     console.log('filterData',filterData)
+     //console.log('filterData',filterData)
      setcoachFilterData(filterData);
 
      if(filterData.length == 1){
@@ -268,17 +268,17 @@ if(clientRegisteredId != ''){
   }
 
   const handleTimeClick = (event: any) => {
-    // //console.log( event.target.getAttribute("data-key"));
-    ////console.log( event.target.getAttribute("data-time"));
+    // ////console.log( event.target.getAttribute("data-key"));
+    //////console.log( event.target.getAttribute("data-time"));
     setmeetingtime(event.target.getAttribute("data-time"));
 
     // selectedTime.splice(0, selectedTime.length);
     //selectedTime.splice(0, array1.length);
     setselectedTime(event.target.getAttribute("data-key"));
-    ////console.log(meetingdate);
-    //console.log(meetingtime);
+    //////console.log(meetingdate);
+    ////console.log(meetingtime);
     var startTime = meetingdate + " " + meetingtime;
-    //console.log(startTime);
+    ////console.log(startTime);
 
     var newTime = new Date(
       new Date(
@@ -290,7 +290,7 @@ if(clientRegisteredId != ''){
       minute: "2-digit",
       hour12: false,
     });
-    //console.log(newTime);
+    ////console.log(newTime);
     setmeetingendtime(newTime);
     setshowNext(true);
    
@@ -306,7 +306,7 @@ if(clientRegisteredId != ''){
    var endtime = "17:00:00";
    var timeslots = [starttime];
    
-   console.log(meetingByDate);
+   //console.log(meetingByDate);
    
    while (starttime < endtime) {
    
@@ -351,11 +351,11 @@ if(clientRegisteredId != ''){
   
    // coach data fetch
    const getCoachData = async () => {
-    console.log('test');
+    //console.log('test');
         const queryDoc = query(coachRef,where('accept_new_client','==',1));
     
         await getDocs(queryDoc).then(response => {
-          console.log(response.docs.length);
+          //console.log(response.docs.length);
           setCoachData(
             response.docs.map(data => {
               return { ...data.data(), coach_idd: data.id }
@@ -366,11 +366,11 @@ if(clientRegisteredId != ''){
 
 
       const getAllClientData = async () => {
-        console.log('test');
+        //console.log('test');
             const queryDoc = query(clientRef, where('assign_coach_id', '!=', ''));
         
             await getDocs(queryDoc).then(response => {
-              console.log(response.docs.length);
+              //console.log(response.docs.length);
               setClientData(
                 response.docs.map(data => {
                   return { ...data.data(), client_idd: data.id }
@@ -381,11 +381,11 @@ if(clientRegisteredId != ''){
 
 // coach data fetch
 const getAllPlans = async () => {
-  console.log('testsss');
+  //console.log('testsss');
       const queryDoc = query(planRef,where('status', '==', '1'));
   
       await getDocs(queryDoc).then(response => {
-        console.log(response.docs.length);
+        //console.log(response.docs.length);
         setplanData(
           response.docs.map(data => {
             return { ...data.data(), plan_id: data.id }
@@ -411,7 +411,7 @@ const getAllPlans = async () => {
     
         if(coachData != null){
     
-        console.log('coachData',coachData);
+        //console.log('coachData',coachData);
 
 
         
@@ -430,7 +430,7 @@ const getAllPlans = async () => {
     
         if(clientData != null){
     
-        console.log('clientData',clientData);
+        //console.log('clientData',clientData);
 
 
         if(coachData != null){
@@ -464,8 +464,8 @@ const sortedCoaches = coachData && clientData ? coachData.slice().sort((a, b) =>
     const countA = coachClientCounts[a.coach_idd] || 0;
     const countB = coachClientCounts[b.coach_idd] || 0;
 
-    console.log(`Coach ${a.coach_idd} - Clients: ${countA}`);
-    console.log(`Coach ${b.coach_idd} - Clients: ${countB}`);
+    //console.log(`Coach ${a.coach_idd} - Clients: ${countA}`);
+    //console.log(`Coach ${b.coach_idd} - Clients: ${countB}`);
 
     if (coach_prefer === 'male') {
       // Prioritize male coaches
@@ -529,7 +529,7 @@ useEffect(() => {
     
   if(sortedCoaches != null ){
 
-  console.log('coachData',sortedCoaches);
+  //console.log('coachData',sortedCoaches);
 
 
   
@@ -544,7 +544,7 @@ useEffect(() => {
       useEffect(() => {
     
     
-        console.log(coachData);
+        //console.log(coachData);
 
         
         
@@ -569,11 +569,11 @@ useEffect(() => {
 
   // coach data fetch
   const countData = async (client_em:string) => {
-    console.log('test');
+    //console.log('test');
         const queryDoc = query(clientRef, where('client_email', '==', client_em));
     let count_data=0
         await getDocs(queryDoc).then(response => {
-          console.log(response.docs.length);
+          //console.log(response.docs.length);
           count_data=response.docs.length;
         })
         return count_data;
@@ -583,7 +583,7 @@ useEffect(() => {
        // formik form validates
        const onChange =  (event) => {
 
-         console.log(event.target);
+         //console.log(event.target);
 
          if(event.target.name == 'client_name'){
           set_client_name(event.target.value);
@@ -607,14 +607,14 @@ useEffect(() => {
 
 
         const countDiscoveySes = async () => {
-    console.log('test');
+    //console.log('test');
         const queryDoc = query(meetingRef, where('clientId', '==', clientRegisteredId),where('isDiscoverySession', '==', 1));
     let count_data=0
         await getDocs(queryDoc).then(response => {
-          console.log(response.docs.length); 
+          //console.log(response.docs.length); 
           count_data=response.docs.length;
         })
-        console.log(count_data);
+        //console.log(count_data);
         return count_data;
       }
 
@@ -623,8 +623,8 @@ useEffect(() => {
         // formik form validates
         const onSubmit = async (event) => {
 
-          console.log('i am here');
-          console.log(event.target);
+          //console.log('i am here');
+          //console.log(event.target);
 
           setClientMsg('');
           setClientEmailMsg('');
@@ -696,12 +696,12 @@ useEffect(() => {
                 //   .then((docRef) => {
                 //     const docId = docRef.id;
                 //       setUserAddedId(docId)
-                //     console.log('done');
+                //     //console.log('done');
                 //     toast.success('Client registered successfully')
                 //     //router.push('/client/login')
                 //   })
                 //   .catch((err) => {
-                //     console.error(err);
+                //     //console.error(err);
                 //   })
       
           
@@ -745,7 +745,7 @@ useEffect(() => {
             isMeetingStarted: 0,
           isMeetingEnd: 0,
           });
-  console.log('working');
+  //console.log('working');
 
   const client_id = clientRegisteredId;
   const fieldToEdit = doc(database, 'client_user', client_id);
@@ -759,7 +759,7 @@ useEffect(() => {
     
   })
   .catch((err) => {
-    //console.log(err);
+    ////console.log(err);
   })
   
       // setNext(true);
@@ -774,7 +774,7 @@ useEffect(() => {
     tomorrow.setDate(date.getDate() + 1);
     var todayDate = new Date(tomorrow).toISOString().slice(0, 10);
 
-    console.log(todayDate);
+    //console.log(todayDate);
 
     getMeetingByDate(todayDate);
 
@@ -784,7 +784,7 @@ useEffect(() => {
     var endTime = "";
     const d = date;
     var selectedDay = date.getDay();
-    //console.log("selected days: " + selectedDay + "");
+    ////console.log("selected days: " + selectedDay + "");
 
     setDate(date);
     setMonth(date.toLocaleString("default", { month: "long" }));
@@ -796,8 +796,8 @@ useEffect(() => {
 
    
 
-      // //console.log(res);
-      //console.log(data);
+      // ////console.log(res);
+      ////console.log(data);
 
 
 
@@ -848,7 +848,7 @@ useEffect(() => {
         }
       );
       const data = await res.json();
-      console.log(data);
+      //console.log(data);
       setmeetingLink(data.url);
       setmeetingName(data.name);
       setmeetingApiCreated(data.api_created);
@@ -870,7 +870,7 @@ useEffect(() => {
         setbookingError(true);
       }
 
-      //console.log(data);
+      ////console.log(data);
 
      // setmeetingSuccessMsg('Discovery Session Added');
 
@@ -993,7 +993,7 @@ if(client_emailId != ""){
     } catch (err) {
       setbookingLoad(false);
       setbookingError(true);
-      //console.log(err);
+      ////console.log(err);
     }
 
   }

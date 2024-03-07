@@ -16,13 +16,13 @@ const Pastslip = ({ datesArray, meetingSession }) => {
         const csvRow = `probono, ${meet.meeting_start_time} hours, £ 0.0`;
         //         csvRows.push(csvRow);
 
-        //console.log('Processing date:', d_arr);
+        ////console.log('Processing date:', d_arr);
     
   //       const probonoCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'probono' ).length : 0;
   //       const noviceCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'novice').length : 0;
   //       const experiencedCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'experienced').length : 0;
     
-  //       console.log('Counts:', probonoCount, noviceCount, experiencedCount);
+  //       //console.log('Counts:', probonoCount, noviceCount, experiencedCount);
     
   //       if (index === 0) {
   //         const csvRow = `probono, ${probonoCount * 0.5} hours, £ 0.0`;
@@ -52,7 +52,7 @@ const Pastslip = ({ datesArray, meetingSession }) => {
       setCsvData(csvString);
     
       // Trigger download
-      console.log('Before downloadCSV');
+      //console.log('Before downloadCSV');
       downloadCSV(csvString);
     };
     

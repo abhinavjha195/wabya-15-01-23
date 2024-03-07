@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       res.status(200).json({ success: true, messageSid: result.sid });
     } catch (error) {
       // Return error response
-      console.error(error);
+      //console.error(error);
       res.status(500).json({ success: false, error: "error" });
     }
   } else {

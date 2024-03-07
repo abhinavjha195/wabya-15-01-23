@@ -39,10 +39,10 @@ if(localStorage.getItem("p_url2")){
 }else{
 setshowpage(true);
 }
-console.log('lastUrl',lastUrl2);
+//console.log('lastUrl',lastUrl2);
 if (lastUrl2 == '/joinvideo2') {
   // Reload the current page
-  console.log('yes');
+  //console.log('yes');
   localStorage.removeItem("p_url2");
   router.reload();
 }
@@ -53,10 +53,10 @@ let lastUrl='';
     if(localStorage.getItem("last_login_page")){
      lastUrl = localStorage.getItem("last_login_page");
   }
-    console.log('lastUrl',lastUrl);
+    //console.log('lastUrl',lastUrl);
     if (lastUrl == '/coach/login') {
       // Reload the current page
-      console.log('yes');
+      //console.log('yes');
       localStorage.removeItem("last_login_page");
       router.reload();
     }
@@ -76,7 +76,7 @@ let lastUrl='';
         if (coachDoc.exists()) {
           setCoach(coachDoc.data());
         } else {
-          console.log("No coach found");
+          //console.log("No coach found");
         }
       };
       fetchCoach();
@@ -91,7 +91,7 @@ let lastUrl='';
 
 
 const updateNewClientNotified = async (c_id: any) =>{
-  console.log('notified',c_id);
+  //console.log('notified',c_id);
   let a=0;
 
  
@@ -113,7 +113,7 @@ const updateNewClientNotified = async (c_id: any) =>{
 
 
 const updateNotified = async () =>{
-  //console.log('notified',meet_id);
+  ////console.log('notified',meet_id);
   let a=0;
 
  
@@ -138,7 +138,7 @@ const updateNotified = async () =>{
 
 
 const handleChange = async () =>{
-  console.log(accept_new_client);
+  //console.log(accept_new_client);
   let a=0;
 
   if(accept_new_client == 0){
@@ -167,16 +167,16 @@ const handleChange = async () =>{
 
 
 useEffect(() => {
-  console.log('testtt');
+  //console.log('testtt');
 
   const editAdmin = async () => {
 
-   console.log('testtt');
+   //console.log('testtt');
     const coachIds = sessionStorage.getItem('coachId');
     const userCollection = collection(database, 'coaches_user');
     const userDocRef = doc(userCollection, coachIds);
     const userDoc = await getDoc(userDocRef);
-    console.log(userDoc.data());
+    //console.log(userDoc.data());
     setAcceptNewUser(userDoc.data().accept_new_client)
     
   
@@ -186,7 +186,7 @@ useEffect(() => {
 }, []);
 const getMeeting = async () => {
 
-  console.log('testtt');
+  //console.log('testtt');
   const coachId = sessionStorage.getItem('coachId');
   const meetingSessionCollection = collection(database, 'meetingSession');
   const queryDoc = query(meetingSessionCollection, where("coach_id", "==", coachId), where("client_leave", "==", 'no'),where("coachJoined", "==", 'no'));
@@ -194,7 +194,7 @@ const getMeeting = async () => {
     await getDocs(queryDoc).then((response) => {
       setMeeting(
         response.docs.map((data) => {
-          console.log(data.data());
+          //console.log(data.data());
           return { ...data.data(), meet_id: data.id };
         })
       );
@@ -207,7 +207,7 @@ const getMeeting = async () => {
 
  const getNewClient = async () => {
 
-  console.log('testtt');
+  //console.log('testtt');
   const coachId = sessionStorage.getItem('coachId');
   const meetingSessionCollection = collection(database, 'client_user');
   const queryDoc = query(meetingSessionCollection, where("assign_coach_id", "==", coachId), where("isNotified", "==", 0));
@@ -215,7 +215,7 @@ const getMeeting = async () => {
     await getDocs(queryDoc).then((response) => {
       setnewClient(
         response.docs.map((data) => {
-          console.log(data.data());
+          //console.log(data.data());
           return { ...data.data(), c_id: data.id };
         })
       );
@@ -227,7 +227,7 @@ const getMeeting = async () => {
 
  const getScheduleMeeting = async () => {
 
-  console.log('testtt');
+  //console.log('testtt');
   const coachId = sessionStorage.getItem('coachId');
   const meetingSessionCollection = collection(database, 'meeting');
   const queryDoc = query(meetingSessionCollection, where("coachId", "==", coachId), where("isNotified", "==", 0));
@@ -235,7 +235,7 @@ const getMeeting = async () => {
     await getDocs(queryDoc).then((response) => {
       setScheduleMeeting(
         response.docs.map((data) => {
-          console.log(data.data());
+          //console.log(data.data());
           return { ...data.data(), meet_id: data.id };
         })
       );
@@ -245,10 +245,10 @@ const getMeeting = async () => {
  
  }
 useEffect(() => {
-  console.log('abc'); 
+  //console.log('abc'); 
   const intervalId = setInterval(() => {
   //  Call your function here
-   console.log('Function called!');
+   //console.log('Function called!');
 
    getMeeting();
    getScheduleMeeting();

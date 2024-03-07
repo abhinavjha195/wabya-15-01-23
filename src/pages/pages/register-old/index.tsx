@@ -92,7 +92,7 @@ const coachesRef = collection(database, 'coaches_user');
     validateOnChange: false,
 
     onSubmit: (values, action) => {
-      console.log(
+      //console.log(
         "🚀 ~ file: index.tsx ~ line 81 ~ Registration ~ values",
         values,
 
@@ -116,7 +116,7 @@ const coachesRef = collection(database, 'coaches_user');
               router.push('/client/login')
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
 
       );
@@ -124,7 +124,7 @@ const coachesRef = collection(database, 'coaches_user');
     },
   });
 
-console.log(
+//console.log(
   "🚀 ~ file: index.tsx ~ line 90 ~ Registration ~ errors",
   errors
 );

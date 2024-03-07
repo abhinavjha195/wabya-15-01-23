@@ -86,17 +86,17 @@ const ApplyWabyaBasic = () => {
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   }   
   const [emailExist, setEmailExist] = useState(false);
 
      // coach data fetch
      const countData = async (client_em:string) => {
-      console.log('test');
+      //console.log('test');
           const queryDoc = query(coachesRef, where('coach_email', '==', client_em));
       let count_data=0
           await getDocs(queryDoc).then(response => {
-            console.log(response.docs.length); 
+            //console.log(response.docs.length); 
             count_data=response.docs.length;
           })
           return count_data;
@@ -251,7 +251,7 @@ err=err+1;
     if(err == 0){
     //  emailjs.sendForm('service_mwla9qu', 'template_4uf3noc', form1.current, 'kSYqPWVMFZAxQB2yI')
       // .then((result) => {
-      //     console.log(result.text);
+      //     //console.log(result.text);
       //     setIsThankModal(true);
       //   //  action.resetForm();
       //   if (typeof window !== 'undefined') {
@@ -259,7 +259,7 @@ err=err+1;
       //   }
           
       // }, (error) => {
-      //     console.log(error.text);
+      //     //console.log(error.text);
       // });
 
 
@@ -272,7 +272,7 @@ err=err+1;
 
       //     if(otp_gen == ''){
       //       const otp = generateOTP();
-      //       console.log("Generated OTP:", otp);
+      //       //console.log("Generated OTP:", otp);
       //       setotp_gen(otp);
       //     const logoUrl_ = 'https://wabya.com/images/logo-new.png';
       //     const otpmsg = `
@@ -326,8 +326,8 @@ err=err+1;
           //  // err=err+1;
           //       }
           // else if(otp != otp_gen){
-          //   console.log(otp);
-          //   console.log(otp_gen);
+          //   //console.log(otp);
+          //   //console.log(otp_gen);
           //   setotpErr('otp is incorrect');
           //  // err=err+1;
           //       }
@@ -456,7 +456,7 @@ err=err+1;
   
         })
         .catch((err) => {
-          console.error(err);
+          //console.error(err);
         })
 
     //  }
@@ -465,7 +465,7 @@ err=err+1;
       }
     }
     else{
-      console.log('error');
+      //console.log('error');
     }
   }
 

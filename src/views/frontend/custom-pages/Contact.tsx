@@ -43,7 +43,7 @@ const Contact = () => {
     validateOnChange: false,
 
     onSubmit: (values, action) => {
-      console.log(
+      //console.log(
         "🚀 ~ file: index.tsx ~ line 81 ~ Registration ~ values",
         values,
 
@@ -57,11 +57,11 @@ const Contact = () => {
             .then(() => {
               emailjs.sendForm('service_mwla9qu', 'template_l8eegsc', form1.current, 'kSYqPWVMFZAxQB2yI')
               .then((result) => {
-                  console.log(result.text);
+                  //console.log(result.text);
                   action.resetForm();
                   const element =  document.getElementById("sucmsg");
           if (element) {
-            console.log('here');
+            //console.log('here');
             const offsetTop = element.offsetTop -300 ;
             window.scrollTo({
               top: offsetTop,
@@ -70,13 +70,13 @@ const Contact = () => {
           }
                   
               }, (error) => {
-                  console.log(error.text);
+                  //console.log(error.text);
               });
              
               setErrorMsg(true);
             })
             .catch((err) => {
-              console.error(err);
+              //console.error(err);
             })
 
       );
@@ -84,7 +84,7 @@ const Contact = () => {
     },
   });
 
-    console.log(
+    //console.log(
       "🚀 ~ file: index.tsx ~ line 90 ~ Registration ~ errors",
       errors
     );

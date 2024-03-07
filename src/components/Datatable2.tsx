@@ -8,13 +8,13 @@ const DataTable2 = ({ datesArray, meetingSession,coachName }) => {
       csvRows.push("Package,Hours,Earnings"); // Header row
     
       datesArray.forEach((d_arr, index) => {
-        console.log('Processing date:', d_arr);
+        //console.log('Processing date:', d_arr);
     
         const probonoCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'probono' ).length : 0;
         const noviceCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'novice').length : 0;
         const experiencedCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'experienced').length : 0;
     
-        console.log('Counts:', probonoCount, noviceCount, experiencedCount);
+        //console.log('Counts:', probonoCount, noviceCount, experiencedCount);
     
         if (index === 0) {
           const csvRow = `probono, ${probonoCount * 0.5} hours, £ 0.0`;
@@ -44,7 +44,7 @@ const DataTable2 = ({ datesArray, meetingSession,coachName }) => {
       setCsvData(csvString);
     
       // Trigger download
-      console.log('Before downloadCSV');
+      //console.log('Before downloadCSV');
       downloadCSV(csvString);
     };
     
@@ -103,13 +103,13 @@ const convertToCSV2 = (e) => {
     const csvRow = `${formattedDate}, 0.5 hours, £ 20, ,£ 20, , £ 20`;
           csvRows.push(csvRow);
 
-    //console.log('Processing date:', d_arr);
+    ////console.log('Processing date:', d_arr);
 
 //       const probonoCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'probono' ).length : 0;
 //       const noviceCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'novice').length : 0;
 //       const experiencedCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'experienced').length : 0;
 
-//       console.log('Counts:', probonoCount, noviceCount, experiencedCount);
+//       //console.log('Counts:', probonoCount, noviceCount, experiencedCount);
 
 //       if (index === 0) {
 //         const csvRow = `probono, ${probonoCount * 0.5} hours, £ 0.0`;
@@ -139,7 +139,7 @@ const convertToCSV2 = (e) => {
   setCsvData2(csvString);
 
   // Trigger download
-  console.log('Before downloadCSV');
+  //console.log('Before downloadCSV');
   downloadCSV2(csvString);
 };
 

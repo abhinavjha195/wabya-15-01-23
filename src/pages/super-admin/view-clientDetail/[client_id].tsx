@@ -44,13 +44,13 @@ const ViewBasic = () => {
             if (coachDoc.exists()) {
               const planData = planDoc.data();
 
-              console.log(planData);
+              //console.log(planData);
               setPlanData(planData);
             }
           }
         }
       }catch (error) {
-        console.log(error); 
+        //console.log(error); 
       }
     };
     getClientData();

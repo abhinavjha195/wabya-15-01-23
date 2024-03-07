@@ -20,8 +20,8 @@ import DataTable2 from '../../components/Datatable2';
 
 function isSameMonth(date, targetMonth, targetYear) {
   const meetingDate = new Date(date.seconds * 1000); // Assuming 'seconds' is a Unix timestamp
-  console.log('date', meetingDate.getMonth()); // Adding 1 to get the correct month
-  console.log('target month', targetMonth); // Adding 1 to get the correct month
+  //console.log('date', meetingDate.getMonth()); // Adding 1 to get the correct month
+  //console.log('target month', targetMonth); // Adding 1 to get the correct month
   return (
     meetingDate.getMonth() == targetMonth 
   );
@@ -268,7 +268,7 @@ const weekDateRanges = generateDateRanges(currentMonth, currentYear);
     const activeWeekStartDate = new Date(weekRanges[activeWeekIndex].split(' - ')[0]);
     setDayLabels(generateDayLabels(activeWeekStartDate));
 
-    console.log(weekRanges[activeWeekIndex],'week range');
+    //console.log(weekRanges[activeWeekIndex],'week range');
 setdatesArray(getDatesBetweenRange(weekRanges[activeWeekIndex]));
   
   }, [activeWeekIndex]);
@@ -276,13 +276,13 @@ setdatesArray(getDatesBetweenRange(weekRanges[activeWeekIndex]));
     // Update weeks whenever the currentMonth or currentYear changes
     const updatedWeeks = getCurrentMonthWeeks(currentYear, currentMonth);
     setWeeks(updatedWeeks);
-    console.log(currentYear,'current year');
-    console.log(currentMonth,'current month');
+    //console.log(currentYear,'current year');
+    //console.log(currentMonth,'current month');
   }, [currentYear, currentMonth]);
 
   useEffect(() => {
     const token = sessionStorage.getItem('coachId')
-console.log('abc');
+//console.log('abc');
 
 
     if(!token){
@@ -290,7 +290,7 @@ console.log('abc');
     }else{
       getClients();
       getMeetingSession();
-      console.log(client);
+      //console.log(client);
       myprofile();
     }
 }, [])
@@ -352,7 +352,7 @@ const myprofile= async () =>{
   const userCollection = collection(database, 'coaches_user');
   const userDocRef = doc(userCollection, coachIds);
   const userDoc = await getDoc(userDocRef);
-  console.log(userDoc.data());
+  //console.log(userDoc.data());
   setName(userDoc.data().coach_name);
   setMyPlan(userDoc.data().coach_certificate);
 }
@@ -368,7 +368,7 @@ return meetingSession.filter((meet) => {
 
   const meetingDate = new Date(meet.meeting_start_time.seconds * 1000);
   const meetingMonth = meetingDate.getMonth();
-  console.log('meetingMonth',meetingMonth);
+  //console.log('meetingMonth',meetingMonth);
   const isMatchingMonth = meetingMonth === currentMonth;
 
   
@@ -438,7 +438,7 @@ const filteredMeetingSessions_month = (a,b,c) =>{
   
     const meetingDate = new Date(meet.meeting_start_time.seconds * 1000);
     const meetingMonth = meetingDate.getMonth();
-    console.log('meetingMonth',meetingMonth);
+    //console.log('meetingMonth',meetingMonth);
     const isMatchingMonth = meetingMonth === c-1;
   
     
@@ -514,7 +514,7 @@ const totalEarnings = filteredMeetingSessions.length * 20; // Assuming $20 per s
 
   const getMeetingSession = async () => {
 
-    //console.log('testtt');
+    ////console.log('testtt');
     
     const coachId = sessionStorage.getItem('coachId');
     const meetingSessionCollection = collection(database, 'meetingSession');
@@ -527,12 +527,12 @@ const totalEarnings = filteredMeetingSessions.length * 20; // Assuming $20 per s
     try {
       const response = await getDocs(queryDoc);
       const sessionsData = response.docs.map((data) => {
-        console.log(data.data());
+        //console.log(data.data());
         return { ...data.data(), meet_id: data.id };
       });
       setMeetingSession(sessionsData);
     } catch (error) {
-      console.error(error);
+      //console.error(error);
     }
    
    
@@ -641,9 +641,9 @@ const totalEarnings = filteredMeetingSessions.length * 20; // Assuming $20 per s
   const formattedDate = date.toLocaleDateString(undefined, options);
 
   const date_=date.getDate();
-  //console.log(formattedDate);
+  ////console.log(formattedDate);
   
-  //console.log(formattedDate);
+  ////console.log(formattedDate);
 return (
   <></>
 
@@ -1206,7 +1206,7 @@ const timestampToMatch = dateObject.getTime() / 1000;
 
 const currentMonth = new Date().getMonth();
 
-console.log('add', currentMonth);
+//console.log('add', currentMonth);
 const currentYear = new Date().getFullYear();
 
 const probonoCount = meetingSession != null ? meetingSession.filter(meet => meet.client_plan === 'probono' && isSameMonth(meet.meeting_start_time, currentMonth, currentYear)).length : 0;

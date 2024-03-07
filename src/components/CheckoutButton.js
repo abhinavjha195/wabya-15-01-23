@@ -45,7 +45,7 @@ const CheckoutButton = ({price,journey_type}) => {
     
     } catch (error) {
       // Handle potential errors accessing localStorage here
-      console.error('Error accessing localStorage:', error);
+      //console.error('Error accessing localStorage:', error);
     }
   }, []);
   const requestRef = collection(database, "payments");
@@ -69,7 +69,7 @@ const CheckoutButton = ({price,journey_type}) => {
   setShowPayForm(true);
     })
     .catch((err) => {
-      console.error(err);
+      //console.error(err);
        // Re-enable the button and remove loading state
       
     })
@@ -100,7 +100,7 @@ const CheckoutButton = ({price,journey_type}) => {
         router.push("/client/checkout/error");					
       }
     } catch (err) {
-      console.error("Error in creating checkout session:", err);
+      //console.error("Error in creating checkout session:", err);
       router.push("/error");
     }
   };

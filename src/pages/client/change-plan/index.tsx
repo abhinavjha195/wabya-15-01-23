@@ -37,16 +37,16 @@ export default function changeplan() {
 
     // coach data fetch
     const countMyRequest = async () => {
-        //console.log('test');
-        //console.log(sessionStorage.getItem("userId"));
+        ////console.log('test');
+        ////console.log(sessionStorage.getItem("userId"));
         const collectionRef = collection(database, "newPlanRequest");
         const queryDoc = query(collectionRef, where("client_id", "==", sessionStorage.getItem("userId")),where("status", "==", 1));
       
         const snapshot = await getDocs(queryDoc);
         const count_data = snapshot.size;
       
-        //console.log(`Number of documents in collection: ${count_data}`);
-            //console.log(count_data);
+        ////console.log(`Number of documents in collection: ${count_data}`);
+            ////console.log(count_data);
             return count_data;
           }
     
@@ -74,7 +74,7 @@ export default function changeplan() {
            setSucMsg('your request is submitted');
           })
           .catch((err) => {
-            console.error(err);
+            //console.error(err);
              // Re-enable the button and remove loading state
             
           })
@@ -121,7 +121,7 @@ else{
   
     //   return numberOfMeetings;
     } catch (error) {
-      console.error("Error getting plans: ", error);
+      //console.error("Error getting plans: ", error);
    //   return 0; // Return 0 if there was an error
     }
   };
@@ -138,7 +138,7 @@ else{
     
   //   } catch (error) {
   //     // Handle potential errors accessing localStorage here
-  //     console.error('Error accessing localStorage:', error);
+  //     //console.error('Error accessing localStorage:', error);
   //   }
   // }, []);
 
@@ -156,7 +156,7 @@ else{
      await getDocs(queryDoc).then((response) => {
        setMyPlan(
          response.docs.map((data) => {
-           //console.log(data);
+           ////console.log(data);
            return { ...data.data(), plan_id: data.id };
          })
        );
@@ -187,10 +187,10 @@ else{
         if (clientDoc.exists()) {
           setClient(clientDoc.data());
     
-          // ////console.log('here');
-          ////console.log(clientDoc.data);
+          // //////console.log('here');
+          //////console.log(clientDoc.data);
         } else {
-          ////console.log("No client found");
+          //////console.log("No client found");
         }
       };
       
@@ -211,7 +211,7 @@ else{
     
     } catch (error) { 
       // Handle potential errors accessing localStorage here
-      console.error('Error accessing localStorage:', error);
+      //console.error('Error accessing localStorage:', error);
     }
   }, []);
 
@@ -234,8 +234,8 @@ else{
 
   useEffect(() => {
     if (clientPlanId !='') {
-      //console.log('ne wplan ');
-      console.log('clientPlanId',clientPlanId)
+      ////console.log('ne wplan ');
+      //console.log('clientPlanId',clientPlanId)
 
 fetchMyPlan();
     }
@@ -259,8 +259,8 @@ if(new_plan_id != ""){
 
   useEffect(() => {
     if (myplan !=null) {
-      //console.log('ne wplan ');
-      console.log('myplan',myplan)
+      ////console.log('ne wplan ');
+      //console.log('myplan',myplan)
 
 setMyPlanName(myplan[0].plan_name);
  //getData();
@@ -276,7 +276,7 @@ setMyPlanName(myplan[0].plan_name);
     
 if(plan_detail != null){
   
-  console.log('plan_detail',plan_detail);
+  //console.log('plan_detail',plan_detail);
   if(plan_detail.length > 0){
     if(journey_type == 'bundle'){
     setPrice(plan_detail[0].bundle_price);

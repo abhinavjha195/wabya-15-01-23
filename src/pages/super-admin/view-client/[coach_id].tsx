@@ -48,7 +48,7 @@ const ViewBasic = () => {
   //       }
   //     })
   //     .catch((error) => {
-  //       console.error("Error getting next meeting date:", error);
+  //       //console.error("Error getting next meeting date:", error);
   //     });
   // }, [userId]);
 
@@ -76,7 +76,7 @@ const ViewBasic = () => {
           setMeeting(coachesData);
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
 
@@ -100,7 +100,7 @@ const ViewBasic = () => {
           
         }
       }catch (error) {
-        console.log(error); 
+        //console.log(error); 
       }
     };
     getCoachData();

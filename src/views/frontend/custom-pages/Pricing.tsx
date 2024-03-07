@@ -75,7 +75,7 @@ const Pricing = () => {
     e.preventDefault();
     const planId = event.target.getAttribute('data-id');
     localStorage.setItem('planId', planId);
-    console.log('here');
+    //console.log('here');
 
     router.push('/client/register');
   };
@@ -87,7 +87,7 @@ const Pricing = () => {
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
   
-    console.log('response',response);
+    //console.log('response',response);
   }    
 
   const onSubmit = (event) => {
@@ -151,13 +151,13 @@ err=err+1;
     if(err == 0){
       // emailjs.sendForm('service_mwla9qu', 'template_4uf3noc', form1.current, 'kSYqPWVMFZAxQB2yI')
       // .then((result) => {
-      //     console.log(result.text);
+      //     //console.log(result.text);
       //     setenqMsg(true);
       //   //  action.resetForm();
           
           
       // }, (error) => {
-      //     console.log(error.text);
+      //     //console.log(error.text);
       // });
 
       const logoUrl = 'https://wabya.com/images/logo-new.png';
@@ -261,7 +261,7 @@ err=err+1;
 
     setenqMsg(true);}
     else{
-      console.log('error');
+      //console.log('error');
     }
   }
 

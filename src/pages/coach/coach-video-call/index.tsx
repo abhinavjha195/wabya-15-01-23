@@ -47,7 +47,7 @@ const VideoCallPage = () => {
   useEffect(() => {
     if (callObject) {
       callObject.on('joined-meeting', () => {
-        console.log('A user has joined the meeting!');
+        //console.log('A user has joined the meeting!');
 
 
         const clientId = sessionStorage.getItem('userId');
@@ -68,7 +68,7 @@ const VideoCallPage = () => {
          
         })
           .then(() => {
-          console.log('testtt');
+          //console.log('testtt');
   
           // addDoc(logRef, {
           //   meeting_user_id: clientIds,
@@ -81,21 +81,21 @@ const VideoCallPage = () => {
            
           // })
           //   .then(() => {
-          //   console.log('testtt');
+          //   //console.log('testtt');
           //   })
           //   .catch((err) => {
-          //     console.error(err);
+          //     //console.error(err);
           //   })
     
           })
           .catch((err) => {
-            console.error(err);
+            //console.error(err);
           })
   
       });
 
       callObject.on('left-meeting', (event) => {
-        console.log('Participant left:', event.participant);
+        //console.log('Participant left:', event.participant);
       });
     }
   }, [callObject]);
