@@ -43,7 +43,7 @@ const Contact = () => {
     validateOnChange: false,
 
     onSubmit: (values, action) => {
-      //console.log(
+      console.log(
         "🚀 ~ file: index.tsx ~ line 81 ~ Registration ~ values",
         values,
 
@@ -84,7 +84,7 @@ const Contact = () => {
     },
   });
 
-    //console.log(
+    console.log(
       "🚀 ~ file: index.tsx ~ line 90 ~ Registration ~ errors",
       errors
     );
