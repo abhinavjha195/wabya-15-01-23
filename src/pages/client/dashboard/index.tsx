@@ -2554,7 +2554,7 @@ function profile2(){
         //console.log('snapshot');
 
       },
-  (err) => //console.log(err),
+  (err) => console.log(err),
       () => {
   // download url
       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
@@ -3679,17 +3679,20 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 
 
 {isMeetingTimeRange ? (
-                    <a className="btn btn-coach" href={`/client/joinvideo/${data.meetingName}`}>
-                        join video
-                    </a>
-                ) : (
-                  <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); //console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>
-                  join video
-              </a>
-
-            
-              
-                )}            
+  <a className="btn btn-coach" href={`/client/joinvideo/${data.meetingName}`}>
+    join video
+  </a>
+) : (
+  <a 
+    className="btn btn-coach disabled" // Add a disabled class for styling
+    style={{ cursor: 'not-allowed' }}
+    onClick={(e) => e.preventDefault()}
+    href="#"
+  >
+    join video
+  </a>
+)}
+           
                              
                               {/* </Link> */}
                                
@@ -3746,7 +3749,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                                 target="_blank"
                                
                               > */}
-                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); //console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
+                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
                               {/* </Link> */}
                               {/* <Link
                                 passHref

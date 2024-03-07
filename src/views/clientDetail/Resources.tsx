@@ -209,7 +209,7 @@ useEffect(() => {
  // update progress
          setPercent(percent);
          },
-     (err) => {setErrorMessage('something went wrong'),//console.log(err)},
+     (err) => {setErrorMessage('something went wrong'),console.log(err)},
          () => {
      // download url
          getDownloadURL(uploadTask.snapshot.ref).then((url) => {

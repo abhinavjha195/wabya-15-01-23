@@ -85,7 +85,7 @@ else{
     
     } catch (error) {
       // Handle potential errors accessing localStorage here
-      //console.error('Error accessing localStorage:', error);
+      console.error('Error accessing localStorage:', error);
       router.push('/frontend/pricing');
     }
   }, []);
@@ -158,7 +158,7 @@ if(termChecked != true){
 else{
 if(values.clientPassword == values.clientRePassword){
       if(await countData(values.clientEmail.toLowerCase()) == 0){
-      //console.log(
+      console.log(
         "🚀 ~ file: index.tsx ~ line 81 ~ Registration ~ values",
         values,
        
@@ -315,7 +315,7 @@ setsuccessMsg(true);
 
             })
             .catch((err) => {
-              //console.error(err);
+              console.error(err);
             })
 
       );
@@ -336,7 +336,7 @@ setsuccessMsg(true);
 
   });
 
-//console.log(
+console.log(
   "🚀 ~ file: index.tsx ~ line 90 ~ Registration ~ errors",
   errors
 );

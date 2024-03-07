@@ -3681,7 +3681,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                         join video
                     </a>
                 ) : (
-                  <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); //console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>
+                  <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>
                   join video
               </a>
 
@@ -3744,7 +3744,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                                 target="_blank"
                                
                               > */}
-                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); //console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
+                                <a className="btn btn-coach" style={{'cursor':'not-allowed'}} onClick={(e) => { e.preventDefault(); console.log('Button clicked'); }} href={`/client/joinvideo/${data.meetingName}`}>join video</a>
                               {/* </Link> */}
                               {/* <Link
                                 passHref
