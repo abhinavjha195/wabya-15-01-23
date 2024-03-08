@@ -31,7 +31,7 @@ const About = () => {
           </div>
 
         <div className="col-sm-6 right">
-          <iframe src="https://www.youtube.com/embed/GpK8THC4KTM" title="discover what coaching can do for you" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/GpK8THC4KTM" title="discover what coaching can do for you"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
           {/* <figure className="about-fig"><img src="../images/shape-01.png" alt=""/></figure> */}
 
           </div>

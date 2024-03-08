@@ -48,11 +48,16 @@ class CustomDocument extends Document {
           <link href='/font-awesome/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
           <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript" ></script>
 	        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all"/>
+     
+       
+       
         </Head>
         <body>
           <Main />
           <NextScript />
           {/* <!-- Bootstrap Core JavaScript --> */}
+
+         
           <script src="/js/bootstrap.bundle.min.js" async></script>
           <script src="/js/owl.carousel.min.js" async></script>
           {/* <script src="/js/jquery.twentytwenty.js" async></script> */}
