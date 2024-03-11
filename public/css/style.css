@@ -3871,3 +3871,7 @@ left: 75px !important;
 .superadmin-active-page{border-bottom: 3px solid #d479a6 !important;}
 .superadmin-information{text-transform: lowercase;}
 
+.login-wrap form .pastel .checkmark, .login-wrap form .pastel .radio-container .checkmark:after {
+  border-radius: 15%;
+}
+
