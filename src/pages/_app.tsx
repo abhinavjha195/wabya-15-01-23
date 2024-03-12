@@ -103,7 +103,7 @@ const App = (props: ExtendedAppProps) => {
 
       </Head>
 
-      { router.pathname === '/super-admin/dashboard' || router.pathname === '/super-admin/request' || router.pathname === '/super-admin/message' || router.pathname === '/super-admin/faq' || router.pathname === '/super-admin/basic' || router.pathname === '/super-admin/client-list' || router.pathname === '/super-admin/coaches-list' || router.pathname === '/super-admin/edit-profile' || router.pathname === '/super-admin/change-password' || router.pathname === '/super-admin/plans' || router.pathname === '/super-admin/view-client/[coach_id]' || router.pathname === '/super-admin/view-clientDetail/[client_id]'  ?
+      { router.pathname === '/super-admin/dashboard' || router.pathname === '/super-admin/request' || router.pathname === '/super-admin/message' || router.pathname === '/super-admin/faq' || router.pathname === '/super-admin/basic' || router.pathname === '/super-admin/client-list' || router.pathname === '/super-admin/coaches-list' || router.pathname === '/super-admin/edit-profile' || router.pathname === '/super-admin/change-password' || router.pathname === '/super-admin/plans' || router.pathname === '/super-admin/view-client/[coach_id]' ||  router.pathname === '/super-admin/view-pay-detail/[coach_id]' || router.pathname === '/super-admin/view-clientDetail/[client_id]'  ?
       (
         <SettingsProvider>
           <SettingsConsumer>
