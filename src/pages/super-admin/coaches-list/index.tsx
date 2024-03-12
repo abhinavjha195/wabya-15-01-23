@@ -293,6 +293,12 @@ const CoachesList = ()  => {
                               </a>
                             </Link>
 
+                            <Link href={`/super-admin/view-pay-detail/${data.coach_id}`} passHref>
+                              <a className='btn btn-edit'>
+                               view pay details
+                              </a>
+                            </Link>
+
                             <ToastContainer />
                             {/* <button className='btn btn-delete' onClick={() => deleteDocument(data.coach_id)}>
                               <i className='fa fa-trash'></i>

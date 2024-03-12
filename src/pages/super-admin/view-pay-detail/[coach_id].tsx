@@ -263,7 +263,7 @@ useEffect(() => {
 
           <tr>
               <td className='bundle aqua'>probono </td>
-              <td>{probonoCount} hours  {currentMonthState}</td>
+              <td>{probonoCount} hours  </td>
               <td>£00.00</td>
           </tr>
           <tr>
