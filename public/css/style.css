@@ -3875,3 +3875,25 @@ left: 75px !important;
   border-radius: 15%;
 }
 
+
+
+.dropdown-pay {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the dropdown icon */
+.dropdown-icon-pay {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* Style the icon */
+.dropdown-icon-pay i {
+  color: #555;
+  pointer-events: none;
+}
+
+

@@ -228,7 +228,7 @@ useEffect(() => {
           </div>
 
           <div className='col-sm-6 mrb-30'>
-
+          <div className="dropdown-pay">
           <select className='form-control' onChange={handleMonth}>
 
           <option data-month="6" data-year="2024">July 2023</option>
@@ -241,7 +241,8 @@ useEffect(() => {
 <option data-month="1" data-year="2024">February 2024</option>
 <option data-month="2" data-year="2024" selected>March 2024</option>
 </select>
-
+<div className="dropdown-icon-pay"><i className="fa fa-caret-down"></i></div>
+</div>
           </div>
          
           <div className='col-sm-12'>
@@ -264,7 +265,7 @@ useEffect(() => {
           <tr>
               <td className='bundle aqua'>probono </td>
               <td>{probonoCount} hours  </td>
-              <td>£00.00</td>
+              <td>£0.00</td>
           </tr>
           <tr>
               <td className='pay aqua orange'>novice</td>

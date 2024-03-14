@@ -226,7 +226,8 @@ const EditProfile = () => {
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <h2>edit profile</h2>
+          <h2 style={{ textTransform: 'lowercase' }}>edit profile</h2>
+
             <div className='inner-info'>
 
       <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
