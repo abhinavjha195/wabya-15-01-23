@@ -125,12 +125,13 @@ const EditProfile = () => {
     const updatedData = {
         name: proName,
         phone : proPhone,
-        country : proCountry,
+        country : proCountry, 
         timezone : proTimeZone,
         languages : proLanguage,
         bio : proBio,
         about : proAbout,
         profile : 'https://firebasestorage.googleapis.com/v0/b/wabya-45dba.appspot.com/o/super-admin%2Fprofile%2Fimageedit_5_2493534812.png?alt=media&token=d538d2b9-e2ef-4967-9468-2cab763aa3df&_gl=1*ve6mq7*_ga*MTIzMzY1Njg1LjE2OTA4MDU4Nzg.*_ga_CW55HF8NVT*MTY5NjUwMTg3NC42OC4xLjE2OTY1MDE4ODQuNTAuMC4w'
+        // profile :fileUrl,
     };
     await updateDoc(userDocRef, updatedData);
     setMessage(true);
@@ -185,6 +186,7 @@ const EditProfile = () => {
   function profile(){
     if (file != null) {
 
+      console.log('here');
       const storageRef = ref(storage, `/super-admin/profile/${file.name}`)
       const uploadTask =  uploadBytesResumable(storageRef, file);
       uploadTask.on("state_changed",
@@ -193,11 +195,11 @@ const EditProfile = () => {
           //console.log('snapshot');
 
         },
-    (err) => //console.log(err),
+    (err) => console.log(err),
         () => {
     // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-        //console.log(url);
+        console.log(url);
         setfileUrl(url);
 
         // setFile(null);
@@ -236,9 +238,9 @@ const EditProfile = () => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {file ? (<ImgStyled src={URL.createObjectURL(file)} alt='Profile Pic' />) : (<ImgStyled src={proImage} alt='Profile Pic' />)}
 
-              <Box>
+              <Box> 
                 <ButtonStyled className='btn' component='label' variant='contained' htmlFor='account-settings-upload-image'>
-                  Upload New Photo
+                  upload new photo
                   <input name='pro_image'
                     hidden
                     type='file'
@@ -249,7 +251,7 @@ const EditProfile = () => {
                 </ButtonStyled>
 
                 <Typography variant='body2' sx={{ marginTop: 5 }}>
-                  Allowed PNG or JPEG. Max size of 800K.
+                  allowed png or jpeg. max size of 800k.
                 </Typography>
               </Box>
             </Box>

@@ -3884,7 +3884,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
       value={country.country}
      
     >
-      {country.country} - {country.flag}
+      {country.country} 
    </option>
   ))}
 </select>
@@ -4774,9 +4774,9 @@ onClick={handleTimeClick}
                   <br/>
                   <div className="two-button">
                     <button className="btn btn-send" onClick={sendHelpMsg}>send</button>
-                    <button className="btn btn-chat">
+                    {/* <button className="btn btn-chat">
                       <i className="fa fa-whatsapp"></i> chat now
-                    </button>
+                    </button> */}
                   </div>
                 </form>
               </div>
@@ -5402,9 +5402,9 @@ const timeRemaining = Math.floor((meetingDate - currentTime) / 60000);
               <button className="btn btn-send" onClick={sendHelpMsg}>send</button>
             </div>
             <div className="form-group form-btn">
-              <button className="btn btn-chat">
+              {/* <button className="btn btn-chat">
                 <i className="fa fa-whatsapp" /> chat now
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
