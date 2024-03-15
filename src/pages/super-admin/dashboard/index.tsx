@@ -22,6 +22,26 @@ const Dashboard = () => {
     // }
   }, [])
 
+
+  useEffect(() => {
+    // Check if the last URL was '/coch/login'
+
+
+
+let lastUrl='';
+    if(localStorage.getItem("last_admin_login_page")){
+     lastUrl = localStorage.getItem("last_admin_login_page");
+  }
+    //console.log('lastUrl',lastUrl);
+    if (lastUrl == '/admin/login') {
+      // Reload the current page
+      //console.log('yes');
+      localStorage.removeItem("last_admin_login_page");
+      router.reload();
+    }
+  }, [router.path]); // Empty dependency array means this effect runs once after the initial render
+
+
   const getData = async () => {
     await getDocs(databaseRef)
       .then((response) => {

@@ -48,6 +48,12 @@ const AdminLoginPage = () => {
   const [error, setError] = useState(null);
   const [visible, setVisible] = useState<boolean>(false);
 
+  useEffect(() => {
+
+    localStorage.setItem("last_admin_login_page", '/admin/login');
+  }, []);
+
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
