@@ -88,6 +88,7 @@ const CheckoutButton = ({price,journey_type}) => {
           plan_id: plan_id,
           doc_id:doc_id,
           client_id:sessionStorage.getItem("userId"),
+          journey_type:journey_type,
         }),
       });
 

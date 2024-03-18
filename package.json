@@ -66,6 +66,7 @@
     "formik": "^2.2.9",
     "jquery": "^3.6.4",
     "mdi-material-ui": "^7.1.0",
+    "multiselect-react-dropdown": "^2.0.25",
     "next": "^12.3.4",
     "next-auth": "^4.19.2",
     "nodemailer": "^6.9.5",

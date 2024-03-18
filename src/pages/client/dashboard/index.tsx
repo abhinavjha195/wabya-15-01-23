@@ -35,6 +35,8 @@ import { Clock } from "mdi-material-ui";
 import { ArrowRightCircleOutline } from "mdi-material-ui";
 import MeetingCancelled from "src/components/MeetingCancelled";
 
+import Multiselect from 'multiselect-react-dropdown';
+
 const Backup = () => {
   const router = useRouter();
   const form = useRef();
@@ -89,6 +91,17 @@ const Backup = () => {
 
 
   const [newotp, setnewotp] = useState('');
+
+  const [selectedValue, setSelectedValue] = useState([]);
+
+  const handleLanguageSelect = (selectedList, selectedItem) => {
+    setSelectedValue(selectedList);
+  };
+  
+  const handleLanguageRemove = (selectedList, removedItem) => {
+    setSelectedValue(selectedList);
+  };
+
 
   const showEmailForm = () => {
     setSelectOption(false);
@@ -947,7 +960,7 @@ const buyMore = (event) => {
   event.preventDefault();
   //console.log(event.target);
   setBuyMoreErr(false);
-   if(parseInt(clientRemainingSession) == 0){
+   if(parseInt(clientRemainingSession) <10){
 
  // if(1==1){
 
@@ -3959,6 +3972,15 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
             </option>
           ))}
         </select>
+
+
+        {/* <Multiselect
+  options={uniqueLanguageOptions} // Assuming uniqueLanguageOptions is your array of options
+  selectedValues={clientLanguage} // Assuming clientLanguage is an array of preselected values
+  onSelect={handleLanguageSelect} // Function triggered on select event
+  onRemove={handleLanguageRemove} // Function triggered on remove event
+  displayValue="language" // Property name to display in the dropdown options
+/> */}
                               {/* <input
                                 type='text'
                                 name='client_language'

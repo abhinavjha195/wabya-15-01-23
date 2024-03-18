@@ -257,7 +257,14 @@ export default function Success() {
                     if(plan_detail != null){
                     
                       //console.log('plan_detail',plan_detail);
+
+                      console.log(new_journey_type,'new_journey_type');
+                      if(new_journey_type == 'bundle'){
                         setplan_total_ses(plan_detail[0].total_session)
+                      }
+                      else{
+                        setplan_total_ses(1);
+                      }
                      getClientDetail();
                     }
                      }, [plan_detail]);
@@ -282,6 +289,8 @@ export default function Success() {
                     if(client_remaining_ses == 0){
                         setclient_total_update_ses(plan_total_ses);
                     }else{
+
+                      console.log(plan_total_ses,'plan_total_ses');
                         setclient_total_update_ses(parseInt(client_total_ses,10) + parseInt(plan_total_ses,10));
                     }
                         }

@@ -139,6 +139,9 @@ const [modal_action, setmodal_action] = useState("");
   const [client_detail, setclient_detail] = useState(null);
   const [coachClientCounts, setCoachClientCounts] = useState({});
   const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+
 
   async function sendMailFunc (email,content,$subject){   
     let response = await sendMail(email,$subject,content);   
@@ -1306,7 +1309,7 @@ assign coach - {coachId} */}
                     <div className="col-sm-6">
                       <div className="resc-cal">
                         <h5>select a date &amp; time</h5>
-                        <Calendar onChange={getTimeslots} value={date} minDate={today} />
+                        <Calendar onChange={getTimeslots} value={date} minDate={tomorrow} />
                         <h5>time zone</h5>
                         {/* <p>{coachesCalTimezone}</p> */}
                       </div>

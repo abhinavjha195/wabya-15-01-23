@@ -154,7 +154,7 @@ if(plan_detail != null){
                 <div className='inner-info'>
 
                 <div className="row">
-                    <div className="col-sm-6">	
+                    <div className="col-sm-6">	 
                       <label>journey type</label>
                     </div>
                     <div className="col-sm-3">

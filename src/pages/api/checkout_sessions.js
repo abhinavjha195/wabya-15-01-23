@@ -8,6 +8,7 @@ export default async function handler(req, res) {
       const { doc_id } = req.body; // Get price from the request body 
       const { plan_id } = req.body; // Get price from the request body 
       const { client_id } = req.body; // Get price from the request body 		
+      const { journey_type } = req.body; // Get price from the request body 	
     //   const session = await stripe.checkout.sessions.create({
 		// // billing_address_collection: "required",  
    
@@ -57,6 +58,7 @@ export default async function handler(req, res) {
         plan_id: plan_id,
         client_id: client_id,
         payment_id: doc_id,
+        journey_type:journey_type,
       },
     });
 
