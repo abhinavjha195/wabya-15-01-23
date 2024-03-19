@@ -5,6 +5,7 @@ import { collection, getDocs,doc, deleteDoc,updateDoc } from 'firebase/firestore
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Alert } from '@mui/material'
 
 const RequestList = ()  => {
 
@@ -16,6 +17,9 @@ const RequestList = ()  => {
   const [clientData, setClientData] = useState([]);
   const [planData, setPlanData] = useState([]);
   const [count, setCount] = useState(1);
+
+  const [acceptMsg, setAcceptMsg] = useState(false);
+  const [declineMsg, setDeclineMsg] = useState(false);
 
   // Function to increment count by 1
   const incrementCount = () => {
@@ -133,8 +137,8 @@ const updateUserPlan = async (event) => {
       plan_id:new_plan_id
     })
     .then(() => {
-      toast.success('Client Plan updated successfully!')
-
+     // toast.success('Client Plan updated successfully!')
+setAcceptMsg(true);
       updateDoc(fieldToEdit2, {
         status:2
       })
@@ -151,6 +155,50 @@ const updateUserPlan = async (event) => {
     .catch((err) => {
       //console.log(err);
     })
+
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const declineUserPlan = async (event) => {
+    
+    const new_plan_id =  event.target.getAttribute("data-new_plan_id")
+    const client_id =  event.target.getAttribute("data-client_id")
+    const request_id =  event.target.getAttribute("data-request_id")
+    const fieldToEdit = doc(database, 'client_user', client_id);
+    const fieldToEdit2 = doc(database, 'newPlanRequest', request_id);
+
+
+     
+
+      updateDoc(fieldToEdit2, {
+        status:2
+      })
+      .then(() => {
+       // toast.success('Client Plan declined!')
+
+       setDeclineMsg(true);
+        getData();
+       
+      })
+      .catch((err) => {
+        //console.log(err);
+      })
+  
+     
+ 
+   
 
   };
   // view single coach record
@@ -178,7 +226,12 @@ const updateUserPlan = async (event) => {
             <h2>request list</h2>
           </div>
           <div className='col-sm-12'>
+          {declineMsg && <Alert severity='error' style={{ margin :'0 0 20px 20px'}}>plan declined.</Alert>}
+
+{acceptMsg && <Alert severity='success' style={{ margin :'0 0 20px 20px'}}>plan accepted.</Alert>}
           <div className='coach-table'>
+
+       
             <div className='table-responsive'>
 
                 <table className='table table-coaches-list'>
@@ -203,11 +256,22 @@ const updateUserPlan = async (event) => {
                       <>
                       <tr>
                         <td>{count++} </td>
-                        <td>{client_name}</td>
+                        <td>
+                        <Link href={`/super-admin/view-clientDetail/${data.client_id}`} >
+                        <a>{client_name}</a>
+                          </Link>
+                          </td>
                         <td>{plan_name}</td>
                         <td>{new_plan_name}</td>
 
-                        <td><button className='btn btn-success'  data-request_id={data.request_id} data-new_plan_id={data.new_plan_id} data-client_id={data.client_id}  onClick={updateUserPlan}>Update Plan</button></td>
+                        <td>
+                          
+                          <button className='btn btn-success'  data-request_id={data.request_id} data-new_plan_id={data.new_plan_id} data-client_id={data.client_id}  onClick={updateUserPlan}>update plan</button>
+
+
+                          <button className='btn btn-danger'  data-request_id={data.request_id} data-new_plan_id={data.new_plan_id} data-client_id={data.client_id}  onClick={declineUserPlan}>decline plan</button>
+                          
+                          </td>
                         <td>
 
                           

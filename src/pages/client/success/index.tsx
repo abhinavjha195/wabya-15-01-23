@@ -319,6 +319,8 @@ export default function Success() {
             </div>
             <h2>payment successful</h2>
             <h3>Your Plan is Now Active.</h3>
+
+            <h3> <a href='/client/dashboard'>back to home</a></h3>
           </div>
           {/*/ cl-coll */}
         </div>
