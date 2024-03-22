@@ -2015,7 +2015,9 @@ img.tree-image {
   .payment-successful .check.close:before, .payment-successful .check.close:after{content:''; background: #ff0000;}
   .payment-successful .check.close:before{opacity: 0.4;}
 
-.new-plans{text-align:left; position:relative;}
+.new-plans{text-align:left; position:relative;   text-align: left;
+  
+  width: 77%;}
 .new-plans .btn{width:auto;}
 .new-plans .plans-list ul{margin:0; padding:0; display:flex; gap: 30px; justify-content: start;}
 .new-plans .plans-list ul li{list-style:none; margin:0; padding:0;}
@@ -2034,6 +2036,27 @@ img.tree-image {
 .new-plans .btn.btn-chestnutred{background:#ef7655;}
 .new-plans .btn.btn-thulian-pink{background:#d479a5;}
 .new-plans .btn.btn-darkblue{background:#0f2540;}
+
+
+.new-plans h3 {
+  margin: 0 0 20px;
+  border-bottom: 1px solid #0f2540;
+  padding: 0 0 20px;
+}
+
+.table.table-coach th:first-child, .table.table-coach td:first-child {
+  width: 30%;
+  text-align: left;
+}
+
+.table.table-coach th, .table.table-coach td {
+  width: 40%;
+  text-align: right;
+}
+
+.table.table-coach th:last-child, .table.table-coach td:last-child {
+  width: 30%;
+}
 
 .calendar-clientcanel{text-align: center !important;}
 .calendar-clientname{text-align: center !important; letter-spacing: 1px; font-size: 12px;}

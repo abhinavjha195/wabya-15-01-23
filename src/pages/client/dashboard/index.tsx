@@ -4141,9 +4141,12 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 
         <div className="client-plans">
           <div className="row">
-            <div className="col-sm-7">
+            <div className="col-sm-8">
+<div className="new-plans">
+
+
               <h3>my plan</h3>
-              <div className="divider-bottom"></div>
+              {/* <div className="divider-bottom"></div> */}
 
               {/* <form
                 noValidate
@@ -4278,7 +4281,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 
 
 
-<table className="new-plans">
+<table className="table table-coach">
 
   <tr>
     
@@ -4361,14 +4364,11 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
       <td>
       <div className="plans-content">
       <a href="" className="btn btn-maroon" onClick={showUpdateBilling}>
-                update my billing information
+                billing information
               </a>
               </div>
       </td>
-      <td>
-
-
-      </td>
+     
     </tr>
 </table>
 
@@ -4380,7 +4380,9 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 
 
             </div>
-            <div className="col-sm-5">
+
+            </div>
+            <div className="col-sm-4">
               <figure>
                 <img src="../../images/banner-bg.png" alt="Images Logo" />
               </figure>
