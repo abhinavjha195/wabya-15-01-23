@@ -30,6 +30,9 @@ import { SyntheticEvent, useState, useEffect, forwardRef } from 'react'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
+import country_data from '../../../@core/utils/all-countries'
+
+import Multiselect from 'multiselect-react-dropdown';
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -222,6 +225,29 @@ const EditProfile = () => {
 
 
 
+  const languageOptions = country_data.flatMap((country) =>
+  country.languages.map((language) => ({ country: country.country, language }))
+);
+
+// Use filter and some to remove duplicates based on the 'language' property
+const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
+  return !self.slice(0, index).some((item) => (
+    JSON.stringify(item.language) === JSON.stringify(value.language)
+  ));
+});
+
+
+const [selectedValue, setSelectedValue] = useState([]);
+
+const handleLanguageSelect = (selectedList, selectedItem) => {
+  setSelectedValue(selectedList);
+  console.log(selectedList);
+};
+
+const handleLanguageRemove = (selectedList, removedItem) => {
+  setSelectedValue(selectedList);
+};
+
   return (
     <>
     <section className="edit-profile desktop-hidden">
@@ -267,12 +293,39 @@ const EditProfile = () => {
             <TextField fullWidth type='text' label='Phone' placeholder='Phone' name='pro_phone' id='pro_phone' value={proPhone} onChange={event => setPhone(event.target.value)} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth type='text' label='Country' placeholder='Country' name='pro_country' id='pro_country' value={proCountry} onChange={event => setCountry(event.target.value)} />
+            {/* <TextField fullWidth type='text' label='Country' placeholder='Country' name='pro_country' id='pro_country' value={proCountry} onChange={event => setCountry(event.target.value)} /> */}
+
+            <Select
+  
+  fullWidth
+  type='text'
+  name='clientCountry'
+  id='clientCountry'
+  label='Country' 
+  className='coach-country'
+  sx={{ marginBottom: 4 }}
+  value={proCountry}
+  onChange={event => setCountry(event.target.value)}
+
+>
+{country_data.map((country, index) => (
+<MenuItem value= {country.country}> {country.country}</MenuItem>
+))} 
+</Select>
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth type='text' label='Language' placeholder='Language' name='pro_language' id='pro_language' value={proLanguage} onChange={event => setLanguage(event.target.value)} />
-          </Grid>
+            {/* <TextField fullWidth type='text' label='Language' placeholder='Language' name='pro_language' id='pro_language' value={proLanguage} onChange={event => setLanguage(event.target.value)} /> */}
+
+
+            <Multiselect
+  options={uniqueLanguageOptions}  // Assuming uniqueLanguageOptions is your array of options
+  selectedValues={proLanguage} // Assuming clientLanguage is an array of preselected values
+  onSelect={handleLanguageSelect} // Function triggered on select event
+  onRemove={handleLanguageRemove} // Function triggered on remove event
+  displayValue="language" // Property name to display in the dropdown options
+/>
+          </Grid>  
 
           <Grid item xs={12} sm={6}>
             <TextField fullWidth type='text' label='Time Zone' placeholder='Time Zone' name='pro_timezone' id='pro_timezone' value={proTimeZone} onChange={event => setTimeZone(event.target.value)} />

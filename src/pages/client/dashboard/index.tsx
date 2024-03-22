@@ -96,6 +96,7 @@ const Backup = () => {
 
   const handleLanguageSelect = (selectedList, selectedItem) => {
     setSelectedValue(selectedList);
+    console.log(selectedList);
   };
   
   const handleLanguageRemove = (selectedList, removedItem) => {
@@ -144,11 +145,19 @@ const Backup = () => {
     setClientPhone(userDoc.data().client_phone),
     setClientCountry(userDoc.data().client_country),
     setClientLanguage(userDoc.data().client_language),
+    //setClientLanguageArr([{ language: 'French' }]),
+    setClientLanguageArr(userDoc.data().client_language.map(language => ({ language })));
+
+
     setClientTimeZone(userDoc.data().client_zone)
 
     if(userDoc.data().client_profile){
       setImage(userDoc.data().client_profile);
     }
+
+    console.log("Selected Values:", clientLanguageArr);
+    console.log("Selected Values:", clientLanguage);
+    console.log("Selected Values:", userDoc.data().client_language);
   };
 
  
@@ -1897,6 +1906,9 @@ setmypreferplanName(mypreferplan[0].plan_name);
   const [clientCountry, setClientCountry] = useState("");
   const [clientTimeZone, setClientTimeZone] = useState("");
   const [clientLanguage, setClientLanguage] = useState("");
+
+  const [clientLanguageArr, setClientLanguageArr] = useState<string[]>([]);
+
 
   const [count, setCount] = useState(1);
 
@@ -3956,7 +3968,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 <option value="Zulu">Zulu</option>
 <option value="Xhosa">Xhosa</option> */}
 
- <select
+ {/* <select
           className="form-control"
           onChange={handleLanguageChange}
           value={clientLanguage}
@@ -3971,16 +3983,16 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
               {language}
             </option>
           ))}
-        </select> 
+        </select>  */}
 
 
-        {/* <Multiselect
-  options={uniqueLanguageOptions} // Assuming uniqueLanguageOptions is your array of options
-  selectedValues={clientLanguage} // Assuming clientLanguage is an array of preselected values
+        <Multiselect
+  options={uniqueLanguageOptions}  // Assuming uniqueLanguageOptions is your array of options
+  selectedValues={clientLanguageArr} // Assuming clientLanguage is an array of preselected values
   onSelect={handleLanguageSelect} // Function triggered on select event
   onRemove={handleLanguageRemove} // Function triggered on remove event
   displayValue="language" // Property name to display in the dropdown options
-/> */}
+/>
                               {/* <input
                                 type='text'
                                 name='client_language'
@@ -4202,7 +4214,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
   </div>
 ) : (
   <>
-    <div className="new-plans">
+    {/* <div className="new-plans">
       <div className="row">
         <div className="col-sm-6 left mrb-10">
           <div className="plans-content">
@@ -4214,8 +4226,8 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
           </div>
           <div className="plans-content">
             <span>journey type : </span>
-            <a href="#" onClick={(e) => { e.preventDefault(); /* Your custom logic here */ }} className="btn btn-thulian-pink">
-            {clientJourneyType ? clientJourneyType : '-'}
+            // <a href="#" onClick={(e) => { e.preventDefault(); /* Your custom logic here className="btn btn-thulian-pink">
+            {/* {clientJourneyType ? clientJourneyType : '-'}
             </a>
           </div>
         </div>
@@ -4234,13 +4246,13 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
         </div>
         <div className="plans-list col-sm-12">
           <ul>
-            <li>
+            <li> */}
               {/* <a href="/client/change-plan" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId}  >
                 {'6ZpZd4IrzORGQfyu0IqT' === requestPlanId ? 'Change Plan' : 'Requested'}
               </a> */}
 
-<a href="/client/change-plan" className="btn btn-darkgreen"   >
-               change plan
+{/* <a href="/client/change-plan" className="btn btn-darkgreen"   >
+               change plan 
               </a>
             </li>
             <li>
@@ -4256,8 +4268,111 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
           </ul>
         </div>
       </div>
-      {/*/ row */}
+      
+    </div> */}
+
+
+
+
+
+
+
+
+<table className="new-plans">
+
+  <tr>
+    
+    <td>
+
+    <div className="plans-content">
+            <span> {myplanName ? "current plan :" : "prefer  plan :"}</span>
+            
+          </div>
+    
+    </td>
+
+
+    <td>
+    <div className="plans-content">
+    <a href="#" onClick={(e) => { e.preventDefault(); }} className="btn btn-lightgreen">
+            {myplanName ? myplanName : mypreferplanName}
+
+            </a>
+            </div>
+    </td>
+
+    <td>
+    <div className="plans-content">
+    <p className="text-right">sessions remaining: {clientRemainingSession}</p>
     </div>
+    </td>
+    
+    </tr>
+
+
+    <tr>
+
+      <td>
+      <div className="plans-content">
+            <span>journey type : </span>
+           
+          </div>
+      </td>
+
+      <td>
+      <div className="plans-content">
+      <a href="#" onClick={(e) => { e.preventDefault(); /* Your custom logic here */ }} className="btn btn-thulian-pink">
+            {clientJourneyType ? clientJourneyType : '-'}
+            </a>
+            </div>
+      </td>
+
+      <td>
+      <div className="plans-content">
+      <p>{BuyMoreErr && <Alert message="You already have sessions remaining " className='mt-4' style={{'width':'52%'}} type="error"/> }</p>
+              <a href="" className="btn btn-darkgreen" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId} data-price='210' onClick={buyMore}>
+              {myplanName ? "Buy More" : "Buy"}
+
+              </a>
+              
+            </div>
+      </td>
+    </tr>
+
+    <tr>
+
+      <td>
+      <div className="plans-content">
+      <a href="/client/change-plan" className="btn btn-darkgreen"   >
+               change plan 
+              </a>
+              </div>
+      </td>
+
+      <td>
+      <div className="plans-content">
+      <a href="" className="btn btn-chestnutred" data-plan-id={clientPlanId ? clientPlanId : clientPreferPlanId} data-price='210' onClick={buyMore}>
+                 {myplanName ? " change journey type" : "-"}
+              </a>
+              </div>
+      </td>
+
+
+      <td>
+      <div className="plans-content">
+      <a href="" className="btn btn-maroon" onClick={showUpdateBilling}>
+                update my billing information
+              </a>
+              </div>
+      </td>
+      <td>
+
+
+      </td>
+    </tr>
+</table>
+
+
   </>
 )}
 
@@ -4276,7 +4391,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
         <div className="client-notes">
           <div className="row">
             <div className="col-sm-7">
-              <h3>my notes. <span className="upload_notes_client" onClick={showUploadNotes}>Upload Notes</span>
+              <h3>my notes <span className="upload_notes_client" onClick={showUploadNotes}>Upload Notes</span>
              &nbsp;  <span className="upload_notes_client" onClick={showSeeNotes}>See Notes</span>
               </h3>
               <div className="divider-bottom"> </div>
