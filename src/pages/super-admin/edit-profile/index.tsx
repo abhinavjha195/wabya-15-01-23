@@ -238,6 +238,27 @@ const uniqueLanguageOptions = languageOptions.filter((value, index, self) => {
 });
 
 
+const getTimeZoneOfSelectedCountry = () => {
+  const selectedCountry = country_data.find(country => country.country === proCountry);
+  if (selectedCountry) {
+    return selectedCountry.timezone;
+  }
+  return '';
+};
+
+      const selectedCountryTimezone = getTimeZoneOfSelectedCountry();
+
+useEffect(() => {
+
+
+  if(selectedCountryTimezone != ""){
+
+    setTimeZone(selectedCountryTimezone);
+  }
+
+
+}, [selectedCountryTimezone])
+
 const [selectedValue, setSelectedValue] = useState([]);
 
 const handleLanguageSelect = (selectedList, selectedItem) => {

@@ -51,6 +51,9 @@ let lastUrl='';
   //     })
   // }
 
+
+  
+
   const getData = async () => {
     try {
       const response = await getDocs(databaseRef);
@@ -66,6 +69,8 @@ let lastUrl='';
     }
   }
   
+
+ 
 
 return (
   <section className='superadmin-information'>
