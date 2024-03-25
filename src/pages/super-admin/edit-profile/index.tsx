@@ -350,7 +350,7 @@ const handleLanguageRemove = (selectedList, removedItem) => {
           </Grid>  
 
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth type='text' label='Time Zone' placeholder='Time Zone' name='pro_timezone' id='pro_timezone' value={proTimeZone} onChange={event => setTimeZone(event.target.value)} />
+            <TextField fullWidth type='text' label='Time Zone' placeholder='Time Zone' name='pro_timezone' id='pro_timezone' value={proTimeZone} InputProps={{ readOnly: true }} onChange={event => setTimeZone(event.target.value)} />
           </Grid>
 
           <Grid item xs={12}>
