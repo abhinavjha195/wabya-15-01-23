@@ -130,7 +130,8 @@ const EditProfile = () => {
         phone : proPhone,
         country : proCountry, 
         timezone : proTimeZone,
-        languages : proLanguage,
+        // languages : proLanguage,
+        languages:selectedValue,
         bio : proBio,
         about : proAbout,
         profile : 'https://firebasestorage.googleapis.com/v0/b/wabya-45dba.appspot.com/o/super-admin%2Fprofile%2Fimageedit_5_2493534812.png?alt=media&token=d538d2b9-e2ef-4967-9468-2cab763aa3df&_gl=1*ve6mq7*_ga*MTIzMzY1Njg1LjE2OTA4MDU4Nzg.*_ga_CW55HF8NVT*MTY5NjUwMTg3NC42OC4xLjE2OTY1MDE4ODQuNTAuMC4w'
@@ -143,16 +144,16 @@ const EditProfile = () => {
     const nameField = document.getElementById("pro_fullname");
     const bioField = document.getElementById("pro_bio");
     const aboutField = document.getElementById("pro_about");
-    const countryField = document.getElementById("pro_country");
-    const languageField = document.getElementById("pro_language");
+    // const countryField = document.getElementById("pro_country");
+    //const languageField = document.getElementById("pro_language");
     const timezoneField = document.getElementById("pro_timezone");
     const phoneField = document.getElementById("pro_phone");
 
     nameField.value = updatedData.name;
     bioField.value = updatedData.bio;
     aboutField.value = updatedData.about;
-    countryField.value = updatedData.country;
-    languageField.value = updatedData.languages;
+    // countryField.value = updatedData.country;
+    // languageField.value = updatedData.languages;
     timezoneField.value = updatedData.timezone;
     phoneField.value = updatedData.phone;
 

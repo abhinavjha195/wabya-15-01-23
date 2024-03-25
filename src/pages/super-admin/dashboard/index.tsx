@@ -42,15 +42,30 @@ let lastUrl='';
   }, [router.path]); // Empty dependency array means this effect runs once after the initial render
 
 
-  const getData = async () => {
-    await getDocs(databaseRef)
-      .then((response) => {
-        setFireData(response.docs.map((data) =>{
-          return {...data.data(), admin_id: data.id}
-        }))
-      })
-  }
+  // const getData = async () => {
+  //   await getDocs(databaseRef)
+  //     .then((response) => {
+  //       setFireData(response.docs.map((data) =>{
+  //         return {...data.data(), admin_id: data.id}
+  //       }))
+  //     })
+  // }
 
+  const getData = async () => {
+    try {
+      const response = await getDocs(databaseRef);
+      const processedData = response.docs.map((doc) => {
+        const data = doc.data();
+        const languages = data.languages.map(language => language.language); // Assuming 'name' is the field in each language object you want to display
+        return { ...data, admin_id: doc.id, languages: languages.join(', ') };
+      });
+      setFireData(processedData);
+    } catch (error) {
+      // Handle error
+      console.error("Error getting documents: ", error);
+    }
+  }
+  
 
 return (
   <section className='superadmin-information'>
