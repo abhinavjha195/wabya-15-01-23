@@ -95,6 +95,7 @@ const EditProfile = () => {
 
   // edit profile super-admin
   const [message, setMessage] = useState(false);
+  const [selectedValue, setSelectedValue] = useState([]);
 
   useEffect(() => {
 
@@ -114,6 +115,9 @@ const EditProfile = () => {
       setBio(userDoc.data().bio),
       setAbout(userDoc.data().about)
       setImage(userDoc.data().profile)
+
+
+      setSelectedValue(userDoc.data().languages)
     };
     editAdmin();
 
@@ -259,7 +263,7 @@ useEffect(() => {
 
 }, [selectedCountryTimezone])
 
-const [selectedValue, setSelectedValue] = useState([]);
+
 
 const handleLanguageSelect = (selectedList, selectedItem) => {
   setSelectedValue(selectedList);
