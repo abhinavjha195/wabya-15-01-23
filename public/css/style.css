@@ -2047,17 +2047,18 @@ img.tree-image {
 }
 
 .table.table-coach th:first-child, .table.table-coach td:first-child {
-  width: 30%;
+  /* width: 30%; */
   text-align: left;
 }
 
 .table.table-coach th, .table.table-coach td {
-  width: 40%;
-  text-align: right;
+  /* width: 40%;
+  text-align: right; */
 }
 
 .table.table-coach th:last-child, .table.table-coach td:last-child {
-  width: 30%;
+  /* width: 30%; */
+  text-align: right;
 }
 
 .calendar-clientcanel{text-align: center !important;}

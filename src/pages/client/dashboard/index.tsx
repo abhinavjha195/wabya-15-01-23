@@ -3687,12 +3687,12 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                           <tr className="table-pad">
                             {/* <td>{data.coach_name}</td> */}
                             <td>
-                              {new Date(data.meetingDate).toLocaleDateString()}
+                              {new Date(data.meetingDate).toLocaleDateString()}-{myArr2[0]}H{myArr2[1]}
                             
                               
                             </td>
                             <td className="td-two">
-                            <span>{myArr2[0]}H{myArr2[1]}</span>
+                            {/* <span>{myArr2[0]}H{myArr2[1]}</span> */}
                               {/* <Link
                                 passHref
                                // href={`videocall/${data.meetingName}`}
@@ -3761,12 +3761,12 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
                             {/* <td>{data.coach_name}</td> */}
                             <td className="meetdate">
                               {/* {new Date(data.meetingDate).toLocaleDateString()} */}
-                          {myArr[2]}/{myArr[1]}/{myArr[0]}
+                          {myArr[2]}/{myArr[1]}/{myArr[0]}-{myArr2[0]}H{myArr2[1]}
                         
                               
                             </td>
                             <td className="td-two">
-                            {myArr2[0]}H{myArr2[1]}
+                            {/* {myArr2[0]}H{myArr2[1]} */}
                             {/* <Link
                                 passHref
                                  // href={`videocall/${data.meetingName}`}
@@ -4306,7 +4306,7 @@ const isMeetingTimeRange = currentTime >= meetingStartTime.getTime() && currentT
 
     <td>
     <div className="plans-content">
-    <p className="text-right">sessions remaining: {clientRemainingSession}</p>
+    <p className="text-end">sessions remaining: {clientRemainingSession}</p>
     </div>
     </td>
     
