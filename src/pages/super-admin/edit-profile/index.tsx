@@ -73,6 +73,7 @@ const EditProfile = () => {
   const [proBio, setBio] = useState('');
   const [proAbout, setAbout] = useState('');
   const [proImage,setImage] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
 
   // ** State
   const [value, setValue] = useState<string>('account')
@@ -165,6 +166,40 @@ const EditProfile = () => {
 
   }
 
+
+
+
+
+
+
+  const handleSubmit2 = async () =>{
+
+    const adminIds = sessionStorage.getItem('adminId');
+    const userDocRef = doc(collection(database, 'admin_user'), adminIds);
+
+    const updatedData = {
+    
+       // profile : 'https://firebasestorage.googleapis.com/v0/b/wabya-45dba.appspot.com/o/super-admin%2Fprofile%2Fimageedit_5_2493534812.png?alt=media&token=d538d2b9-e2ef-4967-9468-2cab763aa3df&_gl=1*ve6mq7*_ga*MTIzMzY1Njg1LjE2OTA4MDU4Nzg.*_ga_CW55HF8NVT*MTY5NjUwMTg3NC42OC4xLjE2OTY1MDE4ODQuNTAuMC4w'
+        profile :fileUrl,
+    };
+    await updateDoc(userDocRef, updatedData);
+    setMessage(true);
+
+    
+
+    //router.push('/super-admin/dashboard');
+
+  }
+
+
+
+
+
+
+
+
+
+
   const handleClose = () => {
     setMessage(false);
   };
@@ -193,7 +228,7 @@ const EditProfile = () => {
 
   function profile(){
     if (file != null) {
-
+      setIsClicked(true);
       console.log('here');
       const storageRef = ref(storage, `/super-admin/profile/${file.name}`)
       const uploadTask =  uploadBytesResumable(storageRef, file);
@@ -209,7 +244,8 @@ const EditProfile = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
         console.log(url);
         setfileUrl(url);
-
+        setIsClicked(false);
+      //  handleSubmit2();
         // setFile(null);
         //console.log('File Uploaded!');
     });
@@ -315,7 +351,7 @@ const handleLanguageRemove = (selectedList, removedItem) => {
           <Grid item xs={12} sm={6}>
             <TextField type='text' fullWidth label='Email' placeholder='Email' value={proEmail} onChange={event => setEmail(event.target.value)} name='pro_email' id='pro_email' disabled />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField fullWidth type='text' label='Phone' placeholder='Phone' name='pro_phone' id='pro_phone' value={proPhone} onChange={event => setPhone(event.target.value)} />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -388,7 +424,7 @@ const handleLanguageRemove = (selectedList, removedItem) => {
 
           <Grid item xs={12}>
 
-            <button type='submit' className="btn btn-save" onClick={handleSubmit}>
+            <button type='submit' className="btn btn-save" onClick={handleSubmit} disabled={isClicked}>
               Save Changes
             </button>
             {/* <button type='reset' className="btn reset-btn">
